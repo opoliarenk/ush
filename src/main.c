@@ -10,17 +10,29 @@
 int main() {
     char *line;
     char **mass;
+    extern char **environ;
+    int status;
 
     while (1) {
         printf("u$h> ");
         line = mx_wait_line();
         mass = mx_strsplit(line);
-        char *arr[4] = {"/bin/ls", "-l", "src", NULL};
-        if (strcmp(mass[0], "ls") == 0) {
-            free(mass[0]);
-            mass[0] = strdup("/bin/ls");
-            execve(mass[0], arr, environ);
+
+        if (mass[0] != NULL) {
+            if (strcmp(mass[0], "ls") == 0) {
+                char *arr[4] = {"/bin/ls", mass[1], mass[2], NULL};
+                pid_t pid;
+
+                pid = fork();
+                if (pid == 0) {
+                    free(mass[0]);
+                    mass[0] = strdup("/bin/ls");
+                    execve(mass[0], arr, environ);
+                } else 
+                    while(pid != wait(&status));
+            }
         }
+        
     }
     return 0;
 }

@@ -1,6 +1,6 @@
 #include "../inc/ush.h"
 
-char *mx_read_line(void) {
+char *mx_wait_line(void) {
     int bufsize = MX_RL_BUFSIZE;
     int position = 0;
     char *buffer = malloc(sizeof(char) * bufsize);

@@ -6,14 +6,16 @@
 //     }
 // }
 
-int main(int argc, char **argv) {
+int main() {
     char *line;
     char **mass;
 
-    if (argv && argc > 0)
-        while (1) {
-            printf("🔥 u$h> ");
-            line = mx_read_line();
-            mass = mx_strsplit(line);
-        }
+    while (1) {
+        printf("u$h> ");
+        line = mx_wait_line();
+        mass = mx_strsplit(line);
+        // if (mass != NULL)
+        //     mx_fork(mass);
+    }
+    return 0;
 }

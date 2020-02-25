@@ -8,9 +8,12 @@
 #include <string.h>
 
 #define MX_RL_BUFSIZE 1024
+#define MX_TOK_BUFSIZE 64
+#define MX_TOK_DELIM " \t\r\n\a"
 
 int main(int argc, char **argv);
-char *mx_read_line(void);
+char *mx_wait_line(void);
 char **mx_strsplit(char *line);
+void mx_fork(char **mass);
 
 #endif

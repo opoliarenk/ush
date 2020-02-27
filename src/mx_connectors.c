@@ -41,7 +41,7 @@ static char **split(char *line, int count) {
             j = 0;
             k++;
         } else if (line[i] != ';')
-             j++;
+            j++;
     }
     k = 0;
     j = 0;
@@ -63,18 +63,20 @@ char **mx_connectors(char *line) {
     char **mass = NULL;
     int sep = 0;
 
-    for (int i = 0; line[i + 1]; i++) {
-        if (line[i] == ';' && i != 0)
-            sep++;
+    if (mx_semicolon(line)) {
+        for (int i = 0; line[i + 1]; i++) {
+            if (line[i] == ';' && i != 0)
+                sep++;
+        }
+        if (sep > 0)
+            mass = split(line, sep);
+        else {
+            mass = malloc (sizeof (char *) * (2));
+            mass[0] = strdup(line);
+            mass[1] = NULL;
+        }
+        for (int i = 0; mass[i]; i++)
+            printf("%s\n",mass[i]);
     }
-    if (sep > 0)
-        mass = split(line, sep);
-    else {
-        mass = malloc (sizeof (char *) * (2));
-        mass[0] = strdup(line);
-        mass[1] = NULL;
-    }
-    for (int i = 0; mass[i]; i++)
-        printf("%s\n",mass[i]);
     return mass;
 }

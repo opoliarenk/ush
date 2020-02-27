@@ -14,7 +14,7 @@
 int main(int argc, char **argv);
 char *mx_wait_line(void);
 char **mx_strsplit(char *line);
-void mx_fork(char **mass);
 char **mx_connectors(char *line);
+int mx_semicolon(char *line);
 
 #endif

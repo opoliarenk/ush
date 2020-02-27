@@ -5,6 +5,7 @@ DIROBJ = obj
 FILES = main \
 	mx_wait_line \
 	mx_connectors \
+	mx_semicolon \
 
 SRC = $(addprefix src/, $(addsuffix .c,$(FILES)))
 

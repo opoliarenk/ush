@@ -1,5 +1,6 @@
 {
     "files.associations": {
         "ush.h": "c"
-    }
+    },
+    "C_Cpp.errorSquiggles": "Disabled"
 }

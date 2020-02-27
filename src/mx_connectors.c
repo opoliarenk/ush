@@ -63,11 +63,10 @@ char **mx_connectors(char *line) {
     char **mass = NULL;
     int sep = 0;
 
-    if (mx_semicolon(line)) {
-        for (int i = 0; line[i + 1]; i++) {
+    if (mx_semicolon_check(line)) {
+        for (int i = 0; line[i + 1]; i++)
             if (line[i] == ';' && i != 0)
                 sep++;
-        }
         if (sep > 0)
             mass = split(line, sep);
         else {

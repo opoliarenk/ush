@@ -18,7 +18,7 @@ static char **split(char *line, int count) {
     j = 0;
     for (int i = 0; i < len; i++) {
         if (line[i] == ';' && k != 0) {
-            arr[j][k + 1] = '\0';
+            arr[j][k] = '\0';
             j++;
             k = 0;
         } else if (line[i] != ';') {
@@ -35,18 +35,16 @@ char **mx_connectors(char *line) {
     int sep = 0;
 
     if (mx_semicolon_check(line)) {
-        for (int i = 0; line[i + 1]; i++)
+        for (int i = 0; line[i]; i++) 
             if (line[i] == ';' && i != 0)
                 sep++;
-        if (sep > 0)
+        if (sep > 0) {
             mass = split(line, sep);
-        else {
+        } else {
             mass = malloc (sizeof (char *) * (2));
             mass[0] = strdup(line);
             mass[1] = NULL;
         }
-        for (int i = 0; mass[i]; i++)
-            printf("%s\n",mass[i]);
     }
     return mass;
 }

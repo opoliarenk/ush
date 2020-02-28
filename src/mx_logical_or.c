@@ -19,7 +19,7 @@ static char **split(char *line, int count) {
     j = 0;
     for (i = 0; i < len; i++) {
         if (line[i] == '|' && line[i + 1] == '|' && k != 0) {
-            arr[j][k + 1] = '\0';
+            arr[j][k] = '\0';
             j++;
             k = 0;
         } else if (line[i] != '|' && line[i + 1] != '|') {
@@ -48,7 +48,7 @@ int mx_logical_or(char *line) {
     int status_of_work = 1;
 
     while(arr[i]) {
-        if (nazar_func(arr[i]) == 0) { //то есть если Назара функа отработала как надо, то прекращаем работу
+        if (pipe_or_redir_func(arr[i]) == 0) { //то есть если , но сначала функа на проврку пайпов и редирекшинов Назара функа отработала как надо, то прекращаем работу
             status_of_work = 0;
             break;
         }

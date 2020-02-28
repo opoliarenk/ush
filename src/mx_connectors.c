@@ -1,36 +1,7 @@
 #include "../inc/ush.h"
 
-// static char *cut_b_e(char *line) {
-//     int len = strlen(line);
-//     int i = 0;
-//     int j = len - 1;
-//     char *new = NULL;
-//     int k = 0;
-
-//     if (line[0] == ';') {
-//         while (line[i] == ';') {
-//             len--;
-//             i++;
-//         }
-//     } 
-//     if (line[j] == ';') {
-//         while (line[j] == ';') {
-//             len--;
-//             j--;
-//         }
-//     }
-//     new = malloc (sizeof (char) * (len + 1));
-//     for (; i <= j; i++) {
-//         new[k] = line[i];
-//         k++;
-//     }
-//     new[k] = '\0';
-//     return new;
-// }
-
 static char **split(char *line, int count) {
     char **arr = malloc (sizeof (char *) * (count + 2));
-    // cut_b_e(line);
     int len = strlen(line);
     int j = 0;
     int k = 0;

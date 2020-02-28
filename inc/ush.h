@@ -16,5 +16,7 @@ char *mx_wait_line(void);
 char **mx_strsplit(char *line);
 char **mx_connectors(char *line);
 int mx_semicolon_check(char *line);
+void mx_logic(char *mass);
+int mx_logical_or(char *line);
 
 #endif

@@ -13,7 +13,7 @@ int main() {
             if (strcmp(mass[0], "-1") == 0)
                 return 0;
             while(mass[i]) {
-                mx_logic(mass[i]);
+                mx_logic(mass[i])
             }
         }
         

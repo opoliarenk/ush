@@ -1,5 +1,4 @@
 #include "../inc/ush.h"
-#include <string.h>
 
 int main() {
     char *line;
@@ -8,13 +7,13 @@ int main() {
 
     while (1) {
         printf("u$h> ");
-        line = mx_wait_line(); // теперь эту строку надо правильно распарсить, самое важное парсить их по логичным операндам
+        line = mx_canon();
         mass = mx_connectors(line);
         if (mass) {
             if (strcmp(mass[0], "-1") == 0)
                 return 0;
             while(mass[i]) {
-                mx_logic(mass[i])
+                mx_logic(mass[i]);
             }
         }
         

@@ -6,6 +6,9 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
+#include <fcntl.h>
+#include <termios.h>
+#include <string.h>
 
 #define MX_RL_BUFSIZE 1024
 #define MX_TOK_BUFSIZE 64
@@ -18,5 +21,6 @@ char **mx_connectors(char *line);
 int mx_semicolon_check(char *line);
 void mx_logic(char *mass);
 int mx_logical_or(char *line);
+char *mx_canon(void);
 
 #endif

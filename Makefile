@@ -6,6 +6,7 @@ FILES = main \
 	mx_wait_line \
 	mx_connectors \
 	mx_semicolon \
+	mx_ifstrstr \
 
 SRC = $(addprefix src/, $(addsuffix .c,$(FILES)))
 

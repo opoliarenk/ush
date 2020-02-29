@@ -10,12 +10,15 @@
 int main() {
     char *line;
     char **mass;
+    bool exibit = true;
 
-    while (1) {
+    while (exibit) {
         printf("u$h> ");
         line = mx_wait_line(); // теперь эту строку надо правильно распарсить, самое важное парсить их по логичным операндам
         mass = mx_connectors(line);
-
+        for (int i = 0; mass[i]; i++)
+            if (mx_ifstrstr(mass[i], "exit"))
+                exibit = false;
         // mass = mx_strsplit(line);
         // lsh_cd(mass);
 

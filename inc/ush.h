@@ -7,6 +7,8 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdbool.h>
+#include <fcntl.h>
+#include <termios.h>
 
 #define MX_RL_BUFSIZE 1024
 #define MX_TOK_BUFSIZE 64
@@ -16,7 +18,10 @@ int main(int argc, char **argv);
 char *mx_wait_line(void);
 char **mx_strsplit(char *line);
 char **mx_connectors(char *line);
-int mx_semicolon(char *line);
 bool mx_ifstrstr(const char *haystack, const char *needle);
+int mx_semicolon_check(char *line);
+void mx_logic(char *mass);
+int mx_logical_or(char *line);
+char *mx_canon(void);
 
 #endif

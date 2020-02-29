@@ -18,7 +18,7 @@ char *mx_wait_line(void) {
             buffer[position] = c;
         }
         position++;
-    // Если мы превысили буфер, перераспределяем блок памяти
+        // Если мы превысили буфер, перераспределяем блок памяти
         if (position >= bufsize) {
             bufsize += MX_RL_BUFSIZE;
             buffer = realloc(buffer, bufsize);

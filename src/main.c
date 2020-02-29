@@ -1,41 +1,28 @@
 #include "../inc/ush.h"
-#include <string.h>
-
-// static void lsh_cd(char **args) {
-//     if (chdir(args[1]) != 0) {
-//         perror("u$h");
-//     }
-// }
 
 int main() {
     char *line;
     char **mass;
     bool exibit = true;
+    int i = 0;
 
     while (exibit) {
         printf("u$h> ");
-        line = mx_wait_line(); // теперь эту строку надо правильно распарсить, самое важное парсить их по логичным операндам
-        mass = mx_connectors(line);
-        for (int i = 0; mass[i]; i++)
-            if (mx_ifstrstr(mass[i], "exit"))
-                exibit = false;
-        // mass = mx_strsplit(line);
-        // lsh_cd(mass);
-
-        // if (mass[0] != NULL) {
-        //     if (strcmp(mass[0], "ls") == 0) {
-        //         char *arr[4] = {"/bin/ls", mass[1], mass[2], NULL};
-        //         pid_t pid;
-
-        //         pid = fork();
-        //         if (pid == 0) {
-        //             free(mass[0]);
-        //             mass[0] = strdup("/bin/ls");
-        //             execve(mass[0], arr, environ);
-        //         } else 
-        //             while(pid != wait(&status));
-        //     }
-        // }
+        line = mx_wait_line(); //mx_canon();
+        if (line) {
+            mass = mx_connectors(line);
+            if (mass[0] != NULL) {
+                if (strcmp(mass[0], "-1") == 0)
+                    return 0;
+                while(mass[i]) {
+                    mx_logic(mass[i]);
+                    i++;
+                }
+            }
+            for (int i = 0; mass[i]; i++)
+                if (mx_ifstrstr(mass[i], "exit"))
+                    exibit = false;
+        }
         
     }
     return 0;

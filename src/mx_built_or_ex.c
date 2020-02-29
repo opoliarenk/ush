@@ -2,7 +2,7 @@
 
 
 static void builtin(char **mass) {
-    char *builts[8] = {"echo", "cd", "pwd", "which", "env", "export", "unset", "exit"};
+    char *builts[8] = {"echo", "cd", "pwd", "which", "env", "export", "unset", "exit", "fg"};
     int j = 0;
 
     for (int i = 0; mass[i]; i++) {

@@ -20,7 +20,7 @@ int main() {
                 }
             }
             for (int i = 0; mass[i]; i++)
-                if (mx_ifstrstr(mass[i], "exit"))
+                if (strcmp(mass[i], "exit") == 0)
                     exibit = false;
         }
         

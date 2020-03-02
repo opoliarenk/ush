@@ -1,32 +1,46 @@
 NAME = ush
 
-DIROBJ = obj
-
 FILES = main \
 	mx_wait_line \
 	mx_connectors \
-	mx_ifstrstr \
 	mx_semicolon_check \
 	mx_canon \
 	mx_logic \
 
-SRC = $(addprefix src/, $(addsuffix .c,$(FILES)))
+SRC_PREFFIX = $(addprefix src/, $(FILES))
 
-OUT = $(addsuffix .o, $(FILES))
+HEADER = inc/uls.h
 
-INC = inc/ush.h
+DEL_SRC = $(addsuffix .c, $(FILES))
 
-FLAGS = -std=c11 -Wall -Wextra -Werror -Wpedantic
+SRC = $(addsuffix .c, $(SRC_PREFFIX))
 
-all: uninstall install
-install:
-	@mkdir $(DIROBJ)
-	@clang $(FLAGS) $(SRC) -c $(SRC) -I $(INC)
-	@mv $(OUT) $(DIROBJ)
-	@clang $(FLAGS) $(SRC) -o $(NAME) -I $(INC)
+SRC_COMPILE = $(addsuffix .c, $(SRC_PREFFIX))
+
+OBJ = $(addsuffix .o, $(FILES))
+
+CFLAGS = -std=c11 -Werror -Wall -Wextra -Wpedantic
+
+LIB_A = libmx/libmx.a
+
+all: install
+
+install: ush
+
+ush : $(SRC) $(INC)
+	@make -C libmx install
+	@clang $(CFLAGS) -c $(SRC_COMPILE)
+	@clang $(CFLAGS) $(OBJ) $(LIB_A) -o $(NAME)
+	@mkdir -p obj
+	@cp $(OBJ) obj/
+	@rm -rf $(OBJ)
 
 uninstall: clean
+	@make -C libmx uninstall
 	@rm -rf $(NAME)
-clean: 	
-	@rm -rf $(DIROBJ)
-reinstall: uninstall install 
+
+clean:
+	@make -C libmx clean
+	@rm -rf obj
+
+reinstall: uninstall install

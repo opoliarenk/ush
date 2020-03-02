@@ -75,12 +75,12 @@ void mx_logic(char *mass) {
     } 
     for (int i = 0; arr_ampers[i] != NULL; i++) {
         if (if_there_or(arr_ampers[i]) == 1) {
-            //if (mx_logical_or(arr_ampers[i]) == 1) //если функи с операндом || не отробатывают, то мы выходим
+            if (mx_logical_or(arr_ampers[i]) == 1) //если функи с операндом || не отробатывают, то мы выходим
                 break;
         } else {
-        //if (pipe_or_redir_func(arr_ampers[i]) != 0) { // то есть если функа не отработала, то цикл брейкается, но там надо сначала с пайпами отработать
-        //  break;
-        //}
+        if (mx_red_pipe(arr_ampers[i]) != 0) { // то есть если функа не отработала, то цикл брейкается, но там надо сначала с пайпами отработать
+            break;
+        }
         }
     }
     //mx_del_strarr(arr_ampers);

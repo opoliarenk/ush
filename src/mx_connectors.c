@@ -45,8 +45,6 @@ char **mx_connectors(char *line) {
             mass[0] = strdup(line);
             mass[1] = NULL;
         }
-        //for (int i = 0; mass[i]; i++)
-        //    printf("%s\n",mass[i]);
     }
     return mass;
 }

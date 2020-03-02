@@ -6,6 +6,9 @@ FILES = main \
 	mx_semicolon_check \
 	mx_canon \
 	mx_logic \
+	mx_red_pipe \
+	mx_logical_or \
+	mx_redir \
 
 SRC_PREFFIX = $(addprefix src/, $(FILES))
 

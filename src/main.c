@@ -5,7 +5,7 @@ int main() {
     char **mass;
     bool exibit = true;
     int i = 0;
-
+    
     while (exibit) {
         printf("u$h> ");
         line = mx_wait_line(); //mx_canon();
@@ -13,8 +13,6 @@ int main() {
             mass = mx_connectors(line);
             if (mass[0]) {
                 while(mass[i]) {
-                    mx_printstr(mass[i]);
-                    mx_printstr("\n");
                     mx_logic(mass[i]);
                     i++;
                 }

@@ -10,6 +10,7 @@
 #include <stdbool.h>
 #include <fcntl.h>
 #include <termios.h>
+#include <signal.h>
 
 #define MX_RL_BUFSIZE 1024
 #define MX_TOK_BUFSIZE 64
@@ -25,5 +26,7 @@ int mx_logical_or(char *line);
 char *mx_canon(void);
 int mx_red_pipe(char *line);
 int mx_redir(char *line);
+char **mx_newfor_bults(char **mass);
+char **mx_sh_splite(char *line);
 
 #endif

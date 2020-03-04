@@ -6,11 +6,13 @@ FILES = main \
 	mx_semicolon_check \
 	mx_canon \
 	mx_logic \
+	mx_logical_or \
 	mx_env_builtin \
 	mx_builtin_export \
 	mx_builtin_cd \
 	mx_builtin_pwd \
 	mx_builtin_echo \
+	mx_builtin_unset \
 
 SRC_PREFFIX = $(addprefix src/, $(FILES))
 

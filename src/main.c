@@ -32,8 +32,8 @@ int main() {
                     mx_builtin_pwd();
                 if (strcmp(mass[i], "echo") == 0)
                    mx_builtin_echo(mass[i + 1]);
-                //if (strcmp(mass[i], "unset") == 0)
-                //    mx_builtin_unset();
+                if (strcmp(mass[i], "unset") == 0)
+                    mx_builtin_unset(mass[i + 1]);
                 //if (strcmp(mass[i], "which") == 0)
                 //    mx_builtin_which();
                 //if (strcmp(mass[i], "fg") == 0)

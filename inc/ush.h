@@ -38,4 +38,5 @@ void mx_builtin_export(char *name, char *value, char **env);
 void mx_builtin_cd(char *path);
 void mx_builtin_pwd();
 void mx_builtin_echo(char *str);
+void mx_builtin_unset(char *name);
 #endif

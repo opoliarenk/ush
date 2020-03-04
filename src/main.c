@@ -5,6 +5,7 @@ int main() {
     char **mass;
     bool exibit = true;
     int i = 0;
+    extern char **environ;
     
     while (exibit) {
         printf("u$h> ");
@@ -18,9 +19,27 @@ int main() {
                 }
                 i = 0;
             }
-            for (int j = 0; mass[j]; j++)
-                if (strcmp(mass[j], "exit") == 0)
+            for (int i = 0; mass[i]; i++) {
+                if (strcmp(mass[i], "exit") == 0)
                     exibit = false;
+                if (strcmp(mass[i], "env") == 0)
+                    mx_builtin_env(environ);
+                if (strcmp(mass[i], "export") == 0)
+                    mx_builtin_export(mass[i + 1], mass[i + 2], environ);
+                if (strcmp(mass[i], "cd") == 0)
+                    mx_builtin_cd(mass[i + 1]);
+                if (strcmp(mass[i], "pwd") == 0)
+                    mx_builtin_pwd();
+                if (strcmp(mass[i], "echo") == 0)
+                   mx_builtin_echo(mass[i + 1]);
+                //if (strcmp(mass[i], "unset") == 0)
+                //    mx_builtin_unset();
+                //if (strcmp(mass[i], "which") == 0)
+                //    mx_builtin_which();
+                //if (strcmp(mass[i], "fg") == 0)
+                //    mx_builtin_fg();
+            }
+
         }
         
     }

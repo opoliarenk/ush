@@ -16,7 +16,7 @@
 #define MX_TOK_BUFSIZE 64
 #define MX_TOK_DELIM " \t\r\n\a"
 
-int main(int argc, char **argv);
+int main(int argc, char **argv, char **env);
 char *mx_wait_line(void);
 char **mx_str_split(char *line);
 char **mx_connectors(char *line);
@@ -29,4 +29,13 @@ int mx_redir(char *line);
 char **mx_newfor_bults(char **mass);
 char **mx_sh_splite(char *line);
 
+
+
+
+
+void mx_builtin_env(char **env);
+void mx_builtin_export(char *name, char *value, char **env);
+void mx_builtin_cd(char *path);
+void mx_builtin_pwd();
+void mx_builtin_echo(char *str);
 #endif

@@ -62,7 +62,7 @@ static int if_there_amp(char *array) {
     return 0;
 }
 
-void mx_logic(char *mass) {
+void mx_logic(char *mass, t_trig *trig) {
     //сделать проверку на два спереди и два сзади
     char **arr_ampers = NULL;
 
@@ -75,10 +75,10 @@ void mx_logic(char *mass) {
     } 
     for (int i = 0; arr_ampers[i] != NULL; i++) {
         if (if_there_or(arr_ampers[i]) == 1) {
-            if (mx_logical_or(arr_ampers[i]) == 1) //если функи с операндом || не отробатывают, то мы выходим
+            if (mx_logical_or(arr_ampers[i], trig) == 1) //если функи с операндом || не отробатывают, то мы выходим
                 break;
         } else {
-            if (mx_hardparser(arr_ampers[i]) != 0) // mx_red_pipe(arr_ampers[i]то есть, если функа не отработала, то цикл брейкается, но там надо сначала с пайпами отработать
+            if (mx_hardparser(arr_ampers[i], trig) != 0) // mx_red_pipe(arr_ampers[i]то есть, если функа не отработала, то цикл брейкается, но там надо сначала с пайпами отработать
                 break;
         }
     }

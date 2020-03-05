@@ -48,7 +48,7 @@ static char **newfor_bults(char **mass) {
     return newmass;
 }
 
-static void open_f(char *line, char **mass) {
+static void open_f(char *line, char **mass, t_trig *trig) {
     int fd;
     char *str = NULL;
     int i = 0;
@@ -73,16 +73,16 @@ static void open_f(char *line, char **mass) {
         newmass[j] = strdup(str);
     }
     newmass[i + 1] = NULL;
-    
+    mx_builtins(newmass, trig);
     //выполнять функу назара
 }
 
-int mx_redirout(char **mass) {
+int mx_redirout(char **mass, t_trig *trig) {
     char **newmass = newfor_bults(mass);
 
     for (int i = 0; mass[i] != NULL; i++) {
         if (strcmp(mass[i], "<") == 0) {
-            open_f(mass[i + 1], newmass);
+            open_f(mass[i + 1], newmass, trig);
         }
     }
     return 0;

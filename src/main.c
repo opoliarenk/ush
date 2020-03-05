@@ -15,12 +15,12 @@ int main() {
             mass = mx_connectors(line);
             if (mass[0]) {
                 while(mass[i]) {
-                    mx_logic(mass[i]);
+                    mx_logic(mass[i], trig);
                     i++;
                 }
                 i = 0;
             }
-            mx_builtins(mass, trig);
+            //mx_builtins(mass, trig);
         }
     }
     return trig->err;

@@ -1,20 +1,20 @@
 #include "../inc/ush.h"
 
-static int redirectin(char **mass) {
+static int redirectin(char **mass, t_trig *trig) {
     int posi = 2;
 
     for (int i = 0; mass[i] != NULL; i++)
         if (strcmp(mass[i], ">") == 0)
-            posi = mx_redir(mass); // работает но назара функи надо!! strcmp(mass[i], "<") == 0)
+            posi = mx_redir(mass, trig); // работает но назара функи надо!! strcmp(mass[i], "<") == 0)
     return posi;
 }
 
-static int redirectout(char **mass) {
+static int redirectout(char **mass, t_trig *trig) {
     int posi = 2;
 
     for (int i = 0; mass[i] != NULL; i++)
         if (strcmp(mass[i], "<") == 0)
-            posi = mx_redirout(mass); // работает но назара функи надо!! strcmp(mass[i], "<") == 0)
+            posi = mx_redirout(mass, trig); // работает но назара функи надо!! strcmp(mass[i], "<") == 0)
     return posi;
 }
 
@@ -36,16 +36,16 @@ static int redirectout(char **mass) {
 //     return posi;
 // }
 
-int mx_red_pipe(char **mass) { //  проверяет или есть редирекшены , сначала или их не два одновременно, а потом каждый по отдельности 
+int mx_red_pipe(char **mass, t_trig *trig) { //  проверяет или есть редирекшены , сначала или их не два одновременно, а потом каждый по отдельности 
     int redirin; 
     int redirout; 
    // int bothper;
 
     // if (bothper = both(mass) != 2)
     //     return bothper;
-    if ((redirin = redirectin(mass)) != 2) 
+    if ((redirin = redirectin(mass, trig)) != 2) 
         return redirin;
-    if ((redirout = redirectout(mass)) != 2)
+    if ((redirout = redirectout(mass, trig)) != 2)
         return redirout;
     return 2;
 }

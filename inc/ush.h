@@ -27,16 +27,16 @@ char *mx_wait_line(void);
 char **mx_str_split(char *line);
 char **mx_connectors(char *line);
 int mx_semicolon_check(char *line);
-void mx_logic(char *mass);
-int mx_logical_or(char *line);
+void mx_logic(char *mass, t_trig *trig);
+int mx_logical_or(char *line, t_trig *trig);
 char *mx_canon(void);
-int mx_red_pipe(char **mass);
-int mx_redir(char **mass);
+int mx_red_pipe(char **mass, t_trig *trig);
+int mx_redir(char **mass, t_trig *trig);
 char **mx_newfor_bults(char **mass);
 char **mx_sh_splite(char *line);
 char *mx_hardsplit(char *line);
-int mx_hardparser(char *line);
-int mx_redirout(char **mass);
+int mx_hardparser(char *line,  t_trig *trig);
+int mx_redirout(char **mass, t_trig *trig);
 
 
 

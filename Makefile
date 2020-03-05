@@ -11,6 +11,14 @@ FILES = main \
 	mx_builtin_cd \
 	mx_builtin_pwd \
 	mx_builtin_echo \
+	mx_hardsplit \
+	mx_hardparser \
+	mx_logical_or \
+	mx_red_pipe \
+	mx_sh_splite \
+	mx_redirout \
+	mx_redir \
+	mx_newfor_bults \
 
 SRC_PREFFIX = $(addprefix src/, $(FILES))
 

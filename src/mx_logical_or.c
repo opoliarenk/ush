@@ -48,12 +48,12 @@ int mx_logical_or(char *line) {
     int status_of_work = 1;
 
     while(arr[i]) {
-        if ( == 0) { //mx_red_pipe(arr[i]) == 0то есть если , но сначала функа на проврку пайпов и редирекшинов Назара функа отработала как надо, то прекращаем работу
+        if (mx_hardparser(arr[i]) == 0) { //то есть если , но сначала функа на проврку пайпов и редирекшинов Назара функа отработала как надо, то прекращаем работу
             status_of_work = 0;
             break;
         }
         i++;
     }
-   // mx_del_strarr(&arr);
+    mx_del_strarr(&arr);
     return status_of_work;
 }

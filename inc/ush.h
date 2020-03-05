@@ -30,10 +30,14 @@ int mx_semicolon_check(char *line);
 void mx_logic(char *mass);
 int mx_logical_or(char *line);
 char *mx_canon(void);
-int mx_red_pipe(char *line);
-int mx_redir(char *line);
+int mx_red_pipe(char **mass);
+int mx_redir(char **mass);
 char **mx_newfor_bults(char **mass);
 char **mx_sh_splite(char *line);
+char *mx_hardsplit(char *line);
+int mx_hardparser(char *line);
+int mx_redirout(char **mass);
+
 
 
 

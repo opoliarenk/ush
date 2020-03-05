@@ -78,10 +78,9 @@ void mx_logic(char *mass) {
             if (mx_logical_or(arr_ampers[i]) == 1) //если функи с операндом || не отробатывают, то мы выходим
                 break;
         } else {
-        //if () != 0) { // mx_red_pipe(arr_ampers[i]то есть, если функа не отработала, то цикл брейкается, но там надо сначала с пайпами отработать
-         //   break;
-        //}
+            if (mx_hardparser(arr_ampers[i]) != 0) // mx_red_pipe(arr_ampers[i]то есть, если функа не отработала, то цикл брейкается, но там надо сначала с пайпами отработать
+                break;
         }
     }
-    //mx_del_strarr(arr_ampers);
+    mx_del_strarr(&arr_ampers);
 }

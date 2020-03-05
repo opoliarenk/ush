@@ -1,19 +1,5 @@
 #include "../inc/ush.h"
 
-static void mx_bubble_sort_ext(char **arr, int size) {
-    char *buf = NULL;
-
-    for (int j = 0; j < size; j++) {
-        for (int i = j; i < size - 1; i++) {
-            if (mx_strcmp(arr[i], arr[i + 1]) > 0) {
-                buf = arr[i];
-                arr[i] = arr[i + 1];
-                arr[i + 1] = buf;
-            }
-        }
-    }
-}
-
 static int strlen_for_2star(char **env) {
 	int len = 0;
 
@@ -42,7 +28,7 @@ void mx_builtin_export(char *name, char *value, char **env) {
 	if (name && value)
 		setenv(name, value, index_potoka);
 	else {
-		mx_bubble_sort_ext(dup, len_of_env);
+		mx_bubble_sort(dup, len_of_env);
 		for (int i = 0; dup[i]; i++)
 			printf("%s\n", dup[i]);
 	}

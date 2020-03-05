@@ -7,7 +7,8 @@ FILES = main \
 	mx_canon \
 	mx_logic \
 	mx_logical_or \
-	mx_env_builtin \
+	mx_builtins \
+	mx_builtin_env \
 	mx_builtin_export \
 	mx_builtin_cd \
 	mx_builtin_pwd \
@@ -32,9 +33,9 @@ LIB_A = libmx/libmx.a
 
 all: install
 
-install: ush
+install: $(NAME)
 
-ush : $(SRC) $(INC)
+$(NAME) : $(SRC) $(INC)
 	@make -C libmx install
 	@clang $(CFLAGS) -c $(SRC_COMPILE)
 	@clang $(CFLAGS) $(OBJ) $(LIB_A) -o $(NAME)

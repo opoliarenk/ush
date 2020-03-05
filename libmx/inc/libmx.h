@@ -43,7 +43,6 @@ int mx_is_space(char c);
 int mx_atoi(const char *str);
 int mx_isdigit(char c);
 int mx_is_space(char c);
-int mx_atoi(const char *str);
 int mx_count_words(const char *str, char c);
 int mx_get_substr_index(const char *str, const char *sub);
 int mx_skip_substr_index(const char *str, const char *sub, int counter);

@@ -20,7 +20,6 @@ int main() {
                 }
                 i = 0;
             }
-            //mx_builtins(mass, trig);
         }
     }
     return trig->err;

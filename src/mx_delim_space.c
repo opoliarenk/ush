@@ -8,9 +8,15 @@ static void mallocingstr(char **mass, char *line) {
     for (int i = 0; i < len; i++) {
         if (line[i] == '\"') {
             i++;
-            while (line[i] != '\"') {
-                i++;
-                j++;
+            while (line[i] != '\"') { 
+                if (line[i] == '\\') {
+                    i = i + 2;
+                    j++;
+                } 
+                else {
+                    j++;
+                    i++;
+                }
             }
         }
         if (line[i] == ' ' || line[i] == '\t' 
@@ -35,9 +41,15 @@ static int count_words(char *line) {
     int countw = 0;
 
     for (int i = 0; i < len; i++) {
+        // if (line[i] == '\\') {
+        //         i = i + 2;
+        // }
         if (line[i] == '\"') {
             i++;
-            while (line[i] != '\"') {
+            while (line[i] != '\"') { 
+                if (line[i] == '\\') {
+                    i++;
+                }
                 i++;
             }
         }  
@@ -66,7 +78,9 @@ char **mx_delim_space(char *line) {
     for (int i = 0; i < len; i++) {
         if (line[i] == '\"') {
             i++;
-            while (line[i] != '\"') {
+            while (line[i] != '\"') { 
+                if (line[i] == '\\')
+                    i++;
                 mass[j][k] = line[i];
                 k++;
                 i++;

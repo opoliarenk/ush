@@ -3,7 +3,7 @@
 int mx_hardparser(char *line,  t_trig *trig) {
     //char *new = mx_ultra_strtrim(line, ' '); // доделать
     char *newl = mx_hardsplit(line); //FREE
-    char **mass = mx_delim_space(line); //FREE
+    char **mass = mx_delim_space(newl); //FREE
     int status_of_work;
 
     if ((status_of_work = mx_red_pipe(mass, trig)) == 2) {

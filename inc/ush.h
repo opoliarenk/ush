@@ -22,7 +22,7 @@ int err;
 char *last_cd;
 } 			   t_trig;
 
-int main(int argc, char **argv, char **env);
+int main(int argc, char **argv);
 char *mx_wait_line(void);
 char **mx_str_split(char *line);
 char **mx_connectors(char *line);

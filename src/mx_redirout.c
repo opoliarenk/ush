@@ -1,32 +1,5 @@
 #include "../inc/ush.h"
 
-// static char *easy_split(char *line) {
-//     int i;
-//     int j = 0;
-//     char *new = NULL;
-//     int k = 0;
-    
-//     for (i = 0; line[i] != '\0'; i++) {
-//         if (line[i] == '<') 
-//             j = j + 2;
-//     }
-//     i = i + j;
-//     new = mx_strnew(i);
-//     for (int q = 0; q < i; q++) {
-//         if (line[k] == '<') {
-//             new[q++] = ' ';
-//             new[q++] = line[k];
-//             new[q] = ' ';
-//             k++;
-//         } 
-//         else {
-//             new[q] = line[k];
-//             k++;
-//         }
-//     }
-//     return new;
-// }
-
 static char **newfor_bults(char **mass) {
     int newlen = 0;
     char **newmass = NULL;
@@ -59,11 +32,11 @@ static void open_f(char *line, char **mass, t_trig *trig) {
     if (fd == -1) {
         perror("ush"); //ERROR
         return;
-    }
+    } else 
+        close(fd);
     str = mx_file_to_str(line);
-    while (mass[i]) {
+    while (mass[i])
         i++;
-    } 
     newmass = malloc (sizeof (char *) * (i + 2));
     for (j = 0; j < i + 2; j++) {
         while (mass[j]) {

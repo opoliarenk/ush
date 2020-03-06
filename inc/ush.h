@@ -37,6 +37,7 @@ char **mx_sh_splite(char *line);
 char *mx_hardsplit(char *line);
 int mx_hardparser(char *line,  t_trig *trig);
 int mx_redirout(char **mass, t_trig *trig);
+char **mx_delim_space(char *line);
 
 
 

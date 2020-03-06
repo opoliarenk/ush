@@ -38,13 +38,11 @@ int mx_redir(char **mass, t_trig *trig) {
             i = i + 1;
             newmass = mx_newfor_bults(mass);
             creat_file_add(mass[i + 1], newmass, trig);
-            //break;
             continue;
         }
         if (strcmp(mass[i], ">") == 0) {
             newmass = mx_newfor_bults(mass);
             creat_file_one(mass[i + 1], newmass, trig);
-            //break;
         }
     }
     return 0;

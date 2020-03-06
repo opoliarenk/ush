@@ -3,7 +3,8 @@
 #define LSH_TOK_DELIM " \t\r\n\a"
 
 char **mx_sh_splite(char *line) {
-    int bufsize = LSH_TOK_BUFSIZE, position = 0;
+    int bufsize = LSH_TOK_BUFSIZE;
+    int position = 0;
     char **tokens = malloc(bufsize * sizeof(char*));
     char *token;
 

@@ -21,6 +21,7 @@ FILES = main \
 	mx_redirout \
 	mx_redir \
 	mx_newfor_bults \
+	mx_delim_space \
 
 SRC_PREFFIX = $(addprefix src/, $(FILES))
 

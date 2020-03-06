@@ -7,7 +7,7 @@ char *mx_hardsplit(char *line) {
     int k = 0;
     
     for (i = 0; line[i] != '\0'; i++) {
-        if (line[i] == '>' || line[i] == '\'' || line[i] == '\\' || line[i] == '\"' 
+        if (line[i] == '>' || line[i] == '\'' || line[i] == '\\'  
         || line[i] == '$' || line[i] == '(' || line[i] == ')' 
         || line[i] == '{' || line[i] == '}' || line[i] == '`')
             j += 2;
@@ -15,7 +15,7 @@ char *mx_hardsplit(char *line) {
     i = i + j;
     new = mx_strnew(i);
     for (int q = 0; q <= i; q++) {
-        if (line[k] == '>' || line[k] == '\'' || line[k] == '\\' || line[k] == '\"' 
+        if (line[k] == '>' || line[k] == '\'' || line[k] == '\\'  
         || line[k] == '$' || line[k] == '(' || line[k] == ')' 
         || line[k] == '{' || line[k] == '}' || line[k] == '`') {
             new[q++] = ' ';

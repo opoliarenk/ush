@@ -4,12 +4,24 @@ static void mallocingstr(char **mass, char *line) {
     int j = 0;
     int elem = 0;
     int len = strlen(line);
+    int counter = 0;
 
     for (int i = 0; i < len; i++) {
         if (line[i] == '\"') {
             i++;
             while (line[i] != '\"') { 
-                if (line[i] == '\\') {
+                if (line[i] == '\\' && line[i + 1] == '\\') { /////
+                    while (line[i] == '\\') {
+                        i++;
+                        j++;
+                        while (counter != 3 && line[i] == '\\') {
+                            counter++;
+                            i++;
+                        }
+                        counter = 0;
+                    }
+                } /////
+                if (line[i] == '\\' && (line[i + 1] == '\"' || line[i + 1] == '`')) {
                     i = i + 2;
                     j++;
                 } 
@@ -41,13 +53,10 @@ static int count_words(char *line) {
     int countw = 0;
 
     for (int i = 0; i < len; i++) {
-        // if (line[i] == '\\') {
-        //         i = i + 2;
-        // }
         if (line[i] == '\"') {
             i++;
             while (line[i] != '\"') { 
-                if (line[i] == '\\') {
+                if (line[i] == '\\' && (line[i + 1] == '\"' || line[i + 1] == '`')) { //here
                     i++;
                 }
                 i++;
@@ -73,13 +82,26 @@ char **mx_delim_space(char *line) {
     int j = 0;
     int k = 0;
     int len = strlen(line);
+    int counter = 0;
 
     mallocingstr(mass, line);
     for (int i = 0; i < len; i++) {
         if (line[i] == '\"') {
             i++;
             while (line[i] != '\"') { 
-                if (line[i] == '\\')
+                if (line[i] == '\\' && line[i + 1] == '\\') { /////
+                    while (line[i] == '\\') {
+                        mass[j][k] = line[i];
+                        k++;
+                        i++;
+                        while (counter != 3 && line[i] == '\\') {
+                            counter++;
+                            i++;
+                        }
+                        counter = 0;
+                    }
+                } /////
+                if (line[i] == '\\' && (line[i + 1] == '\"' || line[i + 1] == '`')) //here
                     i++;
                 mass[j][k] = line[i];
                 k++;

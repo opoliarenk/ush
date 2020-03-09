@@ -22,6 +22,7 @@ FILES = main \
 	mx_redir \
 	mx_newfor_bults \
 	mx_delim_space \
+	mx_strlen_for_2star \
 
 SRC_PREFFIX = $(addprefix src/, $(FILES))
 

@@ -9,9 +9,7 @@ static void creat_file_one(char *str, char **mass,  t_trig *trig) {
     if (fd == -1)
         fd = open(str, O_CREAT | O_WRONLY);
     dup2(fd, 1);
-    ///////
     mx_builtins(mass, trig);
-    ///////выполнять функу назара вместо этого мусора!!!Передаю туда mass
     dup2(save_fd, 1);
 } 
 
@@ -24,9 +22,7 @@ static void creat_file_add(char *str, char **mass,  t_trig *trig) {
     if (fd == -1)
         fd = open(str, O_CREAT | O_APPEND | O_WRONLY);
     dup2(fd, 1);
-    ///////
     mx_builtins(mass, trig);
-    ///////выполнять функу назара вместо этого мусора!!!!Передаю туда mass
     dup2(save_fd, 1);
 }
 

@@ -42,7 +42,7 @@ char **mx_delim_space(char *line);
 
 
 
-
+int mx_strlen_for_2star(char **env);
 void mx_builtins(char **arr, t_trig *trig);
 void mx_builtin_env(char **env);
 void mx_builtin_export(char *name, char *value, char **env);

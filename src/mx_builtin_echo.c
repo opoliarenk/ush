@@ -29,22 +29,21 @@ void mx_builtin_echo(char **arr) {
 			break;
 		i++;		
 	}
-	while (arr[i]) {
+	while (arr[i + 1]) {
 		//if (fl_E)
 		//	buf = change_str(arr[i]);
 		//else
 			buf = arr[i];
 		mx_printstr(buf);
-		if (!fl_n)
-			mx_printchar(10);
-		else {
-			if (arr[i + 1] == NULL)
-				mx_printstr("%\n");
-			else
-				mx_printchar(32);
-		}
+		mx_printchar(32);
 		i++;
 		//if (fl_E)
 		//	mx_strdel(&buf);
+	}
+	mx_printstr(buf);
+	if (!fl_n)
+		mx_printchar(10);
+	else {
+		mx_printstr("%\n");
 	}
 }

@@ -11,15 +11,19 @@
 #include <fcntl.h>
 #include <termios.h>
 #include <signal.h>
+#include <sys/stat.h>
+#include <dirent.h>
+#include <malloc/malloc.h>
 
 #define MX_RL_BUFSIZE 1024
 #define MX_TOK_BUFSIZE 64
 #define MX_TOK_DELIM " \t\r\n\a"
+#define MX_IFDIR  0040000  /* directory */
+#define MX_IFLNK  0120000  /* symbolic link */
 
 typedef struct s_trig{
-bool exit; //trig na exit
-int err;
-char *last_cd;
+	bool exit; //trig na exit
+	int err;
 } 			   t_trig;
 
 int main(int argc, char **argv);
@@ -50,6 +54,4 @@ void mx_builtin_cd(char **arr, t_trig *trig);
 void mx_builtin_pwd();
 void mx_builtin_echo(char **arr);
 void mx_builtin_unset(char *name);
-
-
 #endif

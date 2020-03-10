@@ -8,7 +8,7 @@ int main() {
 
     trig->exit = true;
     trig->err = 0;
-    trig->last_cd = NULL;
+    chdir("/Users/");
     while (trig->exit) {
         printf("u$h> ");
         line = mx_wait_line(); //mx_canon();

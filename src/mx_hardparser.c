@@ -6,11 +6,11 @@ int mx_hardparser(char *line,  t_trig *trig) {
     int status_of_work;
 
     //////
-    printf("%s\n",newl);
-    for (int i = 0; mass[i] != NULL; i++) {
-        mx_printstr(mass[i]);
-        mx_printchar('\n');
-    }
+    //printf("%s\n",newl);
+    //for (int i = 0; mass[i] != NULL; i++) {
+    //    mx_printstr(mass[i]);
+    //    mx_printchar('\n');
+    //}
     //////
 
     if ((status_of_work = mx_red_pipe(mass, trig)) == 2) {

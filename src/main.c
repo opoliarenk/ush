@@ -11,7 +11,6 @@ int main() {
 
     trig->exit = true;
     trig->err = 0;
-    chdir("/Users/");
     while (trig->exit) {
         mx_canon_off();
         line = mx_input(input); //input

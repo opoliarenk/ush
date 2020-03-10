@@ -4,7 +4,6 @@ FILES = main \
 	mx_wait_line \
 	mx_connectors \
 	mx_semicolon_check \
-	mx_canon \
 	mx_logic \
 	mx_logical_or \
 	mx_builtins \
@@ -23,6 +22,8 @@ FILES = main \
 	mx_newfor_bults \
 	mx_delim_space \
 	mx_strlen_for_2star \
+	mx_canon_off \
+	mx_input \
 
 SRC_PREFFIX = $(addprefix src/, $(FILES))
 

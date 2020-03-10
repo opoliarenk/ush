@@ -14,6 +14,7 @@
 #include <sys/stat.h>
 #include <dirent.h>
 #include <malloc/malloc.h>
+#include <limits.h>
 
 #define MX_RL_BUFSIZE 1024
 #define MX_TOK_BUFSIZE 64
@@ -25,6 +26,25 @@ typedef struct s_trig{
 	bool exit; //trig na exit
 	int err;
 } 			   t_trig;
+
+typedef struct s_history_list {
+    void *data;
+    struct s_history_list *next;
+    struct s_history_list *prev;
+} 			   t_history_list;
+
+typedef struct s_input {
+    char ch[6];
+    t_history_list *history_head;
+    t_history_list *history_back;
+    t_history_list *history_tmp;
+    char head_line[ARG_MAX + 1];
+    char back_line[ARG_MAX + 1];
+    char line[ARG_MAX + 1];
+    unsigned int index;
+    unsigned int cursor;
+} 			   t_input;
+
 
 int main(int argc, char **argv);
 char *mx_wait_line(void);
@@ -54,4 +74,9 @@ void mx_builtin_cd(char **arr, t_trig *trig);
 void mx_builtin_pwd();
 void mx_builtin_echo(char **arr);
 void mx_builtin_unset(char *name);
+
+
+char *mx_input(t_input *input);
+void mx_canon_off(void);
+
 #endif

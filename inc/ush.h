@@ -39,8 +39,6 @@ typedef struct s_input {
     t_history_list *history_back;
     t_history_list *history_tmp;
     char head_line[ARG_MAX + 1];
-    char back_line[ARG_MAX + 1];
-    char line[ARG_MAX + 1];
     unsigned int index;
     unsigned int cursor;
 } 			   t_input;

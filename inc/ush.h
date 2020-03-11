@@ -34,13 +34,15 @@ typedef struct s_history_list {
 } 			   t_history_list;
 
 typedef struct s_input {
-    char ch[6];
+    char ch[5];
     t_history_list *history_head;
     t_history_list *history_back;
     t_history_list *history_tmp;
     char head_line[ARG_MAX + 1];
+    char line[ARG_MAX + 1];
     unsigned int index;
     unsigned int cursor;
+    unsigned int try;
 } 			   t_input;
 
 

@@ -7,6 +7,17 @@ static void mallocingstr(char **mass, char *line) {
     int counter = 0;
 
     for (int i = 0; i < len; i++) {
+        if (line[i] == '\\' && line[i + 1] == '\\') { ///// HEHEHEHE
+                    while (line[i] == '\\') {
+                        i++;
+                        j++;
+                        while (counter != 3 && line[i] == '\\') {
+                            counter++;
+                            i++;
+                        }
+                        counter = 0;
+                    }
+                } ///// HEHEHHE
         if (line[i] == '\"') {
             i++;
             while (line[i] != '\"') { 
@@ -86,6 +97,18 @@ char **mx_delim_space(char *line) {
 
     mallocingstr(mass, line);
     for (int i = 0; i < len; i++) {
+        if (line[i] == '\\' && line[i + 1] == '\\') { ///// HEHEHEHEH
+                    while (line[i] == '\\') {
+                        mass[j][k] = line[i];
+                        k++;
+                        i++;
+                        while (counter != 3 && line[i] == '\\') {
+                            counter++;
+                            i++;
+                        }
+                        counter = 0;
+                    }
+                } ///// HEHEHEHEHE
         if (line[i] == '\"') {
             i++;
             while (line[i] != '\"') { 

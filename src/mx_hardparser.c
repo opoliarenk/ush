@@ -5,14 +5,14 @@ int mx_hardparser(char *line,  t_trig *trig) {
     char **mass = mx_delim_space(newl); //FREE
     int status_of_work;
 
-    ////
-    printf("%s\n",newl);
-    for (int i = 0; mass[i] != NULL; i++) {
+    int i = 0;
+    while (mass[i] != NULL) {
         mx_printstr(mass[i]);
         mx_printchar('\n');
+        i++;
     }
-    ////
 
+    
     if ((status_of_work = mx_red_pipe(mass, trig)) == 2) {
         mx_builtins(mass, trig);
         status_of_work = trig->err;

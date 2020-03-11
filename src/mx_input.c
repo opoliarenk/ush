@@ -83,11 +83,7 @@ char *mx_input(t_input *input) {
     while (read(STDIN_FILENO, input->ch, 5) && checkout_char(input)) {
         clear_view(input);
         dprintf(1, "%s%s", "u$h> ", input->head_line);
-<<<<<<< HEAD
         cursor(input);
-=======
-        mx_handle_cursor(input);
->>>>>>> lena
         memset(input->ch, '\0', sizeof(input->ch));
     }
     if (!strlen(input->head_line))

@@ -14,7 +14,7 @@ char *mx_hardsplit(char *line) {
             else 
                 flag = 0;
         }
-        if ((line[i] == '>' || line[i] == '\''  
+        if ((line[i] == '>' 
         || line[i] == '$' || line[i] == '(' || line[i] == ')' 
         || line[i] == '{' || line[i] == '}' || line[i] == '`') && flag != 1)  
             j += 2;
@@ -29,7 +29,7 @@ char *mx_hardsplit(char *line) {
             else 
                 flag = 0;
         }
-        if ((line[k] == '>' || line[k] == '\''  
+        if ((line[k] == '>'  
         || line[k] == '$' || line[k] == '(' || line[k] == ')' 
         || line[k] == '{' || line[k] == '}' || line[k] == '`') && flag != 1) {  
             new[q++] = ' ';

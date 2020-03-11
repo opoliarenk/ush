@@ -11,7 +11,10 @@ int main() {
 
     trig->exit = true;
     trig->err = 0;
-    chdir("/Users/");
+    trig->PWD = (char *)malloc(50 * sizeof(char));
+    trig->OLDPWD = (char *)malloc(50 * sizeof(char));
+    trig->OLDPWD = getenv("HOME");
+    trig->PWD = getenv("HOME");
     while (trig->exit) {
         mx_canon_off();
         line = mx_input(input); //input

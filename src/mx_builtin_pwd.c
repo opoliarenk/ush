@@ -1,9 +1,65 @@
 #include "../inc/ush.h"
 
-void mx_builtin_pwd() {
-	char pwd[1024];
+typedef struct s_pwd{
+    bool stop;
+    bool L;
+    bool P;
+}              t_pwd;
 
-	getcwd(pwd, sizeof(pwd));
-	mx_printstr(pwd);
-	mx_printstr("\n");
+static void part_for_link(char *path)  {
+    char *link = mx_strnew(1024);
+
+    readlink(path, link, 1024);
+    mx_printstr(link);
+    mx_printstr("\n");
+    mx_strdel(&link);
+}
+
+void mx_builtin_pwd(char **arr, t_trig *trig) {
+    char *cwd = trig->PWD;
+    int i = 1;
+    t_pwd *pwd = (t_pwd *)malloc(sizeof(t_pwd));
+    struct stat lt;
+
+    memset(pwd, 0, sizeof(t_pwd));
+    while (arr[i]) {
+        if (arr[i][0] == '-') {
+            if (strcmp(arr[i], "-P") == 0) {
+                pwd->P = 1;
+                pwd->L = 0;
+            }
+            else if (strcmp(arr[i], "-L") == 0)
+                pwd->L = 1;
+            else {
+                mx_printerr("pwd: bad option: ");
+                mx_printerr(arr[i]);
+                mx_printerr("\n");
+                trig->err = 1;
+                pwd->stop = 1;
+                break;
+            }
+        }
+        else {
+            mx_printerr("pwd: too many arguments\n");
+            trig->err = 1;
+            pwd->stop = 1;
+            break;
+        }
+        i++;
+    }
+    if (!pwd->stop) {
+        lstat(cwd, &lt);
+        if (pwd->P) {
+            if ((lt.st_mode & MX_IFMT) == MX_IFLNK)
+                part_for_link(cwd);
+            else {
+                mx_printstr(cwd);
+                mx_printstr("\n");
+            }
+        }
+        else {
+            mx_printstr(cwd);
+            mx_printstr("\n");
+        }
+    }
 }

@@ -12,7 +12,6 @@ int mx_hardparser(char *line,  t_trig *trig) {
         i++;
     }
 
-    
     if ((status_of_work = mx_red_pipe(mass, trig)) == 2) {
         mx_builtins(mass, trig);
         status_of_work = trig->err;

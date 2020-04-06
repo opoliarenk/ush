@@ -113,6 +113,7 @@ static int count_words(char *line) {
 
 char **mx_delim_space(char *line) {
     int count = count_words(line);
+    mx_printint(count);
     char **mass = malloc(sizeof(char*) * count + 1);
     int j = 0;
     int k = 0;

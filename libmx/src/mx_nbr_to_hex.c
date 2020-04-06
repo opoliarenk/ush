@@ -4,7 +4,7 @@ static char *convers(unsigned long temp, unsigned long nbr,
 char *res, int i) {
     while (nbr) {
         temp = nbr % 16;
-        if (temp >= 0 && temp <= 9)
+        if (temp <= 9)
             res[i--] = temp + 48;
         else
             res[i--] = temp + 87;

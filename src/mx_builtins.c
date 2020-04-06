@@ -19,6 +19,10 @@ void mx_builtins(char **arr, t_trig *trig) {
        mx_builtin_echo(arr);
     if (strcmp(arr[0], "unset") == 0)
         mx_builtin_unset(arr[1]);
+    if (strcmp(arr[0], "true") == 0)
+        mx_builtin_true(trig);
+    if (strcmp(arr[0], "false") == 0)
+        mx_builtin_false(trig);
     // if (strcmp(arr[0], "which") == 0)
     //    mx_builtin_which();
     // if (strcmp(arr[0], "fg") == 0)

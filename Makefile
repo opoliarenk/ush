@@ -24,6 +24,9 @@ FILES = main \
 	mx_strlen_for_2star \
 	mx_canon_off \
 	mx_input \
+	mx_builtin_true \
+	mx_builtin_false \
+	mx_cut_spaces \
 
 SRC_PREFFIX = $(addprefix src/, $(FILES))
 

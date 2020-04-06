@@ -65,7 +65,7 @@ char *mx_hardsplit(char *line);
 int mx_hardparser(char *line,  t_trig *trig);
 int mx_redirout(char **mass, t_trig *trig);
 char **mx_delim_space(char *line);
-
+char *mx_cut_spaces(char *line);
 
 
 
@@ -77,6 +77,8 @@ void mx_builtin_cd(char **arr, t_trig *trig);
 void mx_builtin_pwd(char **arr, t_trig *trig);
 void mx_builtin_echo(char **arr);
 void mx_builtin_unset(char *name);
+void mx_builtin_true(t_trig *trig);
+void mx_builtin_false(t_trig *trig);
 
 
 char *mx_input(t_input *input);

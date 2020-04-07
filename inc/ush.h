@@ -66,8 +66,7 @@ int mx_hardparser(char *line,  t_trig *trig);
 int mx_redirout(char **mass, t_trig *trig);
 char **mx_delim_space(char *line);
 char *mx_cut_spaces(char *line);
-
-
+int mx_rederr(char **mass, t_trig *trig);
 
 int mx_strlen_for_2star(char **env);
 void mx_builtins(char **arr, t_trig *trig);

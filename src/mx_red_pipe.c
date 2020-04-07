@@ -4,8 +4,10 @@ static int redirectin(char **mass, t_trig *trig) {
     int posi = 2;
 
     for (int i = 0; mass[i] != NULL; i++)
-        if (strcmp(mass[i], ">") == 0)
-            posi = mx_redir(mass, trig); 
+        if (strcmp(mass[i], ">") == 0) {
+            posi = mx_redir(mass, trig);
+            break;
+        } 
     return posi;
 }
 
@@ -13,8 +15,10 @@ static int redirectout(char **mass, t_trig *trig) {
     int posi = 2;
 
     for (int i = 0; mass[i] != NULL; i++)
-        if (strcmp(mass[i], "<") == 0)
-            posi = mx_redirout(mass, trig); 
+        if (strcmp(mass[i], "<") == 0) {
+            posi = mx_redirout(mass, trig);
+            break;
+        } 
     return posi;
 }
 
@@ -36,19 +40,22 @@ static int redirectout(char **mass, t_trig *trig) {
 //     return posi;
 // }
 
-// static int err_stream(char **mass, t_trig *trig) на поток ошибок 
-//     int posi = 2;
+static int err_stream(char **mass, t_trig *trig) { //на поток ошибок 
+    int posi = 2;
 
-//     for (int i = 0; mass[i] != NULL; i++) {
-//         if (strcmp(mass[i], "2") == 0 && strcmp(mass[i + 1], ">") == 0)
-//             posi = ; 
-//     return posi;
-// }
+    for (int i = 0; mass[i] != NULL; i++)
+        if (strcmp(mass[i], "2>") == 0)
+            posi = mx_rederr(mass, trig); 
+    return posi;
+}
 
 int mx_red_pipe(char **mass, t_trig *trig) { //  проверяет или есть редирекшены , сначала или их не два одновременно, а потом каждый по отдельности 
     int redirin; 
     int redirout; 
+    int rederr;
     
+    if ((rederr = err_stream(mass, trig)) != 2) 
+        return rederr;
     if ((redirin = redirectin(mass, trig)) != 2) 
         return redirin;
     if ((redirout = redirectout(mass, trig)) != 2)

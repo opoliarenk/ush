@@ -79,6 +79,7 @@ void mx_builtin_echo(char **arr);
 void mx_builtin_unset(char *name);
 void mx_builtin_true(t_trig *trig);
 void mx_builtin_false(t_trig *trig);
+void mx_notbuiltin(char **arr, t_trig *trig, char **environ);
 
 
 char *mx_input(t_input *input);

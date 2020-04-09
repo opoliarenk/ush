@@ -29,6 +29,7 @@ FILES = main \
 	mx_cut_spaces \
 	mx_rederr \
 	mx_redboth \
+	mx_notbuiltin \
 
 SRC_PREFFIX = $(addprefix src/, $(FILES))
 

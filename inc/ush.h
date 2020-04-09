@@ -31,7 +31,7 @@ typedef struct s_trig{
 } 			   t_trig;
 
 typedef struct s_history_list {
-    void *data;
+    char data[ARG_MAX + 1];
     struct s_history_list *next;
     struct s_history_list *prev;
 } 			   t_history_list;
@@ -40,6 +40,8 @@ typedef struct s_input {
     char ch[5];
     t_history_list *history_head;
     t_history_list *history_back;
+    t_history_list *history_next;
+    t_history_list *history_prev;
     t_history_list *history_tmp;
     char head_line[ARG_MAX + 1];
     char line[ARG_MAX + 1];

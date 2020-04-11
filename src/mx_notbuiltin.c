@@ -1,15 +1,22 @@
 #include "../inc/ush.h"
 
-static void exework(char **temp, char **environ) {
+static int exework(char **temp, char **environ) {
+    int status;
     pid_t pid = fork();
+    int status_err = 1;
     
     if (pid == 0) {
-        if (execve(temp[0], temp, environ) == -1) {// ERROR HERE
-            exit(0);//при удачном оно само выходит, при ошибке надо выходить самим( в ручную)
+        if (execve(temp[0], temp, environ) == -1)
+            exit(1);
+    } else {
+        waitpid(pid, &status, WUNTRACED);
+        if (WEXITSTATUS(status) == 1) {
+            status_err = 1;
+        } else {
+            status_err = 0;
         }
-    } else 
-        wait(NULL);
-    
+    }
+    return status_err;
 }
 
 void mx_notbuiltin(char **arr, t_trig *trig, char **environ) {
@@ -18,12 +25,12 @@ void mx_notbuiltin(char **arr, t_trig *trig, char **environ) {
     char **temp = NULL;
     int i = 0;
 
-    trig->err = 0; // просто так
+    //trig->err = 0; // просто так
     buff = mx_strjoin(pre, arr[0]);
     for (i = 0; arr[i] != NULL; i++);
     temp = malloc(sizeof(char*) * i + 1);
     temp[0] = strdup(buff);
     for (i = 1; arr[i] != NULL; i++)
         temp[i] = strdup(arr[i]);
-    exework(temp, environ);
+    trig->err = exework(temp, environ);
 }

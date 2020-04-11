@@ -25,7 +25,6 @@ void mx_builtins(char **arr, t_trig *trig) {
         mx_builtin_false(trig);
     else {
         mx_notbuiltin(arr, trig, environ);
-        trig->err = 1;
     }
     // if (strcmp(arr[0], "which") == 0)
     //    mx_builtin_which();

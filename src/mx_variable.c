@@ -40,7 +40,7 @@ static void push_back(t_var **list, char *str) {
     t_var *buff = *list;
 
     if (buff == NULL) {
-        list = &new_var;
+        *list = new_var;
         return ;
     }
     while (buff->next != NULL)

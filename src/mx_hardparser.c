@@ -11,13 +11,12 @@ int mx_hardparser(char *line, t_trig *trig, t_var **list) {
     int i = 0;
     while (mass[i] != NULL) {
         if (strcmp(mass[i], "$") == 0) {
-            if (list != NULL) {
-            while((*list)->next != NULL) {
+            while((*list) != NULL) {
                 if (strcmp(mass[i + 1], (*list)->name_of_data) == 0) {
                     mx_printstr((*list)->data);
+                    mx_printstr("\n");
                 }
                 (*list) = (*list)->next;
-            }
             }
         }
         //mx_printstr(mass[i]);

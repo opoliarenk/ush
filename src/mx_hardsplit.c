@@ -25,7 +25,6 @@ static char *hash (char *line) { // for the hash, when they comment something
         new = strndup(line, i - 1);
         return new;
     }
-    //new = mx_strdup(line);
     return NULL;
 }
 

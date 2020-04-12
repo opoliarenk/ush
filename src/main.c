@@ -11,7 +11,9 @@ int main() {
     struct termios tty;
     tcgetattr(0, &tty);
     //lena
-
+    //lesha
+    t_var *list = NULL;
+    //lesha
     trig->exit = true;
     trig->err = 0;
     trig->PWD = (char *)malloc(50 * sizeof(char));
@@ -29,7 +31,7 @@ int main() {
             mass = mx_connectors(line);
             if (mass[0]) {
                 while(mass[i]) {
-                    mx_logic(mass[i], trig);
+                    mx_logic(mass[i], trig, list);
                     i++;
                 }
                 i = 0;

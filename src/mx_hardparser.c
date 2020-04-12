@@ -1,15 +1,25 @@
 #include "../inc/ush.h"
 
-int mx_hardparser(char *line,  t_trig *trig) {
+int mx_hardparser(char *line,  t_trig *trig, t_var *list) {
     char *cuts = mx_cut_spaces(line);
     char *newl = mx_hardsplit(cuts); //FREE
+    // тут надо будет поставить проверку на переменные 
     char **mass = mx_delim_space(newl); //FREE
     int status_of_work = 1;
 
+    mx_variable(mass, list);
+
     int i = 0;
     while (mass[i] != NULL) {
-        mx_printstr(mass[i]);
-        mx_printchar('\n');
+        if (strcmp(mass[i], "$") == 0) {
+            while(list->next != NULL) {
+                if (strcmp(mass[i + 1], list->name_of_data)) {
+                    mx_printstr(list->data);
+                }
+            }
+        }
+        //mx_printstr(mass[i]);
+        //mx_printchar('\n');
         i++;
     } //nado budet ubrat
     

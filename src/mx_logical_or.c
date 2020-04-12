@@ -42,13 +42,13 @@ static int count_of_or(char *line) {
     return count;
 }
 
-int mx_logical_or(char *line, t_trig *trig) {
+int mx_logical_or(char *line, t_trig *trig, t_var *list) {
     char **arr = split(line, count_of_or(line));
     int i = 0;
     int status_of_work = 1;
 
     while(arr[i]) {
-        if (mx_hardparser(arr[i], trig) == 0) { // но сначала функа на проврку пайпов и редирекшинов то есть если ,Назара функа отработала как надо, то прекращаем работу
+        if (mx_hardparser(arr[i], trig, list) == 0) { // но сначала функа на проврку пайпов и редирекшинов то есть если ,Назара функа отработала как надо, то прекращаем работу
             status_of_work = 0;
             break;
         }

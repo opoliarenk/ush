@@ -62,7 +62,7 @@ static int if_there_amp(char *array) {
     return 0;
 }
 
-void mx_logic(char *mass, t_trig *trig, t_var *list) {
+void mx_logic(char *mass, t_trig *trig, t_var **list) {
     //сделать проверку на два спереди и два сзади
     char **arr_ampers = NULL;
 

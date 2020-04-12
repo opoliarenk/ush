@@ -31,7 +31,7 @@ int main() {
             mass = mx_connectors(line);
             if (mass[0]) {
                 while(mass[i]) {
-                    mx_logic(mass[i], trig, list);
+                    mx_logic(mass[i], trig, &list);
                     i++;
                 }
                 i = 0;

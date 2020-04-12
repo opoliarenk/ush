@@ -1,6 +1,6 @@
 #include "../inc/ush.h"
 
-int mx_hardparser(char *line,  t_trig *trig, t_var *list) {
+int mx_hardparser(char *line, t_trig *trig, t_var **list) {
     char *cuts = mx_cut_spaces(line);
     char *newl = mx_hardsplit(cuts); //FREE
     // тут надо будет поставить проверку на переменные 
@@ -8,14 +8,16 @@ int mx_hardparser(char *line,  t_trig *trig, t_var *list) {
     int status_of_work = 1;
 
     mx_variable(mass, list);
-
     int i = 0;
     while (mass[i] != NULL) {
         if (strcmp(mass[i], "$") == 0) {
-            while(list->next != NULL) {
-                if (strcmp(mass[i + 1], list->name_of_data)) {
-                    mx_printstr(list->data);
+            if (list != NULL) {
+            while((*list)->next != NULL) {
+                if (strcmp(mass[i + 1], (*list)->name_of_data) == 0) {
+                    mx_printstr((*list)->data);
                 }
+                (*list) = (*list)->next;
+            }
             }
         }
         //mx_printstr(mass[i]);

@@ -42,7 +42,7 @@ static int count_of_or(char *line) {
     return count;
 }
 
-int mx_logical_or(char *line, t_trig *trig, t_var *list) {
+int mx_logical_or(char *line, t_trig *trig, t_var **list) {
     char **arr = split(line, count_of_or(line));
     int i = 0;
     int status_of_work = 1;

@@ -20,6 +20,8 @@ static void mallocingstr(char **mass, char *line) {
                 } ///// HEHEHHE
         if (line[i] == '\'') { ////// TROUBLE
             i++;
+            //j = j + 2;//delete
+            j++;
             while (line[i] != '\'') {
                 if (line[i] == '\\' && line[i + 1] == '\\') {
                     while (line[i] == '\\') {
@@ -44,6 +46,8 @@ static void mallocingstr(char **mass, char *line) {
         } //////// TROUBLE
         if (line[i] == '\"') {
             i++;
+            //j = j + 2;//delete
+            j++;
             while (line[i] != '\"') { 
                 if (line[i] == '\\' && line[i + 1] == '\\') { /////
                     while (line[i] == '\\') {
@@ -68,7 +72,9 @@ static void mallocingstr(char **mass, char *line) {
         }
         if (line[i] == ' ' || line[i] == '\t' 
             || line[i] == '\r' || line[i] == '\n'
-            || line[i] == '\a' || line[i + 1] == '\0') {
+            || line[i] == '\a' || line[i + 1] == '\0') { //|| line[i + 1] == '\0'
+                if (line[i + 1] == '\0')
+                    j++;
                 while (line[i + 1] == ' ' || line[i + 1] == '\t' 
                     || line[i + 1] == '\r' || line[i + 1] == '\n'
                     || line[i + 1] == '\a') 
@@ -110,7 +116,6 @@ static int count_words(char *line) {
     return countw;
 }
 
-
 char **mx_delim_space(char *line) {
     int count = count_words(line);
     char **mass = malloc(sizeof(char*) * count + 1);
@@ -118,7 +123,7 @@ char **mx_delim_space(char *line) {
     int k = 0;
     int len = strlen(line);
     int counter = 0;
-
+    
     mallocingstr(mass, line);
     for (int i = 0; i < len; i++) {
         if (line[i] == '\\' && line[i + 1] == '\\') { ///// HEHEHEHEH
@@ -134,6 +139,8 @@ char **mx_delim_space(char *line) {
             }
         } ///// HEHEHEHEHE
         if (line[i] == '\'') {
+            mass[j][k] = line[i];//del
+            k++;//del
             i++;
             while (line[i] != '\'') {
                 if (line[i] == '\\' && line[i + 1] == '\\') { /////
@@ -154,9 +161,13 @@ char **mx_delim_space(char *line) {
                 k++;
                 i++;
             }
+            mass[j][k] = line[i];//del
+            k++;//del
             i++;
         }
         if (line[i] == '\"') {
+            mass[j][k] = line[i];//del
+            k++;//del
             i++;
             while (line[i] != '\"') { 
                 if (line[i] == '\\' && line[i + 1] == '\\') { /////
@@ -177,6 +188,8 @@ char **mx_delim_space(char *line) {
                 k++;
                 i++;
             }
+            mass[j][k] = line[i];//del
+            k++;//del
             i++;
         }
         if (line[i] == ' ' || line[i] == '\t' 
@@ -186,8 +199,9 @@ char **mx_delim_space(char *line) {
                     || line[i + 1] == '\r' || line[i + 1] == '\n' 
                     || line[i + 1] == '\a')
                         i++;
-                if (line[i + 1] == '\0')
+                if (line[i + 1] == '\0') {
                     mass[j][k] = line[i];
+                }
                 j++;
                 k = 0;
         }

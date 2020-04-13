@@ -31,6 +31,8 @@ FILES = main \
 	mx_redboth \
 	mx_notbuiltin \
 	mx_variable \
+	mx_v_exist \
+	mx_v_out \
 
 SRC_PREFFIX = $(addprefix src/, $(FILES))
 

@@ -3,38 +3,27 @@
 static void var_replac(t_var **list, char **str) {
     int len = strlen(*str);
     char *buff_n = NULL;
-    // int len_name = 0;
     int j = 0;
-    char *temp = *str;
 
     if (*list != NULL) {
        //
     }
     for (int i = 0; i < len; i++) {
-        if (temp[i] == '$') {
+        if (*str[i] == '$') {
             i++;
-            if (temp[i]) {
-                while (temp[i] != ' ' || temp[i] != '$') { //тут что-то не так
-                    j++;
-                    i++;
-                }
-            } 
-            else {
-                mx_printstr("NE SUSHEVST");
-                exit(0);
+            while (*str[i] && (*str[i] != ' ' || *str[i] != '$')) { 
+                j++;
+                i++;
             }
-            
         }
     }
     buff_n = mx_strnew(j);
     j = 0;
     for (int i = 0; i < len; i++) {
-        if (temp[i] == '$') {
+        if (*str[i] == '$') {
             i++;
-            while (temp[i] != ' ' || temp[i] != '$') {
-                if (temp[i] == '\0')
-                    break;
-                buff_n[j] = temp[i];
+            while (*str[i] && (*str[i] != ' ' || *str[i] != '$')) {
+                buff_n[j] = *str[i];
                 j++;
                 i++;
             }

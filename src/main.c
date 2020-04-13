@@ -11,6 +11,7 @@ int main() {
     struct termios tty;
     tcgetattr(0, &tty);
     //lena
+
     //lesha
     t_var *list = NULL;
     //lesha
@@ -29,7 +30,7 @@ int main() {
         //lena
         if (line) {
             mass = mx_connectors(line);
-            if (mass[0]) {
+            if (mass && mass[0]) {
                 while(mass[i]) {
                     mx_logic(mass[i], trig, &list);
                     i++;

@@ -6,13 +6,16 @@ static int exework(char **temp, char **environ) {
     int status_err = 1;
     
     if (pid == 0) {
-        if (execve(temp[0], temp, environ) == -1)
-            exit(1);
-    } else {
+        if (execve(temp[0], temp, environ) == -1) {
+            mx_unknown(temp);
+        }
+    }
+    else {
         waitpid(pid, &status, WUNTRACED);
         if (WEXITSTATUS(status) == 1) {
             status_err = 1;
-        } else {
+        }
+        else {
             status_err = 0;
         }
     }

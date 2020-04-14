@@ -6,27 +6,15 @@ int mx_hardparser(char *line, t_trig *trig, t_var **list) {
     char **mass = mx_delim_space(newl); //FREE
     int status_of_work = 1;
 
-    //mx_printstr("\n\n");
     mx_variable(mass, list);
     mx_v_out(mass, list);
 
-    // int i = 0;
-    // while (mass[i]) {
-    //     if (mass[i][0] == '$') {
-    //         t_var *temp = *list;
-    //         while ((*list) != NULL) {
-    //             if (strcmp((*list)->name_of_data,&mass[i][1]) == 0) {
-    //                 mx_printstr((*list)->data);
-    //                 mx_printchar('\n');
-    //             } 
-    //             (*list) = (*list)->next;
-    //         }
-    //         *list = temp;
-    //     }
-    //     // mx_printstr(mass[i]);
-    //     // mx_printchar('\n');
-    //     i++;
-    // } //nado budet ubrat
+    int i = 0;
+    while (mass[i]) {
+        mx_printstr(mass[i]);
+        mx_printchar('\n');
+        i++;
+    } //nado budet ubrat
     
     if ((status_of_work = mx_red_pipe(mass, trig)) == 2) {
         mx_builtins(mass, trig);

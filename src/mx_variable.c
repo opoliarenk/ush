@@ -9,7 +9,9 @@ static void namedata(char **n, char **d, const char *str) {
         if (str[i] == '=') {
             name = strndup(str, i);
             i++;
-            while (str[i] != '\0') {
+            if (str[i] == '\"' || str[i] == '\'')
+                i++;
+            while (str[i] != '\0' && str[i] != '\"' && str[i] != '\'') {
                 j++;
                 i++;
             }
@@ -21,7 +23,9 @@ static void namedata(char **n, char **d, const char *str) {
     for (int i = 0; str[i] != '\0'; i++) {
         if (str[i] == '=') {
             i++;
-            while (str[i] != '\0') {
+            if (str[i] == '\"' || str[i] == '\'')
+                i++;
+            while (str[i] != '\0' && str[i] != '\"' && str[i] != '\'') {
                 data[j] = str[i];
                 j++;
                 i++;

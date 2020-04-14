@@ -191,6 +191,10 @@ char **mx_delim_space(char *line) {
             mass[j][k] = line[i];//del
             k++;//del
             i++;
+            if (line[i] == '\0') {
+                j++;
+                break;
+            }
         }
         if (line[i] == ' ' || line[i] == '\t' 
             || line[i] == '\r' || line[i] == '\n' 

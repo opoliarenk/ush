@@ -72,6 +72,8 @@ bool checkout_char(t_input *input) {
         || input->ch[0] == '\x7F'
         || strcmp(input->ch, "\x1b\x5b\x44") == 0
         || strcmp(input->ch, "\x1b\x5b\x43") == 0
+        || strcmp(input->ch, "\x1b\x5b\x48") == 0
+        || strcmp(input->ch, "\x1b\x5b\x46") == 0
         || input->ch[0] == '\x16' || input->ch[0] == '\t') {
         if (input->ch[0] == '\n') {}
         else if (input->ch[0] == '\x16')
@@ -93,6 +95,14 @@ bool checkout_char(t_input *input) {
             return true;
         }
         else if (strcmp(input->ch, "\x1b\x5b\x43") == 0) {
+            return true;
+        }
+        else if (strcmp(input->ch, "\x1b\x5b\x48") == 0) {
+            input->cursor = 0;
+            return true;
+        }
+        else if (strcmp(input->ch, "\x1b\x5b\x46") == 0) {
+            input->cursor = input->index;
             return true;
         }
         else
@@ -128,7 +138,7 @@ bool checkout_char(t_input *input) {
 
 char *mx_input(t_input *input) {
     input->history_tmp = (t_history_list *)malloc(sizeof(t_history_list));
-    input->history_back = (t_history_list *)malloc(sizeof(t_history_list));    
+    input->history_back = (t_history_list *)malloc(sizeof(t_history_list));
     input->history_back = input->history_head;
     clear_input(input);
     dprintf(1, "%s", "u$h> ");

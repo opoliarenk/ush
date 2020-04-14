@@ -95,5 +95,6 @@ void mx_notbuiltin(char **arr, t_trig *trig, char **environ);
 
 char *mx_input(t_input *input);
 void mx_canon_off(void);
+void mx_unknown(char **temp);
 
 #endif

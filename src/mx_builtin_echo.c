@@ -31,19 +31,18 @@ void mx_builtin_echo(char **arr) {
             break;
         i++;
     }
-    if (mx_strlen_for_2star(arr) > 2) {
-        while (arr[i + 1]) {
-            mx_printstr(arr[i]);
-            mx_printchar(32);
-            i++;
-        }
+    while (arr[i]) {
+        //
         mx_printstr(arr[i]);
-        if (echo->n)
-            mx_printstr("%\n");
-        else
-            mx_printchar(10);
+        //
+        if (mx_strlen_for_2star(arr) - i != 1)
+            mx_printchar(32);
+        else {
+            if (echo->n )
+                mx_printstr("%\n");
+        }
+        i++;
     }
-    else
-        if (!echo->n)
-            mx_printstr("\n");
+    if (!echo->n)
+        mx_printchar(10);
 }

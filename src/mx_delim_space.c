@@ -94,10 +94,10 @@ static int count_words(char *line) {
     int countw = 0;
 
     for (int i = 0; i < len; i++) {
-        if (line[i] == '\"') {
+        if (line[i] == '\"' || line[i] == '\'') {
             i++;
-            while (line[i] != '\"') { 
-                if (line[i] == '\\' && (line[i + 1] == '\"' || line[i + 1] == '`')) { //here
+            while (line[i] != '\"' && line[i] != '\'') { 
+                if (line[i] == '\\' && (line[i + 1] == '\"' || line[i + 1] == '`' || line[i + 1] == '\'')) { //here
                     i++;
                 }
                 i++;
@@ -161,9 +161,9 @@ char **mx_delim_space(char *line) {
                 k++;
                 i++;
             }
-            mass[j][k] = line[i];//del
-            k++;//del
-            i++;
+            // mass[j][k] = line[i];// PROVERIT ETO
+            // k++;//del
+            // i++;
         }
         if (line[i] == '\"') {
             mass[j][k] = line[i];//del

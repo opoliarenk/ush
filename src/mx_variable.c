@@ -34,6 +34,8 @@ static void namedata(char **n, char **d, const char *str) {
     }
     (*n) = mx_strdup(name);
     (*d) = mx_strdup(data);
+    free(name);
+    free(data);
 }
 
 static t_var *create_node(const char *str) {

@@ -54,8 +54,7 @@ char *mx_hardsplit(char *line) {
             continue;
         }
         if ((line[i] == '>' 
-         || line[i] == '(' || line[i] == ')' 
-        || line[i] == '{' || line[i] == '}' || line[i] == '`' || line[k] == '<') && flag != 1)  
+         || line[i] == '(' || line[i] == ')' || line[i] == '`' || line[k] == '<') && flag != 1)  
             j += 2;
     }
     i = i + j;
@@ -77,8 +76,7 @@ char *mx_hardsplit(char *line) {
             continue;
         }
         if ((line[k] == '>'  
-         || line[k] == '(' || line[k] == ')' 
-        || line[k] == '{' || line[k] == '}' || line[k] == '`' || line[k] == '<') && flag != 1) {  
+         || line[k] == '(' || line[k] == ')' || line[k] == '`' || line[k] == '<') && flag != 1) {  
             new[q++] = ' ';
             new[q++] = line[k];
             new[q] = ' ';

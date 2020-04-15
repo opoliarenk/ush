@@ -5,7 +5,7 @@ int mx_hardparser(char *line, t_trig *trig, t_var **list) {
     char *newl = mx_hardsplit(cuts); //FREE
     char **mass = mx_delim_space(newl); //FREE
     int status_of_work = 1;
-
+    
     mx_variable(mass, list);
     mx_v_out(mass, list);
 

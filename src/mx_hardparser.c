@@ -9,12 +9,12 @@ int mx_hardparser(char *line, t_trig *trig, t_var **list) {
     mx_variable(mass, list);
     mx_v_out(mass, list);
 
-    int i = 0;
-    while (mass[i]) {
-        mx_printstr(mass[i]);
-        mx_printchar('\n');
-        i++;
-    } //nado budet ubrat
+    // int i = 0;
+    // while (mass[i]) {
+    //     mx_printstr(mass[i]);
+    //     mx_printchar('\n');
+    //     i++;
+    // } //nado budet ubrat
     
     if ((status_of_work = mx_red_pipe(mass, trig)) == 2) {
         mx_builtins(mass, trig);

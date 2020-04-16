@@ -16,7 +16,7 @@ void mx_builtins(char **arr, t_trig *trig) {
     else if (strcmp(arr[0], "pwd") == 0)
         mx_builtin_pwd(arr, trig);
     else if (strcmp(arr[0], "echo") == 0)
-       mx_builtin_echo(arr);
+        mx_builtin_echo(arr);
     else if (strcmp(arr[0], "unset") == 0)
         mx_builtin_unset(arr[1]);
     else if (strcmp(arr[0], "true") == 0)

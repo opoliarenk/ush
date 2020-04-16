@@ -15,6 +15,7 @@
 #include <dirent.h>
 #include <malloc/malloc.h>
 #include <limits.h>
+#include <errno.h>
 
 #define MX_RL_BUFSIZE 1024
 #define MX_TOK_BUFSIZE 64
@@ -96,5 +97,6 @@ void mx_notbuiltin(char **arr, t_trig *trig, char **environ);
 char *mx_input(t_input *input);
 void mx_canon_off(void);
 void mx_unknown(char **temp);
+int mx_check_echo(char *line);
 
 #endif

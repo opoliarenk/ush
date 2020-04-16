@@ -29,13 +29,15 @@ int main() {
         tcsetattr(0, TCSAFLUSH, &tty);
         //lena
         if (line) {
-            mass = mx_connectors(line);
-            if (mass && mass[0]) {
-                while(mass[i]) {
-                    mx_logic(mass[i], trig, &list);
-                    i++;
+            if (mx_check_echo(line)) {
+                mass = mx_connectors(line);
+                if (mass && mass[0]) {
+                    while(mass[i]) {
+                        mx_logic(mass[i], trig, &list);
+                        i++;
+                    }
+                    i = 0;
                 }
-                i = 0;
             }
         }
     }

@@ -34,6 +34,7 @@ FILES = main \
 	mx_v_exist \
 	mx_v_out \
 	mx_unknown \
+	mx_check_echo \
 
 SRC_PREFFIX = $(addprefix src/, $(FILES))
 

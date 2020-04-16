@@ -106,7 +106,6 @@ void mx_v_out(char **mass, t_var **list) {
             if (mass[i][j] == '\"')
                 break;
             if (chang == 0 && mass[i][j] == '=' && mass[i][j + 1] != '\'') {
-                mx_printstr("YEAH");
                 mx_variable(mass, list);
                 break;
             }

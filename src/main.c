@@ -11,7 +11,6 @@ int main() {
     struct termios tty;
     tcgetattr(0, &tty);
     //lena
-
     //lesha
     t_var *list = NULL;
     //lesha
@@ -21,6 +20,21 @@ int main() {
     trig->OLDPWD = (char *)malloc(50 * sizeof(char));
     trig->OLDPWD = getenv("HOME");
     trig->PWD = getenv("HOME");
+    //
+    if (read(STDIN_FILENO, input->head_line, sizeof(input->head_line))) {
+        if (mx_check_echo(input->head_line)) {
+            mass = mx_connectors(input->head_line);
+            if (mass && mass[0]) {
+                while(mass[i]) {
+                    mx_logic(mass[i], trig, &list);
+                    i++;
+                }
+                i = 0;
+            }
+        }
+        return trig->err;
+    }
+    //
     while (trig->exit) {
         //lena
         mx_canon_off();

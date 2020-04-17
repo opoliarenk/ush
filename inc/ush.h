@@ -98,5 +98,6 @@ char *mx_input(t_input *input);
 void mx_canon_off(void);
 void mx_unknown(char **temp);
 int mx_check_echo(char *line);
+void mx_check_input(t_trig *trig, t_var *list);
 
 #endif

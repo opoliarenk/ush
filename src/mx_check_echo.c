@@ -11,6 +11,8 @@ int mx_check_echo(char *line) {
                     dprintf(2, "Odd number of quotes.\n");
                     return 0;
                 }
+                if (line[i] == '\x5c')
+                    i++;
             }
         }
         else if (line[i] == '\x27') {
@@ -20,6 +22,8 @@ int mx_check_echo(char *line) {
                     dprintf(2, "Odd number of quotes.\n");
                     return 0;
                 }
+                if (line[i] == '\x5c')
+                    i++;
             }
         }
     }

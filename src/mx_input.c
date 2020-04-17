@@ -79,9 +79,9 @@ bool checkout_char(t_input *input) {
         if (input->ch[0] == '\n') {}
         else if (input->ch[0] == '\x16')
             strncpy(input->history_tmp->data, "exit", 5);
-        else if (input->ch[0] == '\x03') {
-            memset(input->history_tmp->data, '\0', sizeof(input->history_tmp->data));
-        }
+        // else if (input->ch[0] == '\x03') {
+        //     memset(input->history_tmp->data, '\0', sizeof(input->history_tmp->data));
+        // }
         else if (input->ch[0] == '\x7F') {
             if (input->cursor && input->index) {
                 memmove(&input->history_tmp->data[input->cursor - 1],
@@ -110,9 +110,11 @@ bool checkout_char(t_input *input) {
             dprintf(1, "exit\n");
             exit(0);
         }
+        else if (input->ch[0] == '\x03' || input->ch[0] == '\x1a')
+            return true;
         else if (input->ch[0] == '\t')
             strncpy(input->history_tmp->data, "exit", 5);
-        return true;
+        return false;
     }
     else {
         if (mx_history(input)) {

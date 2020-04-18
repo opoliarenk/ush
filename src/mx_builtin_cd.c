@@ -19,6 +19,7 @@ static void part_for_link(char *path, t_trig *trig)  {
 
 void mx_builtin_cd(char **arr, t_trig *trig) {
     int i = 1;
+    int j = 0;
     t_cd *cd = (t_cd *)malloc(sizeof(t_cd));
     struct stat lt;
     char *buf;
@@ -38,10 +39,25 @@ void mx_builtin_cd(char **arr, t_trig *trig) {
             cd->P = false;
         }
         else {
-            if (strcmp(arr[i], "-s") == 0)
-                cd->s = true;
-            else if (strcmp(arr[i], "-P") == 0)
-                cd->P = true;
+            if (arr[i][j] == '-') {
+                j++;
+                while (arr[i][j]) {
+                    if (arr[i][j] == 's')
+                        cd->s = 1;
+                    else if (arr[i][j] == 'P' && !cd->s)
+                        cd->P = 1;
+                    else {
+                        mx_printerr("cd: no such file or directory: ");
+                        mx_printerr(arr[i]);
+                        mx_printerr("\n");
+                        trig->err = 1;
+                        cd->stop = 1;
+                        break;
+                    }
+                    j++;
+                }
+                    j = 0;
+            }
             else
                 break;
         }

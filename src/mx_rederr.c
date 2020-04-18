@@ -21,7 +21,7 @@ static char **newfor_bults(char **mass) {
     return newmass;
 }
 
-static int creat_file_one(char *str, char **mass,  t_trig *trig) {
+static int creat_file_one(char *str, char **mass,  t_trig *trig, t_var **list) {
     int fd;
     int save_fd = dup(2);
     int status_err;
@@ -31,13 +31,13 @@ static int creat_file_one(char *str, char **mass,  t_trig *trig) {
     if (fd == -1)
         fd = open(str, O_CREAT | O_WRONLY);
     dup2(fd, 2);
-    mx_builtins(mass, trig);
+    mx_builtins(mass, trig, list);
     dup2(save_fd, 2);
     status_err = trig->err;
     return status_err;
 } 
 
-static int creat_file_add(char *str, char **mass,  t_trig *trig) {
+static int creat_file_add(char *str, char **mass,  t_trig *trig, t_var **list) {
     int fd;
     int save_fd = dup(2);
     int status_err;
@@ -47,13 +47,13 @@ static int creat_file_add(char *str, char **mass,  t_trig *trig) {
     if (fd == -1)
         fd = open(str, O_CREAT | O_APPEND | O_WRONLY);
     dup2(fd, 2);
-    mx_builtins(mass, trig);
+    mx_builtins(mass, trig, list);
     dup2(save_fd, 2);
     status_err = trig->err;
     return status_err;
 }
 
-int mx_rederr(char **mass, t_trig *trig) {
+int mx_rederr(char **mass, t_trig *trig, t_var **list) {
     char **newmass = NULL;
     int status_err = 2;
 
@@ -61,13 +61,13 @@ int mx_rederr(char **mass, t_trig *trig) {
         if (strcmp(mass[i], "2>") == 0 && strcmp(mass[i + 1], ">") == 0) {
             i = i + 1;
             newmass = newfor_bults(mass);
-            status_err = creat_file_add(mass[i + 1], newmass, trig);
+            status_err = creat_file_add(mass[i + 1], newmass, trig, list);
             //continue;
             break;
         }
         if (strcmp(mass[i], "2>") == 0) {
             newmass = newfor_bults(mass);
-            status_err = creat_file_one(mass[i + 1], newmass, trig);
+            status_err = creat_file_one(mass[i + 1], newmass, trig, list);
             break;
         }
     }

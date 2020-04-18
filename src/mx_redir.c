@@ -1,6 +1,6 @@
 #include "../inc/ush.h"
 
-static int creat_file_one(char *str, char **mass,  t_trig *trig) {
+static int creat_file_one(char *str, char **mass,  t_trig *trig, t_var **list) {
     int fd;
     int save_fd = dup(1);
     int status_err;
@@ -10,13 +10,13 @@ static int creat_file_one(char *str, char **mass,  t_trig *trig) {
     if (fd == -1)
         fd = open(str, O_CREAT | O_WRONLY);
     dup2(fd, 1);
-    mx_builtins(mass, trig);
+    mx_builtins(mass, trig, list);
     dup2(save_fd, 1);
     status_err = trig->err;
     return status_err;
 } 
 
-static int creat_file_add(char *str, char **mass,  t_trig *trig) {
+static int creat_file_add(char *str, char **mass,  t_trig *trig, t_var **list) {
     int fd;
     int save_fd = dup(1);
     int status_err;
@@ -26,13 +26,13 @@ static int creat_file_add(char *str, char **mass,  t_trig *trig) {
     if (fd == -1)
         fd = open(str, O_CREAT | O_APPEND | O_WRONLY);
     dup2(fd, 1);
-    mx_builtins(mass, trig);
+    mx_builtins(mass, trig, list);
     dup2(save_fd, 1);
     status_err = trig->err;
     return status_err;
 }
 
-int mx_redir(char **mass, t_trig *trig) {
+int mx_redir(char **mass, t_trig *trig, t_var **list) {
     char **newmass = NULL;
     int status_err = 2;
 
@@ -40,13 +40,13 @@ int mx_redir(char **mass, t_trig *trig) {
         if (strcmp(mass[i], ">") == 0 && strcmp(mass[i + 1], ">") == 0) {
             i = i + 1;
             newmass = mx_newfor_bults(mass);
-            status_err = creat_file_add(mass[i + 1], newmass, trig);
+            status_err = creat_file_add(mass[i + 1], newmass, trig, list);
             //continue;
             break;
         }
         if (strcmp(mass[i], ">") == 0) {
             newmass = mx_newfor_bults(mass);
-            status_err = creat_file_one(mass[i + 1], newmass, trig);
+            status_err = creat_file_one(mass[i + 1], newmass, trig, list);
             break;
         }
     }

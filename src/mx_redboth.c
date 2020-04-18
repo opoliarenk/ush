@@ -10,7 +10,7 @@ static char **newfor_bults(char **mass) {
             break;
         newlen++;
     }
-    newmass = malloc(sizeof (char *) * newlen + 1);
+    newmass = (char **)malloc(sizeof (char *) * newlen + 1);
     for (int i = 0; mass[i] != NULL; i++) {
         if (strcmp("<" , mass[i]) == 0) {
             break;
@@ -21,7 +21,7 @@ static char **newfor_bults(char **mass) {
     return newmass;
 }
 
-static int open_f(char *line, char **mass, t_trig *trig) {
+static int open_f(char *line, char **mass, t_trig *trig, t_var **list) {
     int fd;
     char *str = NULL;
     int i = 0;
@@ -47,15 +47,16 @@ static int open_f(char *line, char **mass, t_trig *trig) {
         newmass[j] = strdup(str);
     }
     newmass[i + 1] = NULL;
-    mx_builtins(newmass, trig);
+    mx_builtins(newmass, trig, list);
     status_of_work = trig->err;
     return status_of_work;
 }
 
-static int changred(char **mass, char **newmass, t_trig *trig, char *str) {
+static int changred(char **mass, t_trig *trig, char *str, t_var **list) {
     int fd;
     int save_fd;
     int status_of_work;
+    char **newmass = newfor_bults(mass);
 
     for (int i = 0; mass[i] != NULL; i++)
         if (strcmp(mass[i], ">") == 0) {
@@ -67,7 +68,7 @@ static int changred(char **mass, char **newmass, t_trig *trig, char *str) {
             dup2(fd, 1);
             for (int j = 0; mass[j] != NULL; j++) {
                 if (strcmp(mass[j], "<") == 0) {
-                    status_of_work = open_f(mass[j + 1], newmass, trig);
+                    status_of_work = open_f(mass[j + 1], newmass, trig, list);
                 }
             }
             dup2(save_fd, 1);
@@ -75,8 +76,7 @@ static int changred(char **mass, char **newmass, t_trig *trig, char *str) {
     return status_of_work;
 }
 
-int mx_redboth(char **mass, t_trig *trig) {
-    char **newmass = newfor_bults(mass);
+int mx_redboth(char **mass, t_trig *trig, t_var **list) {
     int status_of_work;
     char *str = NULL;
 
@@ -90,6 +90,6 @@ int mx_redboth(char **mass, t_trig *trig) {
             break;
         }
     }
-    status_of_work = changred(mass, newmass, trig, str);
+    status_of_work = changred(mass, trig, str, list);
     return status_of_work;
 }

@@ -21,7 +21,7 @@ static char **newfor_bults(char **mass) {
     return newmass;
 }
 
-static int open_f(char *line, char **mass, t_trig *trig) {
+static int open_f(char *line, char **mass, t_trig *trig, t_var **list) {
     int fd;
     char *str = NULL;
     int i = 0;
@@ -47,18 +47,18 @@ static int open_f(char *line, char **mass, t_trig *trig) {
         newmass[j] = strdup(str);
     }
     newmass[i + 1] = NULL;
-    mx_builtins(newmass, trig);
+    mx_builtins(newmass, trig, list);
     status_of_work = trig->err;
     return status_of_work;
 }
 
-int mx_redirout(char **mass, t_trig *trig) {
+int mx_redirout(char **mass, t_trig *trig, t_var **list) {
     char **newmass = newfor_bults(mass);
     int status_of_work = 2;
 
     for (int i = 0; mass[i] != NULL; i++) {
         if (strcmp(mass[i], "<") == 0) {
-            status_of_work = open_f(mass[i + 1], newmass, trig);
+            status_of_work = open_f(mass[i + 1], newmass, trig, list);
         }
     }
     return status_of_work;

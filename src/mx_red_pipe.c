@@ -1,28 +1,28 @@
 #include "../inc/ush.h"
 
-static int redirectin(char **mass, t_trig *trig) {
+static int redirectin(char **mass, t_trig *trig, t_var **list) {
     int posi = 2;
 
     for (int i = 0; mass[i] != NULL; i++)
         if (strcmp(mass[i], ">") == 0) {
-            posi = mx_redir(mass, trig);
+            posi = mx_redir(mass, trig, list);
             break;
         } 
     return posi;
 }
 
-static int redirectout(char **mass, t_trig *trig) {
+static int redirectout(char **mass, t_trig *trig, t_var **list) {
     int posi = 2;
 
     for (int i = 0; mass[i] != NULL; i++)
         if (strcmp(mass[i], "<") == 0) {
-            posi = mx_redirout(mass, trig);
+            posi = mx_redirout(mass, trig, list);
             break;
         } 
     return posi;
 }
 
-static int both(char **mass, t_trig *trig) { // доделать еще 
+static int both(char **mass, t_trig *trig, t_var **list) { // доделать еще 
     int posi = 2;
     int in = 0;
     int out = 0;
@@ -34,32 +34,32 @@ static int both(char **mass, t_trig *trig) { // доделать еще
             out = 1;
     }
     if (in == 1 && out == 1) 
-        posi = mx_redboth(mass, trig); 
+        posi = mx_redboth(mass, trig, list); 
     return posi;
  }
 
-static int err_stream(char **mass, t_trig *trig) { //на поток ошибок 
+static int err_stream(char **mass, t_trig *trig, t_var **list) { //на поток ошибок 
     int posi = 2;
 
     for (int i = 0; mass[i] != NULL; i++)
         if (strcmp(mass[i], "2>") == 0)
-            posi = mx_rederr(mass, trig); 
+            posi = mx_rederr(mass, trig, list); 
     return posi;
 }
 
-int mx_red_pipe(char **mass, t_trig *trig) { //  проверяет или есть редирекшены , сначала или их не два одновременно, а потом каждый по отдельности 
+int mx_red_pipe(char **mass, t_trig *trig, t_var **list) { //  проверяет или есть редирекшены , сначала или их не два одновременно, а потом каждый по отдельности 
     int redirin; 
     int redirout; 
     int rederr;
     int redboth;
     
-    if ((redboth = both(mass, trig)) != 2) 
+    if ((redboth = both(mass, trig, list)) != 2) 
         return redboth;
-    if ((rederr = err_stream(mass, trig)) != 2) 
+    if ((rederr = err_stream(mass, trig, list)) != 2) 
         return rederr;
-    if ((redirin = redirectin(mass, trig)) != 2) 
+    if ((redirin = redirectin(mass, trig, list)) != 2) 
         return redirin;
-    if ((redirout = redirectout(mass, trig)) != 2)
+    if ((redirout = redirectout(mass, trig, list)) != 2)
         return redirout;
     return 2;
 }

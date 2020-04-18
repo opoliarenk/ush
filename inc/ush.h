@@ -26,6 +26,7 @@
 
 typedef struct s_trig{
 	bool exit; //trig na exit
+    char *linput;
 	int err;
     char *PWD;
     char *OLDPWD;
@@ -66,23 +67,23 @@ int mx_semicolon_check(char *line);
 void mx_logic(char *mass, t_trig *trig, t_var **list);
 int mx_logical_or(char *line, t_trig *trig, t_var **list);
 char *mx_canon(void);
-int mx_red_pipe(char **mass, t_trig *trig);
-int mx_redir(char **mass, t_trig *trig);
+int mx_red_pipe(char **mass, t_trig *trig, t_var **list);
+int mx_redir(char **mass, t_trig *trig, t_var **list);
 char **mx_newfor_bults(char **mass);
 char **mx_sh_splite(char *line);
 char *mx_hardsplit(char *line);
-int mx_redirout(char **mass, t_trig *trig);
+int mx_redirout(char **mass, t_trig *trig, t_var **list);
 char **mx_delim_space(char *line);
 char *mx_cut_spaces(char *line);
-int mx_rederr(char **mass, t_trig *trig);
-int mx_redboth(char **mass, t_trig *trig);
+int mx_rederr(char **mass, t_trig *trig, t_var **list);
+int mx_redboth(char **mass, t_trig *trig, t_var **list);
 void mx_variable(char **mass, t_var **list);
 int mx_hardparser(char *line,  t_trig *trig, t_var **list);
 int mx_v_exist(char *name, char *data, t_var **list);
 void mx_v_out(char **mass, t_var **list);
 
 int mx_strlen_for_2star(char **env);
-void mx_builtins(char **arr, t_trig *trig);
+void mx_builtins(char **arr, t_trig *trig, t_var **list);
 void mx_builtin_env(char **env);
 void mx_builtin_export(char *name, char *value, char **env);
 void mx_builtin_cd(char **arr, t_trig *trig);

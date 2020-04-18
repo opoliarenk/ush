@@ -7,6 +7,30 @@ typedef struct s_echo{
     bool E;
 }              t_echo;
 
+static void func_for_slesh(char *str, int j) {
+    char output;
+ 
+    if (str[j] == 'a')
+        output = '\a';
+    else if (str[j] == 'b')
+        output = '\b';
+    else if (str[j] == 'f')
+        output = '\f';
+    else if (str[j] == 'n')
+        output = '\n';
+    else if (str[j] == 'r')
+        output = '\r';
+    else if (str[j] == 't')
+        output = '\t';
+    else if (str[j] == 'v')
+        output = '\v';
+    else {
+        mx_printchar('\\');
+        output = str[j];
+    }
+    mx_printchar(output);
+}
+
 void mx_builtin_echo(char **arr) {
     int i = 1;
     int j = 0;
@@ -15,34 +39,75 @@ void mx_builtin_echo(char **arr) {
     memset(echo, 0, sizeof(t_echo));
     while (arr[i]) {
         if (arr[i][j] == '-') {
+            j++;
             while (arr[i][j]) {
                 if (arr[i][j] == 'n')
                     echo->n = 1;
-                if (arr[i][j] == 'e') {
+                else if (arr[i][j] == 'e')
                     echo->e = 1;
-                }
-                if (arr[i][j] == 'E') {
+                else if (arr[i][j] == 'E' && !echo->e)
                     echo->E = 1;
+                else {
+                    mx_printstr("beda s bashkoi\n");
+                    break;
                 }
                 j++;
             }
+            j = 0;
         }
-        else
+        else {
+            echo->e = 1;
             break;
+        }
         i++;
     }
+    j++;
     while (arr[i]) {
         //
-        mx_printstr(arr[i]);
+        if (arr[i][0] == '"') {
+            while (arr[i][j] != '"') {
+                if (arr[i][j] == '\\' && echo->e) {
+                    func_for_slesh(arr[i], j + 1);
+                    j++;
+                }
+                else
+                    mx_printchar(arr[i][j]);
+                j++;
+            }
+            j = 0;
+        }
+        else {
+            while (arr[i][j]) {
+                if (arr[i][j] == '\\')
+                   j++; 
+                mx_printchar(arr[i][j]);
+                j++;
+            }
+            j = 0;
+        }
         //
         if (mx_strlen_for_2star(arr) - i != 1)
             mx_printchar(32);
         else {
             if (echo->n )
-                mx_printstr("%\n");
+                mx_printstr("\n");
         }
         i++;
     }
     if (!echo->n)
         mx_printchar(10);
+    /////
+    // i = 0; j = 0;
+    // mx_printstr("\n------------------------\n");
+    //     while (arr[i]) {
+    //         while (arr[i][j]) {
+    //             mx_printchar(arr[i][j]);
+    //             mx_printchar(32);
+    //             j++;
+    //         }
+    //         j = 0;
+    //         i++;
+    //         mx_printchar(10);
+    //     }
+        ////
 }

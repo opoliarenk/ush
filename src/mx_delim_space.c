@@ -39,6 +39,11 @@ static void mallocingstr(char **mass, char *line) {
                     j++;
                 } 
                 else {
+                    if (line[i + 1] == '\0') {
+                        j++;
+                        mass[elem] = mx_strnew(j);
+                        break;
+                    }
                     j++;
                     i++;
                 }
@@ -94,15 +99,47 @@ static int count_words(char *line) {
     int countw = 0;
 
     for (int i = 0; i < len; i++) {
-        if (line[i] == '\"' || line[i] == '\'') {
-            i++;
-            while (line[i] != '\"' && line[i] != '\'') { 
-                if (line[i] == '\\' && (line[i + 1] == '\"' || line[i + 1] == '`' || line[i + 1] == '\'')) { //here
-                    i++;
-                }
+        // if (line[i] == '\"' || line[i] == '\'') {
+        //     i++;
+        //     while (line[i] != '\"' && line[i] != '\'') { 
+        //         if (line[i] == '\\' && (line[i + 1] == '\"' || line[i + 1] == '`' || line[i + 1] == '\'')) { //here
+        //             i++;
+        //         }
+        //         i++;
+        //     }
+        // }  
+        if (i != 0) {
+            if (line[i] == '\"' && line[i - 1] != '\\') {
                 i++;
+                while (line[i] != '\"') {
+                    if (line[i] == '\\')
+                        i += 2;
+                    else 
+                        i++;
+                }
+            } 
+            else if (line[i] == '\'' && line[i - 1] != '\\') {
+                i++;
+                while (line[i] != '\'')
+                    i++;
             }
-        }  
+        } 
+        else {
+            if (line[i] == '\"') {
+                i++;
+                while (line[i] != '\"') {
+                    if (line[i] == '\\')
+                        i += 2;
+                    else 
+                        i++;
+                }
+            } 
+            else if (line[i] == '\'') {
+                i++;
+                while (line[i] != '\'')
+                    i++;
+            }
+        }
         if (line[i] == ' ' || line[i] == '\t' 
             || line[i] == '\r' || line[i] == '\n' 
             || line[i] == '\a' || line[i + 1] == '\0') {
@@ -160,6 +197,10 @@ char **mx_delim_space(char *line) {
                 mass[j][k] = line[i];
                 k++;
                 i++;
+                if (line[i + 1] == '\0') {
+                    mass[j][k] = '\0';
+                    break;
+                }
             }
             // mass[j][k] = line[i];// PROVERIT ETO
             // k++;//del

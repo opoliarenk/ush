@@ -20,13 +20,13 @@ static char *hash (char *line) { // for the hash, when they comment something
         } 
         else if (line[i] == '\'' && i == 0) {
             i++;
-            while (line[i] != '\'' && line[i - 1] != '\\') {
+            while (line[i] != '\'') {
                 i++;
             }
         }
         else if (line[i] == '\'' && line[i - 1] != '\\') {
             i++;
-            while (line[i] != '\'' && line[i - 1] != '\\') {
+            while (line[i] != '\'') {
                 i++;
             }
         } else if (line[i] == '#') {
@@ -53,37 +53,53 @@ char *mx_hardsplit(char *line) {
         //free(line);
         line = mx_strdup(newww);
     }//LEAKS
-
+    
     for (i = 0; line[i] != '\0'; i++) {
         if (i != 0) {
-            if ((line[i] == '\"' || line[i] == '\'') && line[i - 1] != '\\') {
-                if (flag == 0)
-                    flag = 1;
-                else 
-                    flag = 0;
-            }
-            if (line[i] == '2' && line[i + 1] == '>' && line[i - 1] == ' ' && flag != 1) {
-                j+=2;
+            if (line[i] == '\'' && line[i - 1] != '\\') {
                 i++;
-                continue;
+                while (line[i] != '\'')
+                    i++;
+            } 
+            else if (line[i] == '\"' && line[i - 1] != '\\') {
+                i++;
+                while (line[i] != '\"') {
+                    if (line[i] == '\\')
+                        i += 2;
+                    else 
+                        i++;
+                }
             }
-            if ((line[i] == '>' 
-            || line[i] == '(' || line[i] == ')' || line[i] == '`' || line[k] == '<') && flag != 1)  
+            if (line[i] == '2' && line[i + 1] == '>' && line[i - 1] == ' ') {
+                 j+=2;
+                 i++;
+                 continue;
+             }
+            if (line[i] == '>' 
+            || line[i] == '(' || line[i] == ')' || line[i] == '`' || line[i] == '<')  
                 j += 2;
         } else {
-            if (line[i] == '\"' || line[i] == '\'') {
-                if (flag == 0)
-                    flag = 1;
-                else 
-                    flag = 0;
-            }
-            if (line[i] == '2' && line[i + 1] == '>' && flag != 1) {
-                j+=2;
+            if (line[i] == '\"') {
                 i++;
-                continue;
+                while (line[i] != '\"') {
+                    if (line[i] == '\\')
+                        i += 2;
+                    else 
+                        i++;
+                }
             }
-            if ((line[i] == '>' 
-            || line[i] == '(' || line[i] == ')' || line[i] == '`' || line[k] == '<') && flag != 1)  
+            else if (line[i] == '\'') {
+                i++;
+                while(line[i] != '\'')
+                    i++;
+            }
+            if (line[i] == '2' && line[i + 1] == '>') {
+                 j+=2;
+                 i++;
+                 continue;
+             }
+            if (line[i] == '>' 
+            || line[i] == '(' || line[i] == ')' || line[i] == '`' || line[i] == '<')  
                 j += 2;
         }
     }
@@ -92,38 +108,60 @@ char *mx_hardsplit(char *line) {
     new = mx_strnew(i);
     for (int q = 0; q < i; q++) {
         if (k != 0) {
-        if ((line[k] == '\"' || line[k] == '\'') && line[k - 1] != '\\') {
-            if (flag == 0)
-                flag = 1;
-            else 
-                flag = 0;
-        }
-        if (line[k] == '2' && line[k + 1] == '>' && line[k - 1] == ' ' && flag != 1 ) {
-            new[q++] = ' ';
-            new[q++] = '2';
-            new[q++] = '>';
-            new[q] = ' ';
-            k = k + 2;
-            continue;
-        }
+            if (line[k] == '\"' && line[k - 1] != '\\') {
+                new[q++] = line[k++];
+                while (line[k] != '\"') { 
+                    if (line[k] == '\\') {
+                        new[q++] = line[k++];
+                        new[q++] = line[k++];
+                    } 
+                    else  {
+                        new[q++] = line[k++];
+                    }
+                }
+            }
+            else if (line[k] == '\'' && line[k - 1] != '\\') {
+                new[q++] = line[k++];
+                while (line[k] != '\'')
+                    new[q++] = line[k++];
+            }
+            if (line[k] == '2' && line[k + 1] == '>' && line[k - 1] == ' ') {
+                new[q++] = ' ';
+                new[q++] = '2';
+                new[q++] = '>';
+                new[q] = ' ';
+                k = k + 2;
+                continue;
+            }     
         } else {
-             if (line[k] == '\"' || line[k] == '\'') {
-            if (flag == 0)
-                flag = 1;
-            else 
-                flag = 0;
+             if (line[k] == '\"') {
+                new[q++] = line[k++];
+                while (line[k] != '\"') { 
+                    if (line[k] == '\\') {
+                        new[q++] = line[k++];
+                        new[q++] = line[k++];
+                    } 
+                    else  {
+                        new[q++] = line[k++];
+                    }
+                }
+            }
+            else if (line[k] == '\'') {
+                new[q++] = line[k++];
+                while (line[k] != '\'')
+                    new[q++] = line[k++];
+            }
+            if (line[k] == '2' && line[k + 1] == '>' && line[k - 1] == ' ') {
+                new[q++] = ' ';
+                new[q++] = '2';
+                new[q++] = '>';
+                new[q] = ' ';
+                k = k + 2;
+                continue;
+            }     
         }
-        if (line[k] == '2' && line[k + 1] == '>'&& flag != 1 ) {
-            new[q++] = ' ';
-            new[q++] = '2';
-            new[q++] = '>';
-            new[q] = ' ';
-            k = k + 2;
-            continue;
-        }
-        }
-        if ((line[k] == '>'  
-         || line[k] == '(' || line[k] == ')' || line[k] == '`' || line[k] == '<') && flag != 1) {  
+        if (line[k] == '>'  
+         || line[k] == '(' || line[k] == ')' || line[k] == '`' || line[k] == '<') {  
             new[q++] = ' ';
             new[q++] = line[k];
             new[q] = ' ';

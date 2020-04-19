@@ -34,7 +34,7 @@ static void func_for_slesh(char *str, int j) {
 void mx_builtin_echo(char **arr, char *origin) {
     int i = 1;
     int j = 0;
-    int point = 1;
+    int point = 2;
     t_echo *echo = (t_echo *)malloc(sizeof(t_echo));
 
     memset(echo, 0, sizeof(t_echo));
@@ -50,6 +50,7 @@ void mx_builtin_echo(char **arr, char *origin) {
                     echo->E = 1;
                 else {
                     mx_printstr(arr[i]);
+                    mx_printchar(32);
                     break;
                 }
                 j++;
@@ -62,12 +63,11 @@ void mx_builtin_echo(char **arr, char *origin) {
         }
         i++;
     }
-    j++;
     while (arr[i]) {
-        //
         if (arr[i][0] == '"') {
+            j = 1;
             while (arr[i][j] != '"') {
-                if (arr[i][j] == '\\' && echo->e) {
+                if (arr[i][j] == '\\' && !echo->E) {
                     func_for_slesh(arr[i], j + 1);
                     j++;
                 }
@@ -75,63 +75,62 @@ void mx_builtin_echo(char **arr, char *origin) {
                     mx_printchar(arr[i][j]);
                 j++;
             }
-            j = 0;
         }
         else if (arr[i][0] == '\'') {
+            j = 1;
             if (echo->E) {
                 char **split = mx_strsplit(origin, ' ');
-                mx_printstr(split[point]);
+                while (split[point][j] != '\'') {
+                    mx_printchar(split[point][j]);
+                    j++;
+                }
                 mx_del_strarr(&split);
-                point++;
             }
             else {
-                while (arr[i][j]) {
-                    if (arr[i][j] == '\'')
+                while (arr[i][j] != '\'') {
+                    if (arr[i][j] == '\\') {
+                        func_for_slesh(arr[i], j + 1);
                         j++;
-                    mx_printchar(arr[i][j]);
+                    }
+                    else
+                        mx_printchar(arr[i][j]);
                     j++;
                 }
             }
-            j = 0;
-            point++;
         }
         else {
-            mx_printstr(arr[i]);
-            // while (arr[i][j]) {
-            //     mx_printchar(arr[i][j]);
-            //     j++;
-            // }
-            // j = 0;
+            j = 0;
+            while (arr[i][j]) {
+                mx_printchar(arr[i][j]);
+                j++;
+            }
         }
         //
         if (mx_strlen_for_2star(arr) - i != 1)
             mx_printchar(32);
-        else {
-            if (echo->n )
-                mx_printstr("\n");
-        }
         i++;
+        point++;
     }
     if (!echo->n)
         mx_printchar(10);
-    ///
-    i = 0; j = 0;
-    mx_printstr("\n------------------------\n");
-        while (arr[i]) {
-            while (arr[i][j]) {
-                mx_printchar(arr[i][j]);
-                mx_printchar(32);
-                j++;
-            }
-            j = 0;
-            i++;
-            mx_printchar(10);
-        }
-        //
-    ///
-    i = 0; j = 0;
-    mx_printstr("\n------------------------\n");
-    mx_printstr(origin);
-    mx_printstr("\n------------------------\n");   
-    //
+    // ///
+    // i = 0; j = 0;
+    // mx_printstr("\n------------------------\n");
+    //     while (arr[i]) {
+    //         while (arr[i][j]) {
+    //             mx_printchar(arr[i][j]);
+    //             mx_printchar(32);
+    //             j++;
+    //         }
+    //         j = 0;
+    //         i++;
+    //         mx_printchar(10);
+    //     }
+    //     //
+    // ///
+    // i = 0; j = 0;
+    // mx_printstr("\n------------------------\n");
+    // mx_printstr(origin);
+    // mx_printstr("\n------------------------\n");   
+    
 }

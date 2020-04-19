@@ -3,7 +3,6 @@
 void mx_builtins(char **arr, t_trig *trig, t_var **list) {
     extern char **environ;
     trig->err = 0;
-    if ((*list) == NULL) {}// UBERI CHTOBI NE RUGALOS NA UNUSED VARIABLE
             
     if (strcmp(arr[0], "exit") == 0) {
         trig->exit = 0;
@@ -11,7 +10,7 @@ void mx_builtins(char **arr, t_trig *trig, t_var **list) {
     } else if (strcmp(arr[0], "env") == 0)
         mx_builtin_env(environ);
     else if (strcmp(arr[0], "export") == 0)
-        mx_builtin_export(arr[1], arr[2], environ);
+        mx_builtin_export(arr[1], arr[2], environ, list);
     else if (strcmp(arr[0], "cd") == 0)
         mx_builtin_cd(arr, trig);
     else if (strcmp(arr[0], "pwd") == 0)
@@ -19,7 +18,7 @@ void mx_builtins(char **arr, t_trig *trig, t_var **list) {
     else if (strcmp(arr[0], "echo") == 0)
         mx_builtin_echo(arr, trig->linput);
     else if (strcmp(arr[0], "unset") == 0)
-        mx_builtin_unset(arr[1]);
+        mx_builtin_unset(arr[1], list);
     else if (strcmp(arr[0], "true") == 0)
         mx_builtin_true(trig);
     else if (strcmp(arr[0], "false") == 0)

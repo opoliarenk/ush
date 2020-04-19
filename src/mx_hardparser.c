@@ -6,13 +6,13 @@ int mx_hardparser(char *line, t_trig *trig, t_var **list) {
     char **mass = mx_delim_space(newl); //FREE
     int status_of_work = 1;
 
-    int i = 0;
-    while (mass[i]) {
-        mx_printstr(mass[i]);
-        mx_printchar('\n');
-        i++;
-    } //nado budet ubrat
-    mx_printstr("\n-------------\n");
+    // int i = 0;
+    // while (mass[i]) {
+    //     mx_printstr(mass[i]);
+    //     mx_printchar('\n');
+    //     i++;
+    // } //nado budet ubrat
+    // mx_printstr("\n-------------\n");
     trig->linput = mx_strdup(cuts);
     mx_variable(mass, list);
     mx_v_out(mass, list);

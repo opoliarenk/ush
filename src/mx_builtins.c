@@ -3,7 +3,8 @@
 void mx_builtins(char **arr, t_trig *trig, t_var **list) {
     extern char **environ;
     trig->err = 0;
-    mx_printstr((*list)->data);// UBERI CHTOBI NE RUGALOS NA UNUSED VARIABLE
+    if (*list)
+        mx_printstr("kek");
 
     if (strcmp(arr[0], "exit") == 0) {
         trig->exit = 0;
@@ -17,7 +18,7 @@ void mx_builtins(char **arr, t_trig *trig, t_var **list) {
     else if (strcmp(arr[0], "pwd") == 0)
         mx_builtin_pwd(arr, trig);
     else if (strcmp(arr[0], "echo") == 0)
-        mx_builtin_echo(arr);
+        mx_builtin_echo(arr, trig->linput);
     else if (strcmp(arr[0], "unset") == 0)
         mx_builtin_unset(arr[1]);
     else if (strcmp(arr[0], "true") == 0)

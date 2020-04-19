@@ -3,8 +3,8 @@
 void mx_builtins(char **arr, t_trig *trig, t_var **list) {
     extern char **environ;
     trig->err = 0;
-    mx_printstr((*list)->data);// UBERI CHTOBI NE RUGALOS NA UNUSED VARIABLE
-
+    if ((*list) == NULL) {}// UBERI CHTOBI NE RUGALOS NA UNUSED VARIABLE
+            
     if (strcmp(arr[0], "exit") == 0) {
         trig->exit = 0;
         trig->err = mx_atoi(arr[1]);

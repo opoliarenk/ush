@@ -73,6 +73,10 @@ static void mallocingstr(char **mass, char *line) {
                     j++;
                     i++;
                 }
+                if (!line[i]) {
+                    mass[elem] = mx_strnew(j);
+                    break;
+                }
             }
         }
         if (line[i] == ' ' || line[i] == '\t' 
@@ -226,6 +230,9 @@ char **mx_delim_space(char *line) {
                 if (line[i] == '\\' && (line[i + 1] == '\"' || line[i + 1] == '`')) //here
                     i++;
                 mass[j][k] = line[i];
+                if (!line[i]) {
+                    break;
+                }
                 k++;
                 i++;
             }

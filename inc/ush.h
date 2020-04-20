@@ -90,7 +90,7 @@ void mx_builtin_export(char *name, char *value, char **env, t_var **list);
 void mx_builtin_cd(char **arr, t_trig *trig);
 void mx_builtin_pwd(char **arr, t_trig *trig);
 void mx_builtin_echo(char **arr, char *origin);
-void mx_builtin_unset(char *name, t_var **list);
+void mx_builtin_unset(char **name, t_var **list);
 void mx_builtin_true(t_trig *trig);
 void mx_builtin_false(t_trig *trig);
 void mx_notbuiltin(char **arr, t_trig *trig, char **environ);

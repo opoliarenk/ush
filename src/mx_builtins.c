@@ -18,7 +18,7 @@ void mx_builtins(char **arr, t_trig *trig, t_var **list) {
     else if (strcmp(arr[0], "echo") == 0)
         mx_builtin_echo(arr, trig->linput);
     else if (strcmp(arr[0], "unset") == 0)
-        mx_builtin_unset(arr[1], list);
+        mx_builtin_unset(arr, list);
     else if (strcmp(arr[0], "true") == 0)
         mx_builtin_true(trig);
     else if (strcmp(arr[0], "false") == 0)

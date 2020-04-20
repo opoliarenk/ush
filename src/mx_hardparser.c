@@ -16,13 +16,7 @@ int mx_hardparser(char *line, t_trig *trig, t_var **list) {
     trig->linput = mx_strdup(cuts);
     mx_variable(mass, list);
     mx_v_out(mass, list);
-
-    // int i = 0;
-    // while (mass[i]) {
-    //     mx_printstr(mass[i]);
-    //     mx_printchar('\n');
-    //     i++;
-    // } //nado budet ubrat
+    mx_subspars(mass);
     
     if ((status_of_work = mx_red_pipe(mass, trig, list)) == 2) {
         mx_builtins(mass, trig, list);

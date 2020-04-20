@@ -20,7 +20,6 @@ static void mallocingstr(char **mass, char *line) {
                 } ///// HEHEHHE
         if (line[i] == '\'') { ////// TROUBLE
             i++;
-            //j = j + 2;//delete
             j++;
             while (line[i] != '\'') {
                 if (line[i] == '\\' && line[i + 1] == '\\') {
@@ -43,6 +42,11 @@ static void mallocingstr(char **mass, char *line) {
                         j++;
                         mass[elem] = mx_strnew(j);
                         break;
+                    } 
+                    if (line[i] == '\'') {
+                        j++;
+                        i++;
+                        break;
                     }
                     j++;
                     i++;
@@ -51,7 +55,6 @@ static void mallocingstr(char **mass, char *line) {
         } //////// TROUBLE
         if (line[i] == '\"') {
             i++;
-            //j = j + 2;//delete
             j++;
             while (line[i] != '\"') { 
                 if (line[i] == '\\' && line[i + 1] == '\\') { /////
@@ -70,6 +73,11 @@ static void mallocingstr(char **mass, char *line) {
                     j++;
                 } 
                 else {
+                    if (line[i] == '\"') { //////////
+                        j++;
+                        i++;
+                        break;
+                    }
                     j++;
                     i++;
                 }
@@ -198,6 +206,12 @@ char **mx_delim_space(char *line) {
                 } /////
                 if (line[i] == '\\' && (line[i + 1] == '\"' || line[i + 1] == '`')) //here
                     i++;
+                if (line[i] == '\'') {
+                    mass[j][k] = line[i];
+                    k++;
+                    i++;
+                    break;
+                }
                 mass[j][k] = line[i];
                 k++;
                 i++;
@@ -206,9 +220,6 @@ char **mx_delim_space(char *line) {
                     break;
                 }
             }
-            // mass[j][k] = line[i];// PROVERIT ETO
-            // k++;//del
-            // i++;
         }
         if (line[i] == '\"') {
             mass[j][k] = line[i];//del
@@ -227,12 +238,14 @@ char **mx_delim_space(char *line) {
                         counter = 0;
                     }
                 } /////
-                if (line[i] == '\\' && (line[i + 1] == '\"' || line[i + 1] == '`')) //here
-                    i++;
-                mass[j][k] = line[i];
-                if (!line[i]) {
+                if (line[i] == '\"') {
                     break;
                 }
+                if (line[i] == '\\' && (line[i + 1] == '\"' || line[i + 1] == '`')) //here
+                    i++;
+                if (!line[i])
+                    break;
+                mass[j][k] = line[i];
                 k++;
                 i++;
             }
@@ -251,7 +264,9 @@ char **mx_delim_space(char *line) {
                     || line[i + 1] == '\r' || line[i + 1] == '\n' 
                     || line[i + 1] == '\a')
                         i++;
-                if (line[i + 1] == '\0') {
+                if (line[i + 1] == '\0' && line[i] != ' ' && line[i] != '\t' 
+                    && line[i] != '\r' && line[i] != '\n' 
+                    && line[i] != '\a') {
                     mass[j][k] = line[i];
                 }
                 j++;

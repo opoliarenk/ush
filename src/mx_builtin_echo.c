@@ -67,7 +67,7 @@ void mx_builtin_echo(char **arr, char *origin) {
         if (arr[i][0] == '"') {
             j = 1;
             while (arr[i][j] != '"') {
-                if (arr[i][j] == '\\' && !echo->E) {
+                if (arr[i][j] == '\\' && arr[i][j + 1] != '"' && !echo->E) {
                     func_for_slesh(arr[i], j + 1);
                     j++;
                 }
@@ -88,7 +88,7 @@ void mx_builtin_echo(char **arr, char *origin) {
             }
             else {
                 while (arr[i][j] != '\'') {
-                    if (arr[i][j] == '\\') {
+                    if (arr[i][j] == '\\'&& arr[i][j + 1] != '\'') {
                         func_for_slesh(arr[i], j + 1);
                         j++;
                     }
@@ -113,24 +113,24 @@ void mx_builtin_echo(char **arr, char *origin) {
     }
     if (!echo->n)
         mx_printchar(10);
-    // ///
-    // i = 0; j = 0;
-    // mx_printstr("\n------------------------\n");
-    //     while (arr[i]) {
-    //         while (arr[i][j]) {
-    //             mx_printchar(arr[i][j]);
-    //             mx_printchar(32);
-    //             j++;
-    //         }
-    //         j = 0;
-    //         i++;
-    //         mx_printchar(10);
-    //     }
-    //     //
-    // ///
-    // i = 0; j = 0;
-    // mx_printstr("\n------------------------\n");
-    // mx_printstr(origin);
-    // mx_printstr("\n------------------------\n");   
+        // ///
+        // i = 0; j = 0;
+        // mx_printstr("\n------------------------\n");
+        //     while (arr[i]) {
+        //         while (arr[i][j]) {
+        //             mx_printchar(arr[i][j]);
+        //             mx_printchar(32);
+        //             j++;
+        //         }
+        //         j = 0;
+        //         i++;
+        //         mx_printchar(10);
+        //     }
+        //     //
+        // ///
+        // i = 0; j = 0;
+        // mx_printstr("\n------------------------\n");
+        // mx_printstr(origin);
+        // mx_printstr("\n------------------------\n");   
     
 }

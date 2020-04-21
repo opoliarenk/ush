@@ -16,8 +16,9 @@ void mx_builtin_export(char *name, char *value, char **env, t_var **list) {
 	int index_potoka = 1;
 	int len_of_env = mx_strlen_for_2star(env);                
 	char **dup = strdup_for_2star(env, len_of_env);
-	if ((*list) == NULL) {}// UBERI CHTOBI NE RUGALOS NA UNUSED VARIABLE
+	t_var *p = *list;
 
+	while(p) {p = p->next;}
 	if (name && value)
 		setenv(name, value, index_potoka);
 	else {

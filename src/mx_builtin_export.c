@@ -40,7 +40,6 @@ void mx_builtin_export(char **arr, char **env, t_var **list) {
 			mx_del_strarr(&split);
 		}
 	}
-	else {
+	else
 		print_for_export(env);
-	}
 }

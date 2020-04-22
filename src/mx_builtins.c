@@ -10,7 +10,7 @@ void mx_builtins(char **arr, t_trig *trig, t_var **list) {
     } else if (strcmp(arr[0], "env") == 0)
         mx_builtin_env(environ);
     else if (strcmp(arr[0], "export") == 0)
-        mx_builtin_export(arr[1], arr[2], environ, list);
+        mx_builtin_export(arr, environ, list);
     else if (strcmp(arr[0], "cd") == 0)
         mx_builtin_cd(arr, trig);
     else if (strcmp(arr[0], "pwd") == 0)

@@ -1,9 +1,16 @@
 #include "../inc/ush.h"
 
+void sigcatch(int sig) {
+        signal(sig, sigcatch);
+        mx_printchar(10);
+}
+
 void mx_builtins(char **arr, t_trig *trig, t_var **list) {
+    signal(SIGTSTP, sigcatch);
+    signal(SIGINT, sigcatch);
     extern char **environ;
     trig->err = 0;
-            
+
     if (strcmp(arr[0], "exit") == 0) {
         trig->exit = 0;
         trig->err = mx_atoi(arr[1]);

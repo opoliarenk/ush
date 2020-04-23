@@ -81,7 +81,13 @@ void mx_variable(char **mass, t_var **list);
 int mx_hardparser(char *line,  t_trig *trig, t_var **list);
 int mx_v_exist(char *name, char *data, t_var **list);
 void mx_v_out(char **mass, t_var **list);
-char **mx_subspars(char **mass, t_trig *trig, t_var **list);
+// char **mx_subspars(char **mass, t_trig *trig, t_var **list);
+char **mx_sub(char **mass, t_trig *trig, t_var **list);
+char *mx_replace(char *start, char **str, char *temp);
+char **mx_end_sub(char **mass, char *str);
+//char **mx_stup_pars(char **mass, t_trig *trig, t_var **list);
+//char *mx_vip_sub(char **mass, t_trig *trig, t_var **list);
+//char **mx_help_hard(char *str, t_trig *trig, t_var **list);
 
 int mx_strlen_for_2star(char **env);
 void mx_builtins(char **arr, t_trig *trig, t_var **list);

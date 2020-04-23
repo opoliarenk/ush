@@ -5,6 +5,7 @@ static void mallocingstr(char **mass, char *line) {
     int elem = 0;
     int len = strlen(line);
     int counter = 0;
+    int kol = 0;
 
     for (int i = 0; i < len; i++) {
         if (line[i] == '\\' && line[i + 1] == '\\') { ///// HEHEHEHE
@@ -52,7 +53,72 @@ static void mallocingstr(char **mass, char *line) {
                     i++;
                 }
             }
-        } //////// TROUBLE
+        } //////// TROUBLE/////NEW
+         if (line[i] == '`') { ////// TROUBLE
+            i++;
+            j++;
+            while (line[i] != '`') {
+                if (line[i] == '\\' && line[i + 1] == '\\') {
+                    while (line[i] == '\\') {
+                        i++;
+                        j++;
+                        while (counter != 1 && line[i] == '\\') {
+                            counter++;
+                            i++;
+                        }
+                        counter = 0;
+                    }
+                }
+                else {
+                    if (line[i + 1] == '\0') {
+                        j++;
+                        mass[elem] = mx_strnew(j);
+                        break;
+                    } 
+                    if (line[i] == '`') {
+                        j++;
+                        i++;
+                        break;
+                    }
+                    j++;
+                    i++;
+                }
+            }
+        } //////// TROUBLE NEW
+        if (line[i] == '$' && line[i + 1] == '(') {
+            i++;
+            j++;
+            kol++;
+            while(kol != 0) {//line[i] != ')'
+                if (line[i] == '\\' && line[i + 1] == '\\') { /////
+                    while (line[i] == '\\') {
+                        i++;
+                        j++;
+                        while (counter != 3 && line[i] == '\\') {
+                            counter++;
+                            i++;
+                        }
+                        counter = 0;
+                    }
+                } /////
+                else {
+                    if (line[i] == '$' && line[i + 1] == '(')
+                        kol++;
+                    if (line[i] == ')')
+                        kol--;
+                    if (kol == 0 && line[i] == ')') {
+                    }
+                    else {
+                        j++;
+                        i++;
+                    }
+                }
+                if (!line[i]) {
+                    mass[elem] = mx_strnew(j);
+                    break;
+                }
+            }
+        }
         if (line[i] == '\"') {
             i++;
             j++;
@@ -68,6 +134,12 @@ static void mallocingstr(char **mass, char *line) {
                         counter = 0;
                     }
                 } /////
+                if (line[i] == '$' && line[i + 1] == '(') {
+                    while (line[i] != ')') {
+                        i++;
+                        j++;
+                    }
+                }
                 if (line[i] == '\\' && (line[i + 1] == '\"' || line[i + 1] == '`')) {
                     i = i + 2;
                     j++;
@@ -109,17 +181,9 @@ static void mallocingstr(char **mass, char *line) {
 static int count_words(char *line) {
     int len = strlen(line);
     int countw = 0;
+    int kol = 0;
 
-    for (int i = 0; i < len; i++) {
-        // if (line[i] == '\"' || line[i] == '\'') {
-        //     i++;
-        //     while (line[i] != '\"' && line[i] != '\'') { 
-        //         if (line[i] == '\\' && (line[i + 1] == '\"' || line[i + 1] == '`' || line[i + 1] == '\'')) { //here
-        //             i++;
-        //         }
-        //         i++;
-        //     }
-        // }  
+    for (int i = 0; i < len; i++) { 
         if (i != 0) {
             if (line[i] == '\"' && line[i - 1] != '\\') {
                 i++;
@@ -134,6 +198,33 @@ static int count_words(char *line) {
                 i++;
                 while (line[i] != '\'')
                     i++;
+            }
+            else if (line[i] == '`' && line[i - 1] != '\\') {
+                i++;
+                while (line[i] != '`') {
+                    if (line[i] == '\\')
+                        i += 2;
+                    else 
+                        i++;
+                }
+            }
+            else if (line[i] == '$' && line[i + 1] == '(' && line[i - 1] != '\\') {
+                i += 2;
+                kol++;
+                while (kol != 0) {
+                    if (line[i] == '\\') {
+                        i += 2;
+                    }
+                    else if (line[i] == '$' && line[i + 1] == '(') {
+                        kol++;
+                        i += 2;
+                    } 
+                    else {
+                        i++;
+                    }
+                    if (line[i] == ')')
+                        kol--;
+                }
             }
         } 
         else {
@@ -150,6 +241,33 @@ static int count_words(char *line) {
                 i++;
                 while (line[i] != '\'')
                     i++;
+            } 
+             else if (line[i] == '`') {
+                i++;
+                while (line[i] != '`') {
+                    if (line[i] == '\\')
+                        i += 2;
+                    else 
+                        i++;
+                }
+            }
+            else if (line[i] == '$' && line[i + 1] == '(') {
+                i += 2;
+                kol++;
+                while (kol != 0) {
+                    if (line[i] == '\\') {
+                        i += 2;
+                    }
+                    else if (line[i] == '$' && line[i + 1] == '(') {
+                        kol++;
+                        i += 2;
+                    }
+                    else {
+                        i++;
+                    }
+                    if (line[i] == ')')
+                        kol--;
+                }
             }
         }
         if (line[i] == ' ' || line[i] == '\t' 
@@ -172,7 +290,8 @@ char **mx_delim_space(char *line) {
     int k = 0;
     int len = strlen(line);
     int counter = 0;
-    
+    int kol = 0;
+
     mallocingstr(mass, line);
     for (int i = 0; i < len; i++) {
         if (line[i] == '\\' && line[i + 1] == '\\') { ///// HEHEHEHEH
@@ -221,6 +340,76 @@ char **mx_delim_space(char *line) {
                 }
             }
         }
+        if (line[i] == '`') {
+            mass[j][k] = line[i];//del
+            k++;//del
+            i++;
+            while (line[i] != '`') {
+                if (line[i] == '\\' && line[i + 1] == '\\') { /////
+                    while (line[i] == '\\') {
+                        mass[j][k] = line[i];
+                        k++;
+                        i++;
+                        while (counter != 1 && line[i] == '\\') {
+                            counter++;
+                            i++;
+                        }
+                        counter = 0;
+                    }
+                } /////
+                // if (line[i] == '\\' && (line[i + 1] == '\"' || line[i + 1] == '`')) //here
+                //     i++;
+                if (line[i] == '`') {
+                    mass[j][k] = line[i];
+                    k++;
+                    i++;
+                    break;
+                }
+                mass[j][k] = line[i];
+                k++;
+                i++;
+                if (line[i + 1] == '\0') {
+                    mass[j][k] = '\0';
+                    break;
+                }
+            }
+        }
+        if (line[i] == '$' && line[i + 1] == '(') {
+            mass[j][k] = line[i];//del
+            k++;//del
+            i++;
+            kol++;
+            while(kol != 0) {//line[i] != ')'
+                if (line[i] == '\\' && line[i + 1] == '\\') { /////
+                    while (line[i] == '\\') {
+                        mass[j][k] = line[i];
+                        k++;
+                        i++;
+                        while (counter != 3 && line[i] == '\\') {
+                            counter++;
+                            i++;
+                        }
+                        counter = 0;
+                    }
+                } /////
+                else {
+                    if (line[i] == '$' && line[i + 1] == '(')
+                        kol++;
+                    if (line[i] == ')')
+                        kol--;
+                    if (kol == 0 && line[i] == ')') {
+                        mass[j][k] = line[i];
+                    }
+                    else {
+                        mass[j][k] = line[i];
+                        k++;
+                        i++;
+                    }
+                }
+                if (!line[i])
+                    break;
+            }
+        }
         if (line[i] == '\"') {
             mass[j][k] = line[i];//del
             k++;//del
@@ -238,6 +427,13 @@ char **mx_delim_space(char *line) {
                         counter = 0;
                     }
                 } /////
+                if (line[i] == '$' && line[i + 1] == '(') {
+                    while (line[i] != ')') {
+                        mass[j][k] = line[i];
+                        k++;
+                        i++;
+                    }
+                }
                 if (line[i] == '\"') {
                     break;
                 }

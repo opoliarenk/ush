@@ -17,10 +17,12 @@ int mx_hardparser(char *line, t_trig *trig, t_var **list) {
     trig->linput = mx_strdup(cuts);
     mx_variable(mass, list);
     mx_v_out(mass, list);
-    if ((new = mx_subspars(mass, trig, list)) != NULL) {
+
+    if ((new = mx_sub(mass, trig, list)) != NULL) {
         mx_del_strarr(&mass);
         mass = new;
     }
+        
     if ((status_of_work = mx_red_pipe(mass, trig, list)) == 2) {
         mx_builtins(mass, trig, list);
         status_of_work = trig->err;

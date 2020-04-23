@@ -44,8 +44,10 @@ void mx_builtin_cd(char **arr, t_trig *trig) {
                 while (arr[i][j]) {
                     if (arr[i][j] == 's')
                         cd->s = 1;
-                    else if (arr[i][j] == 'P' && !cd->s)
-                        cd->P = 1;
+                    else if (arr[i][j] == 'P') {
+                        if (!cd->s)
+                            cd->P = 1;
+                    }
                     else {
                         mx_printerr("cd: no such file or directory: ");
                         mx_printerr(arr[i]);
@@ -67,7 +69,7 @@ void mx_builtin_cd(char **arr, t_trig *trig) {
         path = getenv("HOME");
     else
         path = arr[i];
-    if (arr[i + 1] && arr[i + 2]) {
+    if (arr[i + 1] && arr[i + 2] && arr[i + 3]) {
         mx_printerr("cd: too many arguments\n");
         trig->err = 1;
         cd->stop = 1;

@@ -13,6 +13,11 @@ FILES = main \
 	mx_builtin_pwd \
 	mx_builtin_echo \
 	mx_builtin_unset \
+	mx_builtin_which \
+	mx_is_built_in \
+	mx_is_command \
+	mx_is_slash \
+	mx_strjoin_free \
 	mx_hardsplit \
 	mx_hardparser \
 	mx_red_pipe \

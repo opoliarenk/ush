@@ -28,7 +28,10 @@ void mx_notbuiltin(char **arr, t_trig *trig, char **environ) {
     char **temp = NULL;
     int i = 0;
 
-    buff = mx_strjoin(pre, arr[0]);
+    if (strstr(arr[0], pre) == NULL)
+        buff = mx_strjoin(pre, arr[0]);
+    else 
+        buff = strdup(arr[0]);
     for (i = 0; arr[i] != NULL; i++);
     temp = (char **)malloc(sizeof(char*) * i + 1);
     temp[0] = strdup(buff);

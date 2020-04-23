@@ -95,7 +95,7 @@ void mx_v_out(char **mass, t_var **list) {
             }
             if (mass[i][j] == '$') {
                 chang = var_replac(list, &mass[i]);
-                break;
+                //break;
             }
         }
     }  

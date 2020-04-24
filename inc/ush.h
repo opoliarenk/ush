@@ -100,6 +100,11 @@ void mx_builtin_true(t_trig *trig);
 void mx_builtin_false(t_trig *trig);
 void mx_notbuiltin(char **arr, t_trig *trig, char **environ);
 
+void mx_builtin_which(char **arr, t_trig *trig);
+bool mx_is_built_in(char *str);
+bool mx_is_slash(char *path);
+bool mx_is_command(char *path, bool *flag, int index);
+char *mx_strjoin_free(char *s1, const char *s2);
 
 char *mx_input(t_input *input);
 void mx_canon_off(void);

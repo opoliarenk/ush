@@ -33,22 +33,24 @@ static void func_for_slesh(char *str, int j) {
 
 void mx_builtin_echo(char **arr, char *origin) {
     int i = 1;
-    int j = 0;
+    int j = 1;
     int point = 2;
     t_echo *echo = (t_echo *)malloc(sizeof(t_echo));
     char **split = mx_strsplit(origin, ' ');
 
     memset(echo, 0, sizeof(t_echo));
     while (arr[i]) {
-        if (arr[i][j] == '-') {
-            j++;
+        if (arr[i][0] == '-') {
+            j = 1;
             while (arr[i][j]) {
                 if (arr[i][j] == 'n')
                     echo->n = 1;
                 else if (arr[i][j] == 'e')
                     echo->e = 1;
-                else if (arr[i][j] == 'E' && !echo->e)
-                    echo->E = 1;
+                else if (arr[i][j] == 'E') {
+                    if (!echo->e)
+                        echo->E = 1;
+                }
                 else {
                     mx_printstr(arr[i]);
                     mx_printchar(32);
@@ -56,13 +58,12 @@ void mx_builtin_echo(char **arr, char *origin) {
                 }
                 j++;
             }
-            j = 0;
         }
         else {
             echo->e = 1;
             break;
         }
-        i++;
+          i++;
     }
     while (arr[i]) {
         if (echo->E) {

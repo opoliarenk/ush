@@ -26,6 +26,8 @@ void mx_builtins(char **arr, t_trig *trig, t_var **list) {
         mx_builtin_echo(arr, trig->linput);
     else if (strcmp(arr[0], "unset") == 0)
         mx_builtin_unset(arr, list);
+    else if (strcmp(arr[0], "which") == 0)
+        mx_builtin_which(arr, trig);
     else if (strcmp(arr[0], "true") == 0)
         mx_builtin_true(trig);
     else if (strcmp(arr[0], "false") == 0)
@@ -33,8 +35,6 @@ void mx_builtins(char **arr, t_trig *trig, t_var **list) {
     else {
         mx_notbuiltin(arr, trig, environ);
     }
-    // if (strcmp(arr[0], "which") == 0)
-    //    mx_builtin_which();
     // if (strcmp(arr[0], "fg") == 0)
     //    mx_builtin_fg();
 }

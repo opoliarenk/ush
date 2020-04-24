@@ -18,25 +18,30 @@ static void part_for_link(char *path)  {
 void mx_builtin_pwd(char **arr, t_trig *trig) {
     char *cwd = trig->PWD;
     int i = 1;
+    int j = 1;
     t_pwd *pwd = (t_pwd *)malloc(sizeof(t_pwd));
     struct stat lt;
 
     memset(pwd, 0, sizeof(t_pwd));
     while (arr[i]) {
         if (arr[i][0] == '-') {
-            if (strcmp(arr[i], "-P") == 0) {
-                pwd->P = 1;
-                pwd->L = 0;
-            }
-            else if (strcmp(arr[i], "-L") == 0)
-                pwd->L = 1;
-            else {
-                mx_printerr("pwd: bad option: ");
-                mx_printerr(arr[i]);
-                mx_printerr("\n");
-                trig->err = 1;
-                pwd->stop = 1;
-                break;
+            j = 1;
+            while (arr[i][j]) {
+                if (arr[i][j] == 'P')
+                    pwd->P = 1;
+                else if (arr[i][j] == 'L') {
+                    if (!pwd->P)
+                        pwd->L = 1;
+                }
+                else {
+                    mx_printerr("pwd: bad option: ");
+                    mx_printchar(arr[i][j]);
+                    mx_printerr("\n");
+                    trig->err = 1;
+                    pwd->stop = 1;
+                    break;
+                }
+                j++;
             }
         }
         else {

@@ -3,46 +3,91 @@
 
 static void help1(char *line, int *i, int *kol) {
     if (line[(*i)] == '\"' && line[(*i) - 1] != '\\') {
-                (*i)++;
-                while (line[(*i)] != '\"') {
-                    if (line[(*i)] == '\\')
-                        (*i) += 2;
-                    else 
-                        (*i)++;
-                }
-            } 
-            else if (line[(*i)] == '\'' && line[(*i) - 1] != '\\') {
-                (*i)++;
-                while (line[(*i)] != '\'')
-                    (*i)++;
-            }
-            else if (line[(*i)] == '`' && line[(*i) - 1] != '\\') {
-                (*i)++;
-                while (line[(*i)] != '`') {
-                    if (line[(*i)] == '\\')
-                        (*i) += 2;
-                    else 
-                        (*i)++;
-                }
-            }
-            else if (line[(*i)] == '$' && line[(*i) + 1] == '(' && line[(*i) - 1] != '\\') {
+        (*i)++;
+        while (line[(*i)] != '\"') {
+            if (line[(*i)] == '\\')
                 (*i) += 2;
-                (*kol)++;
-                while ((*kol) != 0) {
-                    if (line[(*i)] == '\\') {
-                        (*i) += 2;
-                    }
-                    else if (line[(*i)] == '$' && line[(*i) + 1] == '(') {
-                        (*kol)++;
-                        (*i) += 2;
-                    } 
-                    else {
-                        (*i)++;
-                    }
-                    if (line[(*i)] == ')')
-                        (*kol)--;
-                }
+            else 
+                (*i)++;
+        }
+    } 
+    else if (line[(*i)] == '\'' && line[(*i) - 1] != '\\') {
+        (*i)++;
+        while (line[(*i)] != '\'')
+            (*i)++;
+    }
+    else if (line[(*i)] == '`' && line[(*i) - 1] != '\\') {
+        (*i)++;
+        while (line[(*i)] != '`') {
+            if (line[(*i)] == '\\')
+                (*i) += 2;
+            else 
+                (*i)++;
             }
+        }
+        else if (line[(*i)] == '$' && line[(*i) + 1] == '(' && line[(*i) - 1] != '\\') {
+        (*i) += 2;
+        (*kol)++;
+        while ((*kol) != 0) {
+            if (line[(*i)] == '\\') {
+                (*i) += 2;
+            }
+            else if (line[(*i)] == '$' && line[(*i) + 1] == '(') {
+                (*kol)++;
+                (*i) += 2;
+            } 
+            else {
+                (*i)++;
+            }
+            if (line[(*i)] == ')')
+                (*kol)--;
+        }
+    }
+}
+
+static void help2(char *line, int *i, int *kol) {
+
+if (line[(*i)] == '\"') {
+    (*i)++;
+    while (line[(*i)] != '\"') {
+        if (line[(*i)] == '\\')
+            (*i) += 2;
+        else 
+            (*i)++;
+    }
+} 
+else if (line[(*i)] == '\'') {
+    (*i)++;
+    while (line[(*i)] != '\'')
+        (*i)++;
+} 
+else if (line[(*i)] == '`') {
+    (*i)++;
+    while (line[(*i)] != '`') {
+        if (line[(*i)] == '\\')
+            (*i) += 2;
+        else 
+        (*i)++;
+    }
+}
+else if (line[(*i)] == '$' && line[(*i) + 1] == '(') {
+    (*i) += 2;
+    (*kol)++;
+    while ((*kol) != 0) {
+        if (line[(*i)] == '\\') {
+            (*i) += 2;
+        }
+        else if (line[(*i)] == '$' && line[(*i) + 1] == '(') {
+            (*kol)++;
+            (*i) += 2;
+        }
+        else {
+            (*i)++;
+        }
+        if (line[(*i)] == ')')
+            (*kol)--;
+        }
+    }
 }
 
 int mx_countingw(char *line) {
@@ -53,90 +98,9 @@ int mx_countingw(char *line) {
     for (int i = 0; i < len; i++) { 
         if (i != 0) {
             help1(line, &i, &kol);
-            // if (line[i] == '\"' && line[i - 1] != '\\') {
-            //     i++;
-            //     while (line[i] != '\"') {
-            //         if (line[i] == '\\')
-            //             i += 2;
-            //         else 
-            //             i++;
-            //     }
-            // } 
-            // else if (line[i] == '\'' && line[i - 1] != '\\') {
-            //     i++;
-            //     while (line[i] != '\'')
-            //         i++;
-            // }
-            // else if (line[i] == '`' && line[i - 1] != '\\') {
-            //     i++;
-            //     while (line[i] != '`') {
-            //         if (line[i] == '\\')
-            //             i += 2;
-            //         else 
-            //             i++;
-            //     }
-            // }
-            // else if (line[i] == '$' && line[i + 1] == '(' && line[i - 1] != '\\') {
-            //     i += 2;
-            //     kol++;
-            //     while (kol != 0) {
-            //         if (line[i] == '\\') {
-            //             i += 2;
-            //         }
-            //         else if (line[i] == '$' && line[i + 1] == '(') {
-            //             kol++;
-            //             i += 2;
-            //         } 
-            //         else {
-            //             i++;
-            //         }
-            //         if (line[i] == ')')
-            //             kol--;
-            //     }
-            // }
         } 
         else {
-            if (line[i] == '\"') {
-                i++;
-                while (line[i] != '\"') {
-                    if (line[i] == '\\')
-                        i += 2;
-                    else 
-                        i++;
-                }
-            } 
-            else if (line[i] == '\'') {
-                i++;
-                while (line[i] != '\'')
-                    i++;
-            } 
-             else if (line[i] == '`') {
-                i++;
-                while (line[i] != '`') {
-                    if (line[i] == '\\')
-                        i += 2;
-                    else 
-                        i++;
-                }
-            }
-            else if (line[i] == '$' && line[i + 1] == '(') {
-                i += 2;
-                kol++;
-                while (kol != 0) {
-                    if (line[i] == '\\') {
-                        i += 2;
-                    }
-                    else if (line[i] == '$' && line[i + 1] == '(') {
-                        kol++;
-                        i += 2;
-                    }
-                    else {
-                        i++;
-                    }
-                    if (line[i] == ')')
-                        kol--;
-                }
-            }
+            help2(line, &i, &kol);
         }
         if (line[i] == ' ' || line[i] == '\t' 
             || line[i] == '\r' || line[i] == '\n' 

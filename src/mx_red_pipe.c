@@ -28,7 +28,7 @@ static int both(char **mass, t_trig *trig, t_var **list) { // доделать �
     int out = 0;
 
     for (int i = 0; mass[i] != NULL; i++) {
-        if (strcmp(mass[i], ">") == 0 || strcmp(mass[i], "2>") == 0)
+        if (strcmp(mass[i], ">") == 0)
             in = 1; 
         if (strcmp(mass[i], "<") == 0)
             out = 1;
@@ -52,7 +52,10 @@ int mx_red_pipe(char **mass, t_trig *trig, t_var **list) { //  проверяе�
     int redirout; 
     int rederr;
     int redboth;
+    int pepe;
     
+    if ((pepe = mx_pipe(mass, trig, list)) != 2)
+        return pepe;
     if ((redboth = both(mass, trig, list)) != 2) 
         return redboth;
     if ((rederr = err_stream(mass, trig, list)) != 2) 

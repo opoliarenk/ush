@@ -23,31 +23,19 @@ static char **newfor_bults(char **mass) {
 
 static int open_f(char *line, char **mass, t_trig *trig, t_var **list) {
     int fd;
-    char *str = NULL;
-    int i = 0;
-    char **newmass = NULL;
-    int j = 0;
     int status_of_work;
+    int save_fd = dup(0);
     
     fd = open(line, O_RDONLY);
     if (fd == -1) {
-        perror("ush"); //ERROR
+        perror("ush");
         return fd;
-    } else 
-        close(fd);
-    str = mx_file_to_str(line);
-    while (mass[i])
-        i++;
-    newmass = malloc (sizeof (char *) * (i + 2));
-    for (j = 0; j < i + 2; j++) {
-        while (mass[j]) {
-            newmass[j] = strdup(mass[j]);
-            j++;
-        }
-        newmass[j] = strdup(str);
-    }
-    newmass[i + 1] = NULL;
-    mx_builtins(newmass, trig, list);
+    } 
+    close(0);
+    dup2(fd, 0);
+    mx_builtins(mass, trig, list);
+    close(fd);
+    dup2(save_fd, 0);
     status_of_work = trig->err;
     return status_of_work;
 }
@@ -58,7 +46,10 @@ int mx_redirout(char **mass, t_trig *trig, t_var **list) {
 
     for (int i = 0; mass[i] != NULL; i++) {
         if (strcmp(mass[i], "<") == 0) {
-            status_of_work = open_f(mass[i + 1], newmass, trig, list);
+            while (mass[i + 1] != NULL) 
+                i++;                
+            status_of_work = open_f(mass[i], newmass, trig, list);
+            break;
         }
     }
     return status_of_work;

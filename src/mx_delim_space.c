@@ -10,7 +10,7 @@ char **mx_delim_space(char *line) {
 
     mx_new_malloc(mass, line);
     for (int i = 0; i < len; i++) {
-        if (line[i] == '\\' && line[i + 1] == '\\') { ///// HEHEHEHEH
+        if (line[i] == '\\' && line[i + 1] == '\\' && mx_check_for_echoE(line) != true) { ///// HEHEHEHEH
             while (line[i] == '\\') {
                 mass[j][k] = line[i];
                 k++;
@@ -27,7 +27,7 @@ char **mx_delim_space(char *line) {
             k++;//del
             i++;
             while (line[i] != '\'') {
-                if (line[i] == '\\' && line[i + 1] == '\\') { /////
+                if (line[i] == '\\' && line[i + 1] == '\\' && mx_check_for_echoE(line) != true) { /////
                     while (line[i] == '\\') {
                         mass[j][k] = line[i];
                         k++;
@@ -61,7 +61,7 @@ char **mx_delim_space(char *line) {
             k++;//del
             i++;
             while (line[i] != '`') {
-                if (line[i] == '\\' && line[i + 1] == '\\') { /////
+                if (line[i] == '\\' && line[i + 1] == '\\' && mx_check_for_echoE(line) != true) { /////
                     while (line[i] == '\\') {
                         mass[j][k] = line[i];
                         k++;
@@ -96,7 +96,7 @@ char **mx_delim_space(char *line) {
             i++;
             kol++;
             while(kol != 0) {//line[i] != ')'
-                if (line[i] == '\\' && line[i + 1] == '\\') { /////
+                if (line[i] == '\\' && line[i + 1] == '\\' && mx_check_for_echoE(line) != true) { /////
                     while (line[i] == '\\') {
                         mass[j][k] = line[i];
                         k++;
@@ -131,7 +131,7 @@ char **mx_delim_space(char *line) {
             k++;//del
             i++;
             while (line[i] != '\"') { 
-                if (line[i] == '\\' && line[i + 1] == '\\') { /////
+                if (line[i] == '\\' && line[i + 1] == '\\' && mx_check_for_echoE(line) != true) { /////
                     while (line[i] == '\\') {
                         mass[j][k] = line[i];
                         k++;

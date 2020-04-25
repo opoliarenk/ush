@@ -106,7 +106,7 @@ void mx_builtin_pwd(char **arr, t_trig *trig);
 
 void mx_builtin_echo(char **arr, char *origin);
 int mx_parser_4_echo(char **arr, t_echo *echo);
-bool mx_check_for_echoE(char **arr);
+bool mx_check_for_echoE(char *arr);
 
 void mx_builtin_unset(char **name, t_var **list);
 void mx_builtin_true(t_trig *trig);

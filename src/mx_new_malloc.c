@@ -8,7 +8,7 @@ void mx_new_malloc(char **mass, char *line) {
     int kol = 0;
 
     for (int i = 0; i < len; i++) {
-        if (line[i] == '\\' && line[i + 1] == '\\') { ///// HEHEHEHE
+        if (line[i] == '\\' && line[i + 1] == '\\' && mx_check_for_echoE(line) != true) { ///// HEHEHEHE
                     while (line[i] == '\\') {
                         i++;
                         j++;
@@ -23,7 +23,7 @@ void mx_new_malloc(char **mass, char *line) {
             i++;
             j++;
             while (line[i] != '\'') {
-                if (line[i] == '\\' && line[i + 1] == '\\') {
+                if (line[i] == '\\' && line[i + 1] == '\\' && mx_check_for_echoE(line) != true) {
                     while (line[i] == '\\') {
                         i++;
                         j++;
@@ -58,7 +58,7 @@ void mx_new_malloc(char **mass, char *line) {
             i++;
             j++;
             while (line[i] != '`') {
-                if (line[i] == '\\' && line[i + 1] == '\\') {
+                if (line[i] == '\\' && line[i + 1] == '\\' && mx_check_for_echoE(line) != true) {
                     while (line[i] == '\\') {
                         i++;
                         j++;
@@ -90,7 +90,7 @@ void mx_new_malloc(char **mass, char *line) {
             j++;
             kol++;
             while(kol != 0) {//line[i] != ')'
-                if (line[i] == '\\' && line[i + 1] == '\\') { /////
+                if (line[i] == '\\' && line[i + 1] == '\\' && mx_check_for_echoE(line) != true) { /////
                     while (line[i] == '\\') {
                         i++;
                         j++;
@@ -123,7 +123,7 @@ void mx_new_malloc(char **mass, char *line) {
             i++;
             j++;
             while (line[i] != '\"') { 
-                if (line[i] == '\\' && line[i + 1] == '\\') { /////
+                if (line[i] == '\\' && line[i + 1] == '\\' && mx_check_for_echoE(line) != true) { /////
                     while (line[i] == '\\') {
                         i++;
                         j++;

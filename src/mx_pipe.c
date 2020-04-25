@@ -53,8 +53,6 @@ static void parser(char **mass, t_trig *trig, t_var **list, int count) {
     int save_one = dup(1);
     int save_zero = dup(0);
 
-    mx_printint(count);
-
     while (count > 0) {
         buff = creator(&mass[i]);
         if (dissp == count) {

@@ -12,6 +12,8 @@ FILES = main \
 	mx_builtin_cd \
 	mx_builtin_pwd \
 	mx_builtin_echo \
+	mx_parser_4_echo \
+	mx_check_for_echoE \
 	mx_builtin_unset \
 	mx_builtin_which \
 	mx_is_built_in \

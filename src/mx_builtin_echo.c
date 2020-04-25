@@ -1,12 +1,5 @@
 #include "../inc/ush.h"
 
-typedef struct s_echo{
-    bool stop;
-    bool n;
-    bool e;
-    bool E;
-}              t_echo;
-
 static void func_for_slesh(char *str, int j) {
     char output;
  
@@ -39,32 +32,7 @@ void mx_builtin_echo(char **arr, char *origin) {
     char **split = mx_strsplit(origin, ' ');
 
     memset(echo, 0, sizeof(t_echo));
-    while (arr[i]) {
-        if (arr[i][0] == '-') {
-            j = 1;
-            while (arr[i][j]) {
-                if (arr[i][j] == 'n')
-                    echo->n = 1;
-                else if (arr[i][j] == 'e')
-                    echo->e = 1;
-                else if (arr[i][j] == 'E') {
-                    if (!echo->e)
-                        echo->E = 1;
-                }
-                else {
-                    mx_printstr(arr[i]);
-                    mx_printchar(32);
-                    break;
-                }
-                j++;
-            }
-        }
-        else {
-            echo->e = 1;
-            break;
-        }
-          i++;
-    }
+    i = mx_parser_4_echo(arr, echo);
     while (arr[i]) {
         if (echo->E) {
             if (arr[i][0] == '\'') {
@@ -131,23 +99,22 @@ void mx_builtin_echo(char **arr, char *origin) {
     if (!echo->n)
         mx_printchar(10);
         // ///
-        i = 0; j = 0;
-        mx_printstr("\n------------------------\n");
-            while (arr[i]) {
-                while (arr[i][j]) {
-                    mx_printchar(arr[i][j]);
-                    mx_printchar(32);
-                    j++;
-                }
-                j = 0;
-                i++;
-                mx_printchar(10);
-            }
-            //
-        ///
-        i = 0; j = 0;
-        mx_printstr("\n------------------------\n");
-        mx_printstr(origin);
-        mx_printstr("\n------------------------\n");   
-    
+        // i = 0; j = 0;
+        // mx_printstr("\n------------------------\n");
+        //     while (arr[i]) {
+        //         while (arr[i][j]) {
+        //             mx_printchar(arr[i][j]);
+        //             mx_printchar(32);
+        //             j++;
+        //         }
+        //         j = 0;
+        //         i++;
+        //         mx_printchar(10);
+        //     }
+        //     //
+        // ///
+        // i = 0; j = 0;
+        // mx_printstr("\n------------------------\n");
+        // mx_printstr(origin);
+        // mx_printstr("\n------------------------\n");
 }

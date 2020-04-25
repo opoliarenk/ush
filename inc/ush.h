@@ -58,6 +58,12 @@ typedef struct s_var {
     struct s_var *next;
 }              t_var;
 
+typedef struct s_echo{
+    bool stop;
+    bool n;
+    bool e;
+    bool E;
+}              t_echo;
 
 int main(int argc, char **argv);
 char *mx_wait_line(void);
@@ -89,7 +95,11 @@ void mx_builtin_env(char **env);
 void mx_builtin_export(char **arr, char **env, t_var **list);
 void mx_builtin_cd(char **arr, t_trig *trig);
 void mx_builtin_pwd(char **arr, t_trig *trig);
+
 void mx_builtin_echo(char **arr, char *origin);
+int mx_parser_4_echo(char **arr, t_echo *echo);
+bool mx_check_for_echoE(char **arr);
+
 void mx_builtin_unset(char **name, t_var **list);
 void mx_builtin_true(t_trig *trig);
 void mx_builtin_false(t_trig *trig);

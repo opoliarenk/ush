@@ -49,6 +49,8 @@ FILES = main \
 	mx_countingw \
 	mx_new_malloc \
 	mx_pipe \
+	mx_tilde \
+	mx_mt \
 
 SRC_PREFFIX = $(addprefix src/, $(FILES))
 

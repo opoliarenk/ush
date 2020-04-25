@@ -2,11 +2,14 @@
 
 int mx_hardparser(char *line, t_trig *trig, t_var **list) {
     char *cuts = mx_cut_spaces(line);//FREE
-    char *newl = mx_hardsplit(cuts); //FREE
-    char **mass = mx_delim_space(newl); //FREE
+    char *newl = mx_hardsplit(cuts);//FREE
+    char **mass = mx_delim_space(newl);//FREE
     int status_of_work = 1;
     char **new = NULL;
 
+    if (mx_mt(&mass) == 1)
+        return status_of_work;
+    
     int i = 0;
     while (mass[i]) {
         mx_printstr(mass[i]);

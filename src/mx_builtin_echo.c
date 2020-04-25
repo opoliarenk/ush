@@ -36,7 +36,7 @@ static void print_2_type(char *arr) {
 
     while (arr[j + 1]) {
         if ((arr[j] == '\\' && arr[j + 1] != '\'')
-            || (arr[i][j] == '\\' && arr[i][j + 1] != '"')) {
+            || (arr[j] == '\\' && arr[j + 1] != '"')) {
             func_for_slesh(arr, j + 1);
             j++;
         }
@@ -48,7 +48,6 @@ static void print_2_type(char *arr) {
 
 void mx_builtin_echo(char **arr, char *origin) {
     int i = 1;
-    int j = 1;
     int point = 2;
     t_echo *echo = (t_echo *)malloc(sizeof(t_echo));
     char **split = mx_strsplit(origin, ' ');
@@ -65,12 +64,10 @@ void mx_builtin_echo(char **arr, char *origin) {
                 print_1_type(arr[i], 0, 0);
         }
         else {
-            if (arr[i][0] == '\'') {
+            if (arr[i][0] == '\'')
                 print_2_type(arr[i]);
-            }
-            else if (arr[i][0] == '"') {
+            else if (arr[i][0] == '"') 
                 print_2_type(arr[i]);
-            }
             else
                 print_1_type(arr[i], 0, 0);
         }

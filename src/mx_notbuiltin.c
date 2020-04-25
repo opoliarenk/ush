@@ -52,11 +52,8 @@ void mx_notbuiltin(char **arr, t_trig *trig, char **environ) {
     for (i = 0; arr[i] != NULL; i++);
     temp = (char **)malloc(sizeof(char*) * i + 1);
     temp[0] = strdup(buff);
-    for (i = 1; arr[i] != NULL; i++) {
+    for (i = 1; arr[i] != NULL; i++)
         temp[i] = strdup(arr[i]);
-        mx_printstr(temp[i]);
-        mx_printstr("\n");
-    }
     temp[i] = NULL;
     trig->err = exework(temp, environ);
     free(buff);

@@ -1,7 +1,7 @@
 #include "../inc/ush.h"
 
 void mx_unknown(char **temp) {
-    if (temp[0][5] == '=') {
+    if (temp[0][0] == '=') {
         dprintf(2, "ush: %s not found\n", temp[0]);
         exit(1);
     }

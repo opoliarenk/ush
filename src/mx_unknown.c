@@ -1,8 +1,8 @@
 #include "../inc/ush.h"
 
 void mx_unknown(char **temp) {
-    if (temp[0][5] == '=') {
-        dprintf(2, "ush: %s not found\n", &temp[0][6]);
+    if (temp[0][0] == '=') {
+        dprintf(2, "ush: %s not found\n", temp[0]);
         exit(1);
     }
     else if (temp[0][5] == '$' && temp[0][6] != '$') {
@@ -12,6 +12,7 @@ void mx_unknown(char **temp) {
         if (temp[0][i] == '=' && temp[0][i + 1] != '=')
             exit(0);
     }
-    dprintf(2, "ush: command not found : %s\n", &temp[0][5]);
+    dprintf(2, "ush: command not found : %s\n", temp[0]);
     exit(127);
 }
+

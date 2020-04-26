@@ -18,7 +18,10 @@ void mx_new_malloc(char **mass, char *line) {
                         }
                         counter = 0;
                     }
-                } ///// HEHEHHE
+            } ///// HEHEHHE
+        if (line[i] == '\\') {
+            i++;
+        }
         if (line[i] == '\'') { ////// TROUBLE
             i++;
             j++;

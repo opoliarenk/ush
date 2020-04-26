@@ -22,6 +22,9 @@ char **mx_delim_space(char *line) {
                 counter = 0;
             }
         } ///// HEHEHEHEHE
+        if (line[i] == '\\') {
+            i++;
+        }
         if (line[i] == '\'') {
             mass[j][k] = line[i];//del
             k++;//del

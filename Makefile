@@ -14,6 +14,7 @@ FILES = main \
 	mx_builtin_echo \
 	mx_parser_4_echo \
 	mx_check_for_echoE \
+	mx_echo_func_for_slesh \
 	mx_builtin_unset \
 	mx_builtin_which \
 	mx_is_built_in \

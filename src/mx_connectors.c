@@ -35,27 +35,24 @@ static void auditor_1 (char *line, char **arr) {
 
 static char **split(char *line, int count) {
     char **arr = malloc (sizeof (char *) * (count + 2));
-    int len = strlen(line);
-    int j = 0;
-    int k = 0;
-    int h = 0;
+    int j_k_h[3] = {0, 0, 0};
 
     auditor_1(line, arr);
-    for (int i = 0; i < len; i++) {
-        if (line[i] == ';' && (h = while_space(line, i)) != i) {
-            i = h;
+    for (int i = 0; i < mx_strlen(line); i++) {
+        if (line[i] == ';' && (j_k_h[2] = while_space(line, i)) != i) {
+            i = j_k_h[2];//h
         }
-        else if (line[i] == ';' && k != 0) {
-            arr[j][k] = '\0';
-            j++;
-            k = 0;
+        else if (line[i] == ';' && j_k_h[1] != 0) { //k
+            arr[j_k_h[0]][j_k_h[1]] = '\0';//j k
+            j_k_h[0]++; //j
+            j_k_h[1] = 0;//k
         }
         else if (line[i] != ';') {
-            arr[j][k] = line[i];
-            k++; 
+            arr[j_k_h[0]][j_k_h[1]] = line[i];
+            j_k_h[1]++; 
         }
     }
-    arr[j + 1] = NULL;
+    arr[j_k_h[0] + 1] = NULL;
     return arr;
 }
 
@@ -77,5 +74,3 @@ char **mx_connectors(char *line) {
     }
     return mass;
 }
-
-//not sure, that it work correctly

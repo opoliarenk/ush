@@ -1,49 +1,49 @@
 #include "../inc/ush.h"
 
-static void namedata(char **n, char **d, const char *str) {
-    char *name = NULL;
-    char *data = NULL;
-    int j = 0;
+// static void namedata(char **n, char **d, const char *str) {
+//     char *name = NULL;
+//     char *data = NULL;
+//     int j = 0;
 
-    for (int i = 0; str[i] != '\0'; i++) {
-        if (str[i] == '=') {
-            name = strndup(str, i);
-            i++;
-            if (str[i] == '\"' || str[i] == '\'')
-                i++;
-            while (str[i] != '\0' && str[i] != '\"' && str[i] != '\'') {
-                j++;
-                i++;
-            }
-            break;
-        }
-    }
-    data = mx_strnew(j);
-    j = 0;
-    for (int i = 0; str[i] != '\0'; i++) {
-        if (str[i] == '=') {
-            i++;
-            if (str[i] == '\"' || str[i] == '\'')
-                i++;
-            while (str[i] != '\0' && str[i] != '\"' && str[i] != '\'') {
-                data[j] = str[i];
-                j++;
-                i++;
-            }
-        }
-    }
-    (*n) = mx_strdup(name);
-    (*d) = mx_strdup(data);
-    free(name);
-    free(data);
-}
+//     for (int i = 0; str[i] != '\0'; i++) {
+//         if (str[i] == '=') {
+//             name = strndup(str, i);
+//             i++;
+//             if (str[i] == '\"' || str[i] == '\'')
+//                 i++;
+//             while (str[i] != '\0' && str[i] != '\"' && str[i] != '\'') {
+//                 j++;
+//                 i++;
+//             }
+//             break;
+//         }
+//     }
+//     data = mx_strnew(j);
+//     j = 0;
+//     for (int i = 0; str[i] != '\0'; i++) {
+//         if (str[i] == '=') {
+//             i++;
+//             if (str[i] == '\"' || str[i] == '\'')
+//                 i++;
+//             while (str[i] != '\0' && str[i] != '\"' && str[i] != '\'') {
+//                 data[j] = str[i];
+//                 j++;
+//                 i++;
+//             }
+//         }
+//     }
+//     (*n) = mx_strdup(name);
+//     (*d) = mx_strdup(data);
+//     free(name);
+//     free(data);
+// }
 
 static t_var *create_node(const char *str) {
     t_var *var = (t_var *)malloc(sizeof(t_var));
     char *name = NULL;
     char *data = NULL;
 
-    namedata(&name, &data, str);
+    mx_namedata(&name, &data, str);
     var->name_of_data = strdup(name);
     var->data = strdup(data);
     var->next = NULL;
@@ -73,7 +73,7 @@ static void varcheck(const char *str, t_var **list) {
         if (str[0] == '\"' || str[0] == '\'')
             break;
         if (str[i] == '=') {
-            namedata(&name, &data, str);
+            mx_namedata(&name, &data, str);
             if (getenv(name) != NULL) {
                 setenv(name, data, 1);
             }

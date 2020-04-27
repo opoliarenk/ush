@@ -52,6 +52,7 @@ FILES = main \
 	mx_tilde \
 	mx_mt \
 	mx_doubl_red \
+	mx_namedata \
 
 SRC_PREFFIX = $(addprefix src/, $(FILES))
 

@@ -23,31 +23,19 @@ static char **newfor_bults(char **mass) {
 
 static int open_f(char *line, char **mass, t_trig *trig, t_var **list) {
     int fd;
-    char *str = NULL;
-    int i = 0;
-    char **newmass = NULL;
-    int j = 0;
     int status_of_work;
-    
+    int save_fd = dup(0);
+
     fd = open(line, O_RDONLY);
     if (fd == -1) {
-        perror("ush"); //ERROR
+        perror("ush");
         return fd;
-    } else 
-        close(fd);
-    str = mx_file_to_str(line);
-    while (mass[i])
-        i++;
-    newmass = malloc (sizeof (char *) * (i + 2));
-    for (j = 0; j < i + 2; j++) {
-        while (mass[j]) {
-            newmass[j] = strdup(mass[j]);
-            j++;
-        }
-        newmass[j] = strdup(str);
-    }
-    newmass[i + 1] = NULL;
-    mx_builtins(newmass, trig, list);
+    } 
+    close(0);
+    dup2(fd, 0);
+    mx_builtins(mass, trig, list);
+    close(fd);
+    dup2(save_fd, 0);
     status_of_work = trig->err;
     return status_of_work;
 }
@@ -55,24 +43,33 @@ static int open_f(char *line, char **mass, t_trig *trig, t_var **list) {
 static int changred(char **mass, t_trig *trig, char *str, t_var **list) {
     int fd;
     int save_fd;
-    int status_of_work;
+    int status_of_work = 1;
     char **newmass = newfor_bults(mass);
 
-    for (int i = 0; mass[i] != NULL; i++)
+    for (int i = 0; mass[i] != NULL; i++) {
         if (strcmp(mass[i], ">") == 0) {
             save_fd = dup(1);
             close(1);
-            fd = open(str, O_WRONLY | O_TRUNC);
+            if (strcmp(mass[i + 1], ">") == 0)
+                fd = open(str, O_CREAT | O_APPEND | O_WRONLY);
+            else 
+                fd = open(str, O_WRONLY | O_TRUNC);
             if (fd == -1)
                  fd = open(str, O_CREAT | O_WRONLY);
             dup2(fd, 1);
             for (int j = 0; mass[j] != NULL; j++) {
                 if (strcmp(mass[j], "<") == 0) {
-                    status_of_work = open_f(mass[j + 1], newmass, trig, list);
+                    if (strcmp(mass[j + 1], "<") == 0)
+                        status_of_work = mx_doubl_red(mass[j + 2], newmass, trig, list);
+                    else 
+                        status_of_work = open_f(mass[j + 1], newmass, trig, list);
+                    break;
                 }
             }
             dup2(save_fd, 1);
+            break;
         }
+    }
     return status_of_work;
 }
 

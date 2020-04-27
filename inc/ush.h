@@ -96,6 +96,7 @@ void mx_new_malloc(char **mass, char *line);
 int mx_pipe(char **mass, t_trig *trig, t_var **list);
 char *mx_tilde(char *line);
 int mx_mt(char ***mass);
+int mx_doubl_red(char *line, char **mass, t_trig *trig, t_var **list);
 
 int mx_strlen_for_2star(char **env);
 void mx_builtins(char **arr, t_trig *trig, t_var **list);

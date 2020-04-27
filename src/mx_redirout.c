@@ -46,6 +46,10 @@ int mx_redirout(char **mass, t_trig *trig, t_var **list) {
 
     for (int i = 0; mass[i] != NULL; i++) {
         if (strcmp(mass[i], "<") == 0) {
+            if (strcmp(mass[i + 1], "<") == 0) {
+                status_of_work = mx_doubl_red(mass[i + 2], newmass, trig , list);
+                break;
+            }
             while (mass[i + 1] != NULL) 
                 i++;                
             status_of_work = open_f(mass[i], newmass, trig, list);

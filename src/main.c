@@ -20,6 +20,7 @@ int main() {
     trig->OLDPWD = (char *)malloc(50 * sizeof(char));
     trig->OLDPWD = getenv("HOME");
     trig->PWD = getenv("HOME");
+    trig->pids = NULL;
     //
     mx_check_input(trig, list);
     //

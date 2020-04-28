@@ -1,43 +1,5 @@
 #include "../inc/ush.h"
 
-// static void namedata(char **n, char **d, const char *str) {
-//     char *name = NULL;
-//     char *data = NULL;
-//     int j = 0;
-
-//     for (int i = 0; str[i] != '\0'; i++) {
-//         if (str[i] == '=') {
-//             name = strndup(str, i);
-//             i++;
-//             if (str[i] == '\"' || str[i] == '\'')
-//                 i++;
-//             while (str[i] != '\0' && str[i] != '\"' && str[i] != '\'') {
-//                 j++;
-//                 i++;
-//             }
-//             break;
-//         }
-//     }
-//     data = mx_strnew(j);
-//     j = 0;
-//     for (int i = 0; str[i] != '\0'; i++) {
-//         if (str[i] == '=') {
-//             i++;
-//             if (str[i] == '\"' || str[i] == '\'')
-//                 i++;
-//             while (str[i] != '\0' && str[i] != '\"' && str[i] != '\'') {
-//                 data[j] = str[i];
-//                 j++;
-//                 i++;
-//             }
-//         }
-//     }
-//     (*n) = mx_strdup(name);
-//     (*d) = mx_strdup(data);
-//     free(name);
-//     free(data);
-// }
-
 static t_var *create_node(const char *str) {
     t_var *var = (t_var *)malloc(sizeof(t_var));
     char *name = NULL;
@@ -52,7 +14,7 @@ static t_var *create_node(const char *str) {
     return var;
 }
 
-static void push_back(t_var **list,const char *str) {
+static void push_back(t_var **list, const char *str) {
     t_var *new_var = create_node(str);
     t_var *buff = *list;
 

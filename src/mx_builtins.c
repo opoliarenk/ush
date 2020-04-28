@@ -10,6 +10,7 @@ void mx_builtins(char **arr, t_trig *trig, t_var **list) {
     signal(SIGINT, sigcatch);
     extern char **environ;
     trig->err = 0;
+    // sozdanie lista pod proc
 
     if (strcmp(arr[0], "exit") == 0) {
         trig->exit = 0;
@@ -37,6 +38,15 @@ void mx_builtins(char **arr, t_trig *trig, t_var **list) {
     }
     // if (strcmp(arr[0], "fg") == 0)
     //    mx_builtin_fg();
+
+    if (trig->pids != NULL) {
+        t_pid *ppids = trig->pids;
+        while (ppids != NULL) {
+            mx_printint(ppids->npid);
+            mx_printchar('\n');
+            ppids = ppids->next;
+        }
+    }
 }
 
 

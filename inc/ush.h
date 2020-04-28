@@ -24,12 +24,19 @@
 #define MX_IFDIR  0040000  /* directory */
 #define MX_IFLNK  0120000  /* symbolic link */
 
+typedef struct s_pid {
+    char **name_of_pid;
+    pid_t npid;
+    struct s_pid *next;
+}              t_pid;
+
 typedef struct s_trig{
 	bool exit; //trig na exit
     char *linput;
 	int err;
     char *PWD;
     char *OLDPWD;
+    t_pid *pids;
 } 			   t_trig;
 
 typedef struct s_history_list {

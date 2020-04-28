@@ -41,6 +41,10 @@ static int exework(char **temp, char **environ, t_trig *trig) {
     else {
         push_back(pid, temp, trig);
         waitpid(pid, &status, WUNTRACED);
+        if (WIFEXITED(status) == false)
+            mx_printstr("\nCTRL + Z or CTRL + C CHECKED\n");
+        else
+            mx_printstr("\nPROCESS END SUCCESFULLY\n");
         if (WEXITSTATUS(status) == 1) {
             status_err = 1;
         }

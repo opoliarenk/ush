@@ -1,7 +1,8 @@
 #include "../inc/ush.h"
 
 void sigcatch(int sig) {
-        signal(sig, sigcatch);
+        mx_printstr("\nsig catch ");
+        mx_printint(sig);
         mx_printchar(10);
 }
 

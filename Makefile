@@ -17,6 +17,7 @@ FILES = main \
 	mx_echo_func_for_slesh \
 	mx_builtin_unset \
 	mx_builtin_which \
+	mx_builtin_fg \
 	mx_is_built_in \
 	mx_is_command \
 	mx_is_slash \

@@ -119,6 +119,7 @@ bool mx_check_for_echoE(char *arr);
 void mx_echo_func_for_slesh(char *str, int j);
 
 void mx_builtin_unset(char **name, t_var **list);
+void mx_builtin_fg(char **arr, t_trig *trig);
 void mx_builtin_true(t_trig *trig);
 void mx_builtin_false(t_trig *trig);
 void mx_notbuiltin(char **arr, t_trig *trig, char **environ);

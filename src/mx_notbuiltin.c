@@ -39,36 +39,13 @@ static int exework(char **temp, char **environ, t_trig *trig) {
             mx_unknown(temp);
     }
     else {
-        push_back(pid, temp, trig);
         waitpid(pid, &status, WUNTRACED);
-        if (WIFEXITED(status) == true) {
-            mx_printstr("\nPROCESS END SUCCESFULLY\n");
-            if (trig->pids != NULL) {
-                t_pid *ppids = trig->pids;
-                int index = 0;
-                while (ppids != NULL) {
-                    if (ppids->npid == pid) {
-                        //mx_pop_specific_4_pids(&ppids, index);
-                        mx_printstr("kakogo huya ne udalyae zei pid = ");
-                        mx_printint(pid);
-                        mx_printstr("\n");
-                    }
-                    index++;
-                    ppids = ppids->next;
-                }
-            }
-        }
         if (WEXITSTATUS(status) == 1)
             status_err = 1;
         else
             status_err = 0;
-        // mx_printstr("\nSTATUS = ");
-        // mx_printint(status);
-        // mx_printstr("\n");
         if (status == 4735)
-            mx_printstr("\nCTRL + Z CHECKED\n");
-        if (status == 2)
-            mx_printstr("\nCTRL + C CHECKED\n");
+            push_back(pid, temp, trig);
     }
     return status_err;
 }

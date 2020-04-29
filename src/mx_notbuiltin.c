@@ -48,7 +48,7 @@ static int exework(char **temp, char **environ, t_trig *trig) {
                 int index = 0;
                 while (ppids != NULL) {
                     if (ppids->npid == pid) {
-                        mx_pop_specific_4_pids(&ppids, index);
+                        //mx_pop_specific_4_pids(&ppids, index);
                         mx_printstr("kakogo huya ne udalyae zei pid = ");
                         mx_printint(pid);
                         mx_printstr("\n");

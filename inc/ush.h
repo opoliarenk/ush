@@ -135,4 +135,6 @@ void mx_unknown(char **temp);
 int mx_check_echo(char *line);
 void mx_check_input(t_trig *trig, t_var *list);
 
+void mx_pop_specific_4_pids(t_pid **list, int index);
+
 #endif

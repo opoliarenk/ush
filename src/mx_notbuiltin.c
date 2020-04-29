@@ -69,6 +69,7 @@ static char *binary_which(char *arr) {
             free(pre);
         }
     }
+    mx_del_strarr(&bins);
     return arr;
 }
 

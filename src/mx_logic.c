@@ -16,19 +16,9 @@ static char **split(char *line, int count) {
     int len = strlen(line);
     int j = 0;
     int k = 0;
-    int i = 0;
 
-    for (; i < len; i++) {
-        if ((line[i] == '&' && line[i + 1] == '&' && j != 0) || line[i + 1] == '\0') {
-            arr[k] = malloc (sizeof (char) * (j + 1));
-            j = 0;
-            k++;
-        } else if (line[i] != '&' && line[i + 1] != '&')
-            j++;
-    }
-    k = 0;
-    j = 0;
-    for (i = 0; i < len; i++) {
+    mx_logic_split(line, &arr);
+    for (int i = 0; i < len; i++) {
         if (line[i] == '&' && line[i + 1] == '&' && k != 0) {
             arr[j][k] = '\0';
             j++;
@@ -63,7 +53,6 @@ static int if_there_amp(char *array) {
 }
 
 void mx_logic(char *mass, t_trig *trig, t_var **list) {
-    //сделать проверку на два спереди и два сзади
     char **arr_ampers = NULL;
 
     if (if_there_amp(mass) == 1)
@@ -75,10 +64,10 @@ void mx_logic(char *mass, t_trig *trig, t_var **list) {
     } 
     for (int i = 0; arr_ampers[i] != NULL; i++) {
         if (if_there_or(arr_ampers[i]) == 1) {
-            if (mx_logical_or(arr_ampers[i], trig, list) == 1) //если функи с операндом || не отробатывают, то мы выходим
+            if (mx_logical_or(arr_ampers[i], trig, list) == 1) 
                 break;
         } else {
-            if (mx_hardparser(arr_ampers[i], trig, list) != 0) // mx_red_pipe(arr_ampers[i]то есть, если функа не отработала, то цикл брейкается, но там надо сначала с пайпами отработать
+            if (mx_hardparser(arr_ampers[i], trig, list) != 0) 
                 break;
         }
     }

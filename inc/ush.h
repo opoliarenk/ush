@@ -105,6 +105,7 @@ char *mx_tilde(char *line);
 int mx_mt(char ***mass);
 int mx_doubl_red(char *line, char **mass, t_trig *trig, t_var **list);
 void mx_namedata(char **n, char **d, const char *str);
+void mx_logic_split(char *line, char ***arr);
 
 int mx_strlen_for_2star(char **env);
 void mx_builtins(char **arr, t_trig *trig, t_var **list);

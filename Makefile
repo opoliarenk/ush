@@ -56,6 +56,7 @@ FILES = main \
 	mx_doubl_red \
 	mx_namedata \
 	mx_pop_specific_4_pids \
+	mx_logic_split \
 
 SRC_PREFFIX = $(addprefix src/, $(FILES))
 

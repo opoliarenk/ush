@@ -81,8 +81,10 @@ void mx_builtin_fg(char **arr, t_trig *trig) {
                     if (fg->cont) {
                         kill(ppids->npid, SIGCONT);
                         waitpid(ppids->npid, &status, WUNTRACED);
-                        if (status != 4735)
+                        if (status != 4735) {
                            pop_front(&p);
+						   trig->pids = p;
+						}
                     }
                     else {
                         mx_printerr("fg: ");
@@ -108,8 +110,10 @@ void mx_builtin_fg(char **arr, t_trig *trig) {
 	else {
 		kill(ppids->npid, SIGCONT);
         waitpid(ppids->npid, &status, WUNTRACED);
-        if (status != 4735)
+        if (status != 4735) {
 	       pop_front(&ppids);
+		   trig->pids = ppids;
+		}
 	}
 
     ///////////////////////////////////////////////////////////

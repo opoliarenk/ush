@@ -7,25 +7,10 @@ typedef struct s_cd{
     bool P;
 }              t_cd;
 
-static void part_for_link(char *path, t_trig *trig)  {
-    char *link = mx_strnew(1024);
-
-    readlink(path, link, 1024);
-    chdir(link);
-    trig->OLDPWD = trig->PWD;
-    trig->PWD = link;
-    mx_strdel(&link);
-}
-
-void mx_builtin_cd(char **arr, t_trig *trig) {
+static int mx_parser_4_cd(char **arr, t_trig *trig, t_cd *cd) {
     int i = 1;
     int j = 0;
-    t_cd *cd = (t_cd *)malloc(sizeof(t_cd));
-    struct stat lt;
-    char *buf;
-    char *path;
 
-    memset(cd, 0, sizeof(t_cd));
     while (arr[i]) {
         if (strcmp(arr[i], "-") == 0 && arr[i + 1]) {
             mx_printerr("cd: string not in pwd: -\n");
@@ -65,6 +50,37 @@ void mx_builtin_cd(char **arr, t_trig *trig) {
         }
         i++;
     }
+    return i;
+}
+
+static void part_for_link(char *path, t_trig *trig)  {
+    char *link = mx_strnew(1024);
+
+    readlink(path, link, 1024);
+    chdir(link);
+    trig->OLDPWD = trig->PWD;
+    trig->PWD = link;
+    mx_strdel(&link);
+}
+
+void mx_builtin_cd(char **arr, t_trig *trig) {
+    int i;
+    t_cd *cd = (t_cd *)malloc(sizeof(t_cd));
+    struct stat lt;
+    char *buf;
+    char *path;
+
+    memset(cd, 0, sizeof(t_cd));
+    i = mx_parser_4_cd(arr, trig, cd);
+    if (cd->stop)
+        mx_printstr("\nstop = 1\n");
+    if (cd->s)
+        mx_printstr("\ns = 1\n");
+    if (cd->P)
+        mx_printstr("\nP = 1\n");
+    if (cd->back)
+        mx_printstr("\nback = 1\n");
+    
     if (!arr[i])
         path = getenv("HOME");
     else

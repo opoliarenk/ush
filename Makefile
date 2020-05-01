@@ -53,10 +53,17 @@ FILES = main \
 	mx_pipe \
 	mx_tilde \
 	mx_mt \
+<<<<<<< HEAD
 	mx_doubl_red \
 	mx_namedata \
 	mx_pop_specific_4_pids \
 	mx_logic_split \
+=======
+	mx_move_cursor \
+	mx_history \
+	mx_checkout_char \
+	mx_push_history \
+>>>>>>> mon.1
 
 SRC_PREFFIX = $(addprefix src/, $(FILES))
 

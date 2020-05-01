@@ -8,12 +8,13 @@ static void sigcatch(int sig) {
 
 void mx_builtins(char **arr, t_trig *trig, t_var **list) {
     extern char **environ;
+    
     trig->err = 0;
-    // sozdanie lista pod proc
     signal(SIGTSTP, sigcatch);
     signal(SIGINT, sigcatch);
     signal(SIGTTOU, SIG_IGN);
     signal(SIGTTIN, SIG_IGN);
+    //signal(SIGSEGV, SIG_IGN);
     if (strcmp(arr[0], "exit") == 0) {
         trig->exit = 0;
         trig->err = mx_atoi(arr[1]);

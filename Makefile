@@ -52,6 +52,10 @@ FILES = main \
 	mx_pipe \
 	mx_tilde \
 	mx_mt \
+	mx_move_cursor \
+	mx_history \
+	mx_checkout_char \
+	mx_push_history \
 
 SRC_PREFFIX = $(addprefix src/, $(FILES))
 

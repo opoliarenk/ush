@@ -72,6 +72,7 @@ FILES = main \
 	mx_history \
 	mx_checkout_char \
 	mx_push_history \
+	mx_if_P \
 
 SRC_PREFFIX = $(addprefix src/, $(FILES))
 

@@ -54,34 +54,13 @@ static int exework(char **temp, char **environ, t_trig *trig) {
     return status_err;
 }
 
-static char *binary_which(char *arr) {
-    char **bins = mx_strsplit(getenv("PATH"), ':');
-    char *buff = NULL;
-    char *pre = NULL;
-    int fd;
-
-    if (arr[0] != '/') {
-        for (int i = 0; bins[i]; i++) {
-            pre = mx_strjoin(bins[i], "/");
-            buff = mx_strjoin(pre, arr);
-            if ((fd = open(buff, O_RDONLY)) != -1) {
-                close(fd);
-                free(pre);
-                return buff;
-            }
-            free(buff);
-            free(pre);
-        }
-    }
-    mx_del_strarr(&bins);
-    return arr;
-}
-
 void mx_notbuiltin(char **arr, t_trig *trig, char **environ) {
-    char *buff = binary_which(arr[0]);
+    char *buff = mx_if_P(trig, arr);
     char **temp = NULL;
     int i = 0;
 
+    if (buff == NULL) 
+        return ;
     for (i = 0; arr[i] != NULL; i++);
     temp = (char **)malloc(sizeof(char*) * i + 1);
     temp[0] = strdup(buff);
@@ -90,4 +69,5 @@ void mx_notbuiltin(char **arr, t_trig *trig, char **environ) {
     temp[i] = NULL;
     trig->err = exework(temp, environ, trig);
     free(buff);
+    mx_del_strarr(&temp);
 }

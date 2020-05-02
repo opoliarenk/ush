@@ -30,15 +30,25 @@ int mx_hardparser(char *line, t_trig *trig, t_var **list) {
     trig->linput = mx_strdup(cuts);
     mx_variable(mass, list);
     mx_v_out(mass, list);
+      int i = 0;
+     while (mass[i]) {
+         if (strstr(mass[i], "=") != NULL)
+            return 0;
+    //     mx_printstr(mass[i]);
+    //     mx_printchar('\n');
+         i++;
+     }
     subst(&mass, trig, list);
     status_of_work = built_done(mass, trig, list);
     //                mx_printstr("-------------\n");
     // int i = 0;
     // while (mass[i]) {
+     //    if (strstr(mass[i], "=") != NULL)
+     //       return 0;
     //     mx_printstr(mass[i]);
     //     mx_printchar('\n');
-    //     i++;
-    // }
+     //    i++;
+     //}
     // mx_printstr("-------------\n");
     free(newl);
     //mx_del_strarr(&mass);

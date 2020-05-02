@@ -158,10 +158,14 @@ bool mx_is_command(char *path, bool *flag, int index);
 char *mx_strjoin_free(char *s1, const char *s2);
 
 char *mx_input(t_input *input);
+void mx_move_cursor(t_input *input);
 void mx_canon_off(void);
 void mx_unknown(char **temp);
 int mx_check_echo(char *line);
 void mx_check_input(t_trig *trig, t_var *list);
+int mx_history(t_input *input);
+bool mx_checkout_char(t_input *input);
+void mx_push_history(t_input *input);
 
 void mx_pop_specific_4_pids(t_pid **list, int index);
 

@@ -5,12 +5,12 @@ void mx_unknown(char **temp) {
         dprintf(2, "ush: %s not found\n", temp[0]);
         exit(1);
     }
-    else if (temp[0][5] == '$' && temp[0][6] != '$') {
+    else if (temp[0][0] == '$' && temp[0][1] != '$') {
         exit(0);
     }
-    for (int i = 6; temp[0][i]; i++) {
-        if (temp[0][i] == '=' && temp[0][i + 1] != '=')
-            exit(0);
+    for (int i = 0; temp[0][i]; i++) {
+        if (temp[0][i] == '=')
+            return;
     }
     dprintf(2, "ush: command not found : %s\n", temp[0]);
     exit(127);

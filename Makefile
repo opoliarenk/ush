@@ -68,6 +68,10 @@ FILES = main \
 	mx_namedata \
 	mx_pop_specific_4_pids \
 	mx_logic_split \
+	mx_move_cursor \
+	mx_history \
+	mx_checkout_char \
+	mx_push_history \
 
 SRC_PREFFIX = $(addprefix src/, $(FILES))
 

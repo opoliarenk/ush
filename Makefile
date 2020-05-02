@@ -16,6 +16,7 @@ FILES = main \
 	mx_cd_s \
 	mx_cd_P \
 	mx_builtin_pwd \
+	mx_parser_4_pwd \
 	mx_builtin_echo \
 	mx_parser_4_echo \
 	mx_check_for_echoE \

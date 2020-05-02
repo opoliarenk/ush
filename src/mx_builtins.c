@@ -30,7 +30,7 @@ void mx_builtins(char **arr, t_trig *trig, t_var **list) {
     if (strcmp(arr[0], "exit") == 0)
         mx_builtin_exit(arr, trig); 
     else if (strcmp(arr[0], "env") == 0)
-        mx_builtin_env(environ);
+        mx_builtin_env(environ, arr, trig);
     else if (strcmp(arr[0], "export") == 0)
         mx_builtin_export(arr, environ, list);
     else if (strcmp(arr[0], "cd") == 0)

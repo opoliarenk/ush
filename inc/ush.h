@@ -85,6 +85,19 @@ typedef struct s_cd{
     bool P;
 }              t_cd;
 
+typedef struct s_pwd{
+    bool stop;
+    bool L;
+    bool P;
+}              t_pwd;
+
+typedef struct s_env{
+    bool stop;
+    bool i;
+    bool u;
+    bool P;
+}              t_env;
+
 int main(int argc, char **argv);
 char *mx_wait_line(void);
 char **mx_str_split(char *line);
@@ -123,7 +136,7 @@ char *mx_if_P(t_trig *trig, char **arr);
 
 int mx_strlen_for_2star(char **env);
 void mx_builtins(char **arr, t_trig *trig, t_var **list);
-void mx_builtin_env(char **env);
+void mx_builtin_env(char **environ, char **arr, t_trig *trig);
 void mx_builtin_export(char **arr, char **env, t_var **list);
 
 void mx_builtin_cd(char **arr, t_trig *trig);
@@ -134,6 +147,8 @@ void mx_cd_s(char *path, t_trig *trig);
 void mx_cd_P(char *path, t_trig *trig);
 
 void mx_builtin_pwd(char **arr, t_trig *trig);
+void mx_parser_4_pwd(char **arr, t_pwd *pwd, t_trig *trig);
+
 void mx_builtin_echo(char **arr, char *origin);
 int mx_parser_4_echo(char **arr, t_echo *echo);
 bool mx_check_for_echoE(char *arr);

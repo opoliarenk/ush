@@ -3,13 +3,18 @@
 static t_pid *listcreat(pid_t chpid, char **temp) {
     t_pid *newpid = (t_pid*)malloc(sizeof(t_pid));
     int i = 0;
+    char **split = NULL;
 
     while (temp[i])
         i++;
     newpid->name_of_pid = (char**)malloc(sizeof(char*) * i + 1);
-    for (i = 0; temp[i]; i++) {
+    i = 0;
+    split = mx_strsplit(temp[i], '/');
+    newpid->name_of_pid[i] = mx_strdup(split[mx_strlen_for_2star(split) - 1]);
+    mx_del_strarr(&split);
+    for (i = 1; temp[i]; i++)
         newpid->name_of_pid[i] = mx_strdup(temp[i]);
-    }
+    mx_printstr("\n");
     newpid->name_of_pid[i] = NULL;
     newpid->npid = chpid; 
     newpid->next = NULL;

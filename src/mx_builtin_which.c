@@ -1,5 +1,5 @@
 #include "../inc/ush.h"
-// A LOT OF LINES
+
 static void print_not_found(char *arr, t_trig *trig) {
     mx_printerr(arr);
     mx_printerr(" not found\n");
@@ -29,6 +29,12 @@ static bool look_in_path(t_trig *trig, char **ways, char *arr, bool *flag) {
     return a;
 }
 
+static void printerr_4_flag_pars(char *arr, int j) {
+    mx_printerr("which: bad option: -");
+    write(2, &arr[j], 1);
+    mx_printerr("\n");
+}
+
 static int flag_parser(char **arr, t_trig *trig, bool *flag) {
     int i = 1;
 
@@ -40,9 +46,7 @@ static int flag_parser(char **arr, t_trig *trig, bool *flag) {
                 else if (arr[i][j] == 's')
                     flag[1] = 1;
                 else {
-                    mx_printerr("which: bad option: -");
-                    write(2, &arr[i][j], 1);
-                    mx_printerr("\n");
+                    printerr_4_flag_pars(arr[i], j);
                     trig->err = 1;
                 }
             }

@@ -72,6 +72,19 @@ typedef struct s_echo{
     bool E;
 }              t_echo;
 
+typedef struct s_fg {
+    bool str;
+    bool num;
+    bool cont;
+}              t_fg;
+
+typedef struct s_cd{
+    bool stop;
+    bool back;
+    bool s;
+    bool P;
+}              t_cd;
+
 int main(int argc, char **argv);
 char *mx_wait_line(void);
 char **mx_str_split(char *line);
@@ -111,16 +124,29 @@ int mx_strlen_for_2star(char **env);
 void mx_builtins(char **arr, t_trig *trig, t_var **list);
 void mx_builtin_env(char **env);
 void mx_builtin_export(char **arr, char **env, t_var **list);
-void mx_builtin_cd(char **arr, t_trig *trig);
-void mx_builtin_pwd(char **arr, t_trig *trig);
 
+void mx_builtin_cd(char **arr, t_trig *trig);
+int mx_parser_4_cd(char **arr, t_trig *trig, t_cd *cd);
+char *mx_part1_4_cd(char **arr, t_trig *trig, t_cd *cd, int i);
+void mx_cd_back(t_trig *trig);
+void mx_cd_s(char *path, t_trig *trig);
+void mx_cd_P(char *path, t_trig *trig);
+
+void mx_builtin_pwd(char **arr, t_trig *trig);
 void mx_builtin_echo(char **arr, char *origin);
 int mx_parser_4_echo(char **arr, t_echo *echo);
 bool mx_check_for_echoE(char *arr);
 void mx_echo_func_for_slesh(char *str, int j);
 
-void mx_builtin_unset(char **name, t_var **list);
 void mx_builtin_fg(char **arr, t_trig *trig);
+void mx_pid_pop_front(t_pid **head);
+void mx_parsing_4_fg(char *res, t_fg *fg);
+int mx_check_list_4_fg(char *res, t_pid **ppids, t_fg *fg);
+void mx_printname_4_fg(t_pid *ppids);
+bool mx_kill_4_fg(t_pid *ppids, t_trig **trig, t_fg *fg, int j);
+
+void mx_builtin_exit(char **arr, t_trig *trig);
+void mx_builtin_unset(char **name, t_var **list);
 void mx_builtin_true(t_trig *trig);
 void mx_builtin_false(t_trig *trig);
 void mx_notbuiltin(char **arr, t_trig *trig, char **environ);

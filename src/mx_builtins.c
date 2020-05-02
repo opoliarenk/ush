@@ -14,11 +14,10 @@ void mx_builtins(char **arr, t_trig *trig, t_var **list) {
     signal(SIGINT, sigcatch);
     signal(SIGTTOU, SIG_IGN);
     signal(SIGTTIN, SIG_IGN);
-    //signal(SIGSEGV, SIG_IGN);
-    if (strcmp(arr[0], "exit") == 0) {
-        trig->exit = 0;
-        trig->err = mx_atoi(arr[1]);
-    } else if (strcmp(arr[0], "env") == 0)
+    signal(SIGSEGV, sigcatch);
+    if (strcmp(arr[0], "exit") == 0)
+        mx_builtin_exit(arr, trig); 
+    else if (strcmp(arr[0], "env") == 0)
         mx_builtin_env(environ);
     else if (strcmp(arr[0], "export") == 0)
         mx_builtin_export(arr, environ, list);
@@ -33,7 +32,7 @@ void mx_builtins(char **arr, t_trig *trig, t_var **list) {
     else if (strcmp(arr[0], "which") == 0)
         mx_builtin_which(arr, trig);
     else if (strcmp(arr[0], "fg") == 0)
-        mx_builtin_fg(arr, trig);//mx_test
+        mx_builtin_fg(arr, trig);
     else if (strcmp(arr[0], "true") == 0)
         mx_builtin_true(trig);
     else if (strcmp(arr[0], "false") == 0)

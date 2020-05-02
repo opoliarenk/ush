@@ -21,10 +21,9 @@ static int variable_list_len(t_var **head) {
     return len;
 }
 
-static void pop_specific(t_var **list, int index) {
+static void pop_specific(t_var **list, int index, int size) {
     t_var *buf = *list;
     t_var *temp = NULL;
-    int size = variable_list_len(list);
 
     if ((*list != NULL) && (list != NULL)) {
         if (size - 1 >= index) {
@@ -49,6 +48,7 @@ void mx_builtin_unset(char **name, t_var **list) {
 	int index = 0;
 	int i = 1;
 	t_var *p = *list;
+	int size = variable_list_len(list);
 
 	t_var *buf1 = *list;
 	mx_printstr("\nXXXXXXXXXXXDOXXXXXXXXXXXX\n");
@@ -65,7 +65,7 @@ void mx_builtin_unset(char **name, t_var **list) {
 		unsetenv(name[i]);
 		while (p) {
 			if (mx_strcmp(p->name_of_data, name[i]) == 0)
-				pop_specific(list, index);
+				pop_specific(list, index, size);
 			p = p->next;
 			index++;
 		}

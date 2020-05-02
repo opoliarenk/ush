@@ -18,8 +18,8 @@ int main() {
     trig->err = 0;
     trig->PWD = (char *)malloc(50 * sizeof(char));
     trig->OLDPWD = (char *)malloc(50 * sizeof(char));
-    trig->OLDPWD = getenv("HOME");
-    trig->PWD = getenv("HOME");
+    trig->OLDPWD = getenv("PWD");
+    trig->PWD = getenv("PWD");
     trig->pids = NULL;
     //
     mx_check_input(trig, list);

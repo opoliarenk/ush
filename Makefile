@@ -10,14 +10,25 @@ FILES = main \
 	mx_builtin_env \
 	mx_builtin_export \
 	mx_builtin_cd \
+	mx_parser_4_cd \
+	mx_part1_4_cd \
+	mx_cd_back \
+	mx_cd_s \
+	mx_cd_P \
 	mx_builtin_pwd \
 	mx_builtin_echo \
 	mx_parser_4_echo \
 	mx_check_for_echoE \
 	mx_echo_func_for_slesh \
+	mx_builtin_exit \
 	mx_builtin_unset \
 	mx_builtin_which \
 	mx_builtin_fg \
+	mx_pid_pop_front \
+	mx_parsing_4_fg \
+	mx_check_list_4_fg \
+	mx_printname_4_fg \
+	mx_kill_4_fg \
 	mx_is_built_in \
 	mx_is_command \
 	mx_is_slash \

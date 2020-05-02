@@ -56,7 +56,7 @@ static int var_replac(t_var **list, char **temp) {
             i++;
             if ((*temp)[i] == '{') //ubrat esli chto
                 i++;
-            while ((*temp)[i] && ((*temp)[i] != ' ' && (*temp)[i] != '$' && (*temp)[i] != '\"' && (*temp)[i] != '}')) { 
+            while ((*temp)[i] && ((*temp)[i] != ' ' && (*temp)[i] != '$' && (*temp)[i] != '`' && (*temp)[i] != ')' && (*temp)[i] != '\"' && (*temp)[i] != '}')) { 
                 j++;
                 i++;
             }
@@ -70,7 +70,7 @@ static int var_replac(t_var **list, char **temp) {
             i++;
             if ((*temp)[i] == '{') //ubrat esli chto
                 i++;
-            while ((*temp)[i] && ((*temp)[i] != ' ' && (*temp)[i] != '$' && (*temp)[i] != '\"' && (*temp)[i] != '}')) {
+            while ((*temp)[i] && ((*temp)[i] != ' ' && (*temp)[i] != '$' && (*temp)[i] != '`' && (*temp)[i] != ')' && (*temp)[i] != '\"' && (*temp)[i] != '}')) {
                 buff_n[j] = (*temp)[i];
                 j++;
                 i++;

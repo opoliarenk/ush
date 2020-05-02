@@ -6,6 +6,18 @@ static void sigcatch(int sig) {
     mx_printchar(10);
 }
 
+static void making_err(t_trig *trig, t_var **list) { //$?
+    t_var *newl = *list;
+    while (newl) {
+        if (strcmp(newl->name_of_data, "?") == 0) {
+            free(newl->data);
+            newl->data = strdup(mx_itoa(trig->err));
+            break;
+        }
+        newl = newl->next;
+    }
+}
+
 void mx_builtins(char **arr, t_trig *trig, t_var **list) {
     extern char **environ;
     
@@ -39,4 +51,5 @@ void mx_builtins(char **arr, t_trig *trig, t_var **list) {
         mx_builtin_false(trig);
     else
         mx_notbuiltin(arr, trig, environ);
+    making_err(trig, list);
 }

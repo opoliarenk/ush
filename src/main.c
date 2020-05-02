@@ -12,7 +12,10 @@ int main() {
     tcgetattr(0, &tty);
     //lena
     //lesha
-    t_var *list = NULL;
+    t_var *list = (t_var *) malloc (sizeof(t_var));
+    list->data = mx_strdup("0");
+    list->name_of_data = "?";
+    list->next = NULL;
     //lesha
     trig->exit = true;
     trig->err = 0;

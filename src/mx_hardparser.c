@@ -32,16 +32,16 @@ int mx_hardparser(char *line, t_trig *trig, t_var **list) {
     mx_v_out(mass, list);
     subst(&mass, trig, list);
     status_of_work = built_done(mass, trig, list);
-                   mx_printstr("-------------\n");
-    int i = 0;
-    while (mass[i]) {
-        mx_printstr(mass[i]);
-        mx_printchar('\n');
-        i++;
-    }
-    mx_printstr("-------------\n");
+    //                mx_printstr("-------------\n");
+    // int i = 0;
+    // while (mass[i]) {
+    //     mx_printstr(mass[i]);
+    //     mx_printchar('\n');
+    //     i++;
+    // }
+    // mx_printstr("-------------\n");
     free(newl);
-    mx_del_strarr(&mass);
+    //mx_del_strarr(&mass);
     free(cuts);
     return status_of_work; 
 }

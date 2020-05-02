@@ -14,7 +14,6 @@ static t_pid *listcreat(pid_t chpid, char **temp) {
     mx_del_strarr(&split);
     for (i = 1; temp[i]; i++)
         newpid->name_of_pid[i] = mx_strdup(temp[i]);
-    mx_printstr("\n");
     newpid->name_of_pid[i] = NULL;
     newpid->npid = chpid; 
     newpid->next = NULL;
@@ -38,7 +37,7 @@ static int exework(char **temp, char **environ, t_trig *trig) {
     int status;
     pid_t pid = fork();
     int status_err = 1;
-    
+
     if (pid == 0) {
         if (execve(temp[0], temp, environ) == -1)
             mx_unknown(temp);

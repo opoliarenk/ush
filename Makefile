@@ -73,6 +73,14 @@ FILES = main \
 	mx_checkout_char \
 	mx_push_history \
 	mx_if_P \
+	mx_cmdand \
+	mx_andor_input \
+	mx_cmdor \
+	mx_wspace \
+	mx_clear_view \
+	mx_not_a_char \
+	mx_del \
+	mx_if_notch \
 
 SRC_PREFFIX = $(addprefix src/, $(FILES))
 

@@ -39,10 +39,19 @@ static char **split(char *line, int count) {
 static int count_of_or(char *line) {
     int len = strlen(line);
     int count = 0;
+    struct termios tty;
 
     for (int i = 0; i < len - 1; i++) {
-        if (line[i] == '|' && line[i + 1] == '|')
+        if (line[i] == '|' && line[i + 1] == '|' && mx_wspace(&line[i + 2]))
             count++;
+        else if (line[i] == '|' && line[i + 1] == '|'
+                 && !mx_wspace(&line[i + 2])) {
+            count++;
+            tcgetattr(0, &tty);
+            mx_canon_off();
+            mx_cmdor(line);
+            tcsetattr(0, TCSAFLUSH, &tty);
+        }
     }
     return count;
 }

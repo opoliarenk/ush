@@ -1,29 +1,39 @@
 #include "../inc/ush.h"
 
+static void help_d(char **mass, t_trig *trig, t_var *list) {
+    int i = 0;
+
+    if (mass && mass[0]) {
+        while(mass[i]) {
+            mx_logic(mass[i], trig, &list);
+            i++;
+        }
+    }
+}
+
+static void all_free(char **mass, char *buff) {
+    mx_del_strarr(&mass);
+    mx_strdel(&buff);
+}
+
 void mx_check_input(t_trig *trig, t_var *list) {
     char *buff = NULL;
-    char **mass;
+    char **mass = NULL;
     size_t linecap = 0;
-    ssize_t linelen = 0;
-    int i = 0;
+    ssize_t lenght = 0;
 
     if (!isatty(STDIN_FILENO)) {
         buff = mx_strnew(ARG_MAX + 1);
-        while ((linelen = getline(&buff, &linecap, stdin)) > 0) {
-            buff[linelen] = '\0';
-            if (buff[linelen - 1] == '\n')
-                buff[linelen - 1] = '\0';
+        while ((lenght = getline(&buff, &linecap, stdin)) > 0) {
+            buff[lenght] = '\0';
+            if (buff[lenght - 1] == '\n')
+                buff[lenght - 1] = '\0';
             if (mx_check_echo(buff)) {
                 mass = mx_connectors(buff);
-                if (mass && mass[0]) {
-                    while(mass[i]) {
-                        mx_logic(mass[i], trig, &list);
-                        i++;
-                    }
-                    i = 0;
-                }
+                help_d(mass, trig, list);
             }
             exit(trig->err);
         }
+        all_free(mass, buff);
     }
 }

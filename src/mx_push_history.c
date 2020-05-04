@@ -4,6 +4,7 @@ void mx_push_history(t_input *input) {
     if (strcmp(input->history_head->data, input->history_tmp->data))
         strcpy(input->history_head->data, input->history_tmp->data);
     input->history_next = (t_history_list *)malloc(sizeof(t_history_list));
+
     input->history_prev = input->history_head->next;
     input->history_head->next = input->history_next;
     strcpy(input->history_next->data, input->history_head->data);

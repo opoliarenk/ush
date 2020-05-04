@@ -52,11 +52,8 @@ typedef struct s_input {
     t_history_list *history_next;
     t_history_list *history_prev;
     t_history_list *history_tmp;
-    char head_line[ARG_MAX + 1];
-    char line[ARG_MAX + 1];
     unsigned int index;
     unsigned int cursor;
-    unsigned int try;
 } 			   t_input;
 
 typedef struct s_var {
@@ -178,15 +175,23 @@ bool mx_is_slash(char *path);
 bool mx_is_command(char *path, bool *flag, int index);
 char *mx_strjoin_free(char *s1, const char *s2);
 
-char *mx_input(t_input *input);
-void mx_move_cursor(t_input *input);
-void mx_canon_off(void);
-void mx_unknown(char **temp);
-int mx_check_echo(char *line);
-void mx_check_input(t_trig *trig, t_var *list);
-int mx_history(t_input *input);
-bool mx_checkout_char(t_input *input);
-void mx_push_history(t_input *input);
+char *mx_input(t_input *input); //auditor
+void mx_move_cursor(t_input *input); //auditor_leaks
+void mx_canon_off(void); //auditor_leaks
+void mx_unknown(char **temp); //auditor_leaks
+int mx_check_echo(char *line); //auditor_leaks
+void mx_check_input(t_trig *trig, t_var *list); //auditor_leaks
+int mx_history(t_input *input); //auditor_leaks
+bool mx_checkout_char(t_input *input); //auditor_leaks
+void mx_push_history(t_input *input); //auditor
+void mx_cmdand(char *line); //auditor
+bool mx_andor_input(t_input *input); //auditor_leaks
+void mx_cmdor(char *line); //auditor_leaks
+int mx_wspace(char *line); //auditor_leaks
+void mx_clear_view(t_input *input, int count); //auditor_leaks
+bool mx_not_a_char(t_input *input); //auditor_leaks
+bool mx_del(t_input *input); //auditor_leaks
+bool mx_if_notch(t_input *input); //auditor_leaks
 
 void mx_pop_specific_4_pids(t_pid **list, int index);
 

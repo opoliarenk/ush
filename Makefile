@@ -74,6 +74,11 @@ FILES = main \
 	mx_checkout_char \
 	mx_push_history \
 	mx_if_P \
+	mx_env_i \
+	mx_mallocing_new \
+	mx_env_u \
+	mx_env_P \
+	mx_env_not \
 
 SRC_PREFFIX = $(addprefix src/, $(FILES))
 

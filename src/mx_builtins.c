@@ -1,13 +1,14 @@
 #include "../inc/ush.h"
 
-static void sigcatch(int sig) {
-    mx_printstr("\nsig catch ");
-    mx_printint(sig);
-    mx_printchar(10);
-}
+// static void sigcatch(int sig) {
+//     mx_printstr("\nsig catch ");
+//     mx_printint(sig);
+//     mx_printchar(10);
+// }
 
 static void making_err(t_trig *trig, t_var **list) { //$?
     t_var *newl = *list;
+
     while (newl) {
         if (strcmp(newl->name_of_data, "?") == 0) {
             free(newl->data);
@@ -22,11 +23,11 @@ void mx_builtins(char **arr, t_trig *trig, t_var **list) {
     extern char **environ;
     
     trig->err = 0;
-    signal(SIGTSTP, sigcatch);
-    signal(SIGINT, sigcatch);
-    signal(SIGTTOU, SIG_IGN);
-    signal(SIGTTIN, SIG_IGN);
-    signal(SIGSEGV, sigcatch);
+    //signal(SIGTSTP, sigcatch);
+    //signal(SIGINT, sigcatch);
+    // signal(SIGTTOU, SIG_IGN);
+    // signal(SIGTTIN, SIG_IGN);
+    //signal(SIGSEGV, sigcatch);
     if (strcmp(arr[0], "exit") == 0)
         mx_builtin_exit(arr, trig); 
     else if (strcmp(arr[0], "env") == 0)

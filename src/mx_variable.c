@@ -50,6 +50,9 @@ static void varcheck(const char *str, t_var **list) {
 }
 
 void mx_variable(char **mass, t_var **list) {
-    for (int i = 0; mass[i] != NULL; i++)
+    for (int i = 0; mass[i] != NULL; i++) {
+        if (strstr(mass[i],"=") == NULL)
+            break;
         varcheck(mass[i], list);
+    }
 }   

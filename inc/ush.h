@@ -137,6 +137,11 @@ char *mx_if_P(t_trig *trig, char **arr);
 int mx_strlen_for_2star(char **env);
 void mx_builtins(char **arr, t_trig *trig, t_var **list);
 void mx_builtin_env(char **environ, char **arr, t_trig *trig);
+void mx_env_i(char **mass, t_trig *trig);
+void mx_env_u(char **mass, t_trig *trig, char **environ);
+void mx_env_P(char **mass, t_trig *trig, char **environ);
+void mx_env_not(char **arr, t_trig *trig, char **environ);
+char **mx_mallocing_new(char **mass);
 void mx_builtin_export(char **arr, char **env, t_var **list);
 
 void mx_builtin_cd(char **arr, t_trig *trig);

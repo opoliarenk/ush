@@ -33,6 +33,18 @@ static void push_back(pid_t chpid, char **temp, t_trig *trig) {
     buff->next = newpid;
 }
 
+static void unknown(char *temp) {
+    char *buff = NULL;
+    int i;
+
+    for (i = strlen(temp) - 1; temp[i] != '/' && i >= 0; i--);
+    buff = mx_strdup(&temp[i + 1]);
+    mx_printerr("env: ");
+    mx_printerr(buff);
+    mx_printerr(": No such file or directory\n");
+    free(buff);
+}
+
 static int exework(char **temp, char **environ, t_trig *trig) {
     int status;
     pid_t pid = fork();
@@ -40,8 +52,8 @@ static int exework(char **temp, char **environ, t_trig *trig) {
 
     if (pid == 0) {
         if (execve(temp[0], temp, environ) == -1) {
-            mx_unknown(temp);
-            exit(0);
+            unknown(temp[0]);
+            exit(1);
         }
     }
     else {
@@ -56,11 +68,11 @@ static int exework(char **temp, char **environ, t_trig *trig) {
     return status_err;
 }
 
-void mx_notbuiltin(char **arr, t_trig *trig, char **environ) {
+void mx_env_not(char **arr, t_trig *trig, char **environ) {
     char *buff = mx_if_P(trig, arr);
     char **temp = NULL;
     int i = 0;
-
+    
     if (buff == NULL) 
         return ;
     for (i = 0; arr[i] != NULL; i++);

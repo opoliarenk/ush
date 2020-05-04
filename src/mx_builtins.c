@@ -1,11 +1,5 @@
 #include "../inc/ush.h"
 
-// static void sigcatch(int sig) {
-//     mx_printstr("\nsig catch ");
-//     mx_printint(sig);
-//     mx_printchar(10);
-// }
-
 static void making_err(t_trig *trig, t_var **list) { //$?
     t_var *newl = *list;
 
@@ -19,15 +13,7 @@ static void making_err(t_trig *trig, t_var **list) { //$?
     }
 }
 
-void mx_builtins(char **arr, t_trig *trig, t_var **list) {
-    extern char **environ;
-    
-    trig->err = 0;
-    //signal(SIGTSTP, sigcatch);
-    //signal(SIGINT, sigcatch);
-    // signal(SIGTTOU, SIG_IGN);
-    // signal(SIGTTIN, SIG_IGN);
-    //signal(SIGSEGV, sigcatch);
+static bool part1(char **arr, t_trig *trig, t_var **list, char **environ) {
     if (strcmp(arr[0], "exit") == 0)
         mx_builtin_exit(arr, trig); 
     else if (strcmp(arr[0], "env") == 0)
@@ -40,7 +26,13 @@ void mx_builtins(char **arr, t_trig *trig, t_var **list) {
         mx_builtin_pwd(arr, trig);
     else if (strcmp(arr[0], "echo") == 0)
         mx_builtin_echo(arr, trig->linput);
-    else if (strcmp(arr[0], "unset") == 0)
+    else
+        return false;
+    return true;
+}
+
+static bool part2(char **arr, t_trig *trig, t_var **list) {
+    if (strcmp(arr[0], "unset") == 0)
         mx_builtin_unset(arr, list);
     else if (strcmp(arr[0], "which") == 0)
         mx_builtin_which(arr, trig);
@@ -51,6 +43,16 @@ void mx_builtins(char **arr, t_trig *trig, t_var **list) {
     else if (strcmp(arr[0], "false") == 0)
         mx_builtin_false(trig);
     else
+        return false;
+    return true;
+}
+
+void mx_builtins(char **arr, t_trig *trig, t_var **list) {
+    extern char **environ;
+    
+    trig->err = 0;
+    mx_signals();
+    if (!part1(arr, trig, list, environ) && !part2(arr, trig, list))
         mx_notbuiltin(arr, trig, environ);
     making_err(trig, list);
 }

@@ -87,6 +87,7 @@ FILES = main \
 	mx_not_a_char \
 	mx_del \
 	mx_if_notch \
+	mx_signals \
 
 
 SRC_PREFFIX = $(addprefix src/, $(FILES))

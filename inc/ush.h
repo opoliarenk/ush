@@ -194,5 +194,6 @@ bool mx_del(t_input *input); //auditor_leaks
 bool mx_if_notch(t_input *input); //auditor_leaks
 
 void mx_pop_specific_4_pids(t_pid **list, int index);
+void mx_signals();
 
 #endif

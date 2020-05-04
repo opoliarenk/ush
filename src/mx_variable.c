@@ -52,4 +52,4 @@ static void varcheck(const char *str, t_var **list) {
 void mx_variable(char **mass, t_var **list) {
     for (int i = 0; mass[i] != NULL; i++)
         varcheck(mass[i], list);
-}   
+}

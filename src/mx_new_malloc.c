@@ -152,7 +152,7 @@ void mx_new_malloc(char **mass, char *line) {
                         j++;
                         i++;
                         break;
-                    }
+                    } 
                     j++;
                     i++;
                 }

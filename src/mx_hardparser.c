@@ -10,9 +10,12 @@ static int built_done(char **mass, t_trig *trig, t_var **list) {
     return status_of_work;
 }
 
-static void subst(char ***mass, t_trig *trig, t_var **list) {
+static void subst(char ***mass, t_trig *trig, t_var **list, char *newl) {
     char **new = NULL;
 
+    for (int i = 0; newl[i]; i++)
+        if (newl[i] == '\\' && newl[i + 1] == '`')
+            return ;
     if ((new = mx_sub(*mass, trig, list)) != NULL) {
         mx_del_strarr(mass);
         (*mass) = new;
@@ -22,15 +25,24 @@ static void subst(char ***mass, t_trig *trig, t_var **list) {
 int mx_hardparser(char *line, t_trig *trig, t_var **list) {
     char *cuts = mx_cut_spaces(line);
     char *newl = mx_hardsplit(cuts);
-    char **mass = mx_delim_space(newl);
+    char **mass = NULL;
     int status_of_work = 1;
+
+    mx_pre_substr(&newl);
+    mass = mx_delim_space(newl);
+
+    int z = 0;
+    while (mass[z]) {
+        mx_printstr(mass[z++]);
+        mx_printchar('\n');
+    }
 
     if (mx_mt(&mass) == 1)
         return status_of_work;
     trig->linput = mx_strdup(cuts);
     mx_variable(mass, list);
     mx_v_out(mass, list);
-    subst(&mass, trig, list);
+    subst(&mass, trig, list, newl);
     status_of_work = built_done(mass, trig, list);
     free(newl);
     //if (mass[0] != NULL)

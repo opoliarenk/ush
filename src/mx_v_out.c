@@ -1,24 +1,34 @@
 #include "../inc/ush.h"
 
-static char *join_search(char *buff_n, char **temp) {
+static int is_one(char **temp) {
     int one = 0;
-    char *tmp = NULL;
-    char *bn = NULL;
 
     for (int i = 0; (*temp)[i] != '\0'; i++) {
         if ((*temp)[i] == '$' && (*temp)[i + 1] == '{') {
             one = 0;
             break;
-        } else if ((*temp)[i] == '$' && (*temp)[i + 1] != '{') {
+        } 
+        else if ((*temp)[i] == '$' && (*temp)[i + 1] != '{') {
             one = 1; 
             break;
         }
-    }
+    }  
+    return one; 
+}
+
+static char *join_search(char *buff_n, char **temp) {
+    int one = 0;
+    char *tmp = NULL;
+    char *bn = NULL;
+
+    one = is_one(temp);
     if (one == 1) {
         bn = mx_strjoin("$", buff_n); 
-    } else {
+    } 
+    else {
         tmp = mx_strjoin("${", buff_n);
         bn = mx_strjoin(tmp, "}");
+        free(tmp);
     }
     return bn;
 }
@@ -47,37 +57,11 @@ static void search_list(char *buff_n, t_var **list, char **temp) {
 }
 
 static int var_replac(t_var **list, char **temp) {
-    int len = strlen(*temp);
     char *buff_n = NULL;
-    int j = 0;
+    int j = mx_var_rep_count(temp);
 
-    for (int i = 0; i < len; i++) {
-        if ((*temp)[i] == '$') {
-            i++;
-            if ((*temp)[i] == '{') //ubrat esli chto
-                i++;
-            while ((*temp)[i] && ((*temp)[i] != ' ' && (*temp)[i] != '$' && (*temp)[i] != '`' && (*temp)[i] != ')' && (*temp)[i] != '\"' && (*temp)[i] != '}')) { 
-                j++;
-                i++;
-            }
-            break;
-        }
-    }
     buff_n = mx_strnew(j);
-    j = 0;
-    for (int i = 0; i < len; i++) {
-        if ((*temp)[i] == '$') {
-            i++;
-            if ((*temp)[i] == '{') //ubrat esli chto
-                i++;
-            while ((*temp)[i] && ((*temp)[i] != ' ' && (*temp)[i] != '$' && (*temp)[i] != '`' && (*temp)[i] != ')' && (*temp)[i] != '\"' && (*temp)[i] != '}')) {
-                buff_n[j] = (*temp)[i];
-                j++;
-                i++;
-            }
-            break;
-        }
-    }
+    mx_var_rep_crt(temp, &buff_n);
     search_list(buff_n, list, temp);
     return 0;
 }
@@ -95,21 +79,8 @@ void mx_v_out(char **mass, t_var **list) {
             }
             if (mass[i][j] == '$') {
                 chang = var_replac(list, &mass[i]);
-                //break;
             }
         }
     }  
-    for (int i = 0; mass[i] != NULL; i++) {
-        for (int j = 0; mass[i][j] != '\0'; j++) {
-            if (mass[i][j] == '\'')
-                break;
-            if (mass[i][j] == '\"')
-                break;
-            if (chang == 0 && mass[i][j] == '=' && mass[i][j + 1] != '\'') {
-                mx_variable(mass, list);
-                break;
-            }
-
-        }
-    }
+    mx_an_var(mass, chang, list);
 }

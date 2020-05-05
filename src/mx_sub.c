@@ -100,7 +100,8 @@ char **mx_sub(char **mass, t_trig *trig, t_var **list) {
     char **news = NULL;
 
     for (int i = 0; mass[i]; i++) {
-        if ((strstr(mass[i], "$(") != NULL || strstr(mass[i], "`") != NULL) && mass[i][0] != '\'') { // ubrat ili
+        if ((strstr(mass[i], "$(") != NULL || strstr(mass[i], "`") != NULL) 
+            && mass[i][0] != '\'') { 
             creat_pars(&mass[i], trig, list);
             news = mx_end_sub(mass, mass[i]); 
              if ((buff_mass = mx_sub(news, trig, list)) == NULL) {

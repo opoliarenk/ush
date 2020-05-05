@@ -43,66 +43,17 @@ static char *hash (char *line) { // for the hash, when they comment something
 
 char *mx_hardsplit(char *line) {
     int i;
-    int j = 0;
+    //int j = 0;
     char *new = NULL;
     int k = 0;
-    int flag = 0;
+    //int flag = 0;
     char *newww = hash(line);
     
     if ( newww != NULL) {
         //free(line);
         line = mx_strdup(newww);
     }//LEAKS
-    
-    for (i = 0; line[i] != '\0'; i++) {
-        if (i != 0) {
-            if (line[i] == '\'' && line[i - 1] != '\\') {
-                i++;
-                while (line[i] != '\'')
-                    i++;
-            } 
-            else if (line[i] == '\"' && line[i - 1] != '\\') {
-                i++;
-                while (line[i] != '\"') {
-                    if (line[i] == '\\')
-                        i += 2;
-                    else 
-                        i++;
-                }
-            }
-            if (line[i] == '2' && line[i + 1] == '>' && line[i - 1] == ' ') {
-                 j+=2;
-                 i++;
-                 continue;
-             }
-            if (line[i] == '>' || line[i] == '<')  //|| line[i] == '(' || line[i] == ')' || line[i] == '`'
-                j += 2;
-        } else {
-            if (line[i] == '\"') {
-                i++;
-                while (line[i] != '\"') {
-                    if (line[i] == '\\')
-                        i += 2;
-                    else 
-                        i++;
-                }
-            }
-            else if (line[i] == '\'') {
-                i++;
-                while(line[i] != '\'')
-                    i++;
-            }
-            if (line[i] == '2' && line[i + 1] == '>') {
-                 j+=2;
-                 i++;
-                 continue;
-             }
-            if (line[i] == '>' || line[i] == '<')  //|| line[i] == '(' || line[i] == ')' || line[i] == '`' 
-                j += 2;
-        }
-    }
-    i = i + j;
-    flag = 0;
+    i = mx_hspl_count(line);
     new = mx_strnew(i);
     for (int q = 0; q < i; q++) {
         if (k != 0) {
@@ -158,7 +109,7 @@ char *mx_hardsplit(char *line) {
                 continue;
             }     
         }
-        if (line[k] == '>' || line[k] == '<') {  //line[k] == '(' || line[k] == ')' || line[k] == '`' || 
+        if (line[k] == '>' || line[k] == '<') {  
             new[q++] = ' ';
             new[q++] = line[k];
             new[q] = ' ';

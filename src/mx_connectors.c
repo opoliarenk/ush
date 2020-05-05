@@ -40,12 +40,12 @@ static char **split(char *line, int count) {
     auditor_1(line, arr);
     for (int i = 0; i < mx_strlen(line); i++) {
         if (line[i] == ';' && (j_k_h[2] = while_space(line, i)) != i) {
-            i = j_k_h[2];//h
+            i = j_k_h[2];
         }
-        else if (line[i] == ';' && j_k_h[1] != 0) { //k
-            arr[j_k_h[0]][j_k_h[1]] = '\0';//j k
-            j_k_h[0]++; //j
-            j_k_h[1] = 0;//k
+        else if (line[i] == ';' && j_k_h[1] != 0) { 
+            arr[j_k_h[0]][j_k_h[1]] = '\0';
+            j_k_h[0]++; 
+            j_k_h[1] = 0;
         }
         else if (line[i] != ';') {
             arr[j_k_h[0]][j_k_h[1]] = line[i];

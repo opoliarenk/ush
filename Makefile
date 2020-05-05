@@ -88,6 +88,10 @@ FILES = main \
 	mx_del \
 	mx_if_notch \
 	mx_signals \
+	mx_var_rep_count \
+	mx_var_rep_crt \
+	mx_an_var \
+	mx_hspl_count \
 
 
 SRC_PREFFIX = $(addprefix src/, $(FILES))

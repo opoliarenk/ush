@@ -93,7 +93,10 @@ FILES = main \
 	mx_var_rep_crt \
 	mx_an_var \
 	mx_hspl_count \
-
+	mx_hspl_cr \
+	mx_hspl_cr1 \
+	mx_hash \
+	mx_pre_substr \
 
 SRC_PREFFIX = $(addprefix src/, $(FILES))
 

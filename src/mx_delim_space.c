@@ -2,126 +2,121 @@
 
 char **mx_delim_space(char *line) {
     char **mass = malloc(sizeof(char*) * mx_countingw(line) + 1);
-    int j = 0;
-    int k = 0;
+    int j_k_c_ko[4] = {0, 0, 0, 0};
     int len = strlen(line);
-    int counter = 0;
-    int kol = 0;
 
     mx_new_malloc(mass, line);
     for (int i = 0; i < len; i++) {
         if (line[i] == '\\' && line[i + 1] == '\\' && mx_check_for_echoE(line) != true) { ///// HEHEHEHEH
             while (line[i] == '\\') {
-                mass[j][k] = line[i];
-                k++;
+                mass[j_k_c_ko[0]][j_k_c_ko[1]] = line[i];
+                j_k_c_ko[1]++;
                 i++;
-                while (counter != 3 && line[i] == '\\') {
-                    counter++;
+                while (j_k_c_ko[2] != 3 && line[i] == '\\') {
+                    j_k_c_ko[2]++;
                     i++;
                 }
-                counter = 0;
+                j_k_c_ko[2] = 0;
             }
         } ///// HEHEHEHEHE
-        if (line[i] == '\\') {
+        if (line[i] == '\\') { 
             i++;
-        }
+        } 
         if (line[i] == '\'') {
-            mass[j][k] = line[i];//del
-            k++;//del
+            mass[j_k_c_ko[0]][j_k_c_ko[1]] = line[i];//del
+            j_k_c_ko[1]++;//del
             i++;
             while (line[i] != '\'') {
                 if (line[i] == '\\' && line[i + 1] == '\\' && mx_check_for_echoE(line) != true) { /////
                     while (line[i] == '\\') {
-                        mass[j][k] = line[i];
-                        k++;
+                        mass[j_k_c_ko[0]][j_k_c_ko[1]] = line[i];
+                        j_k_c_ko[1]++;
                         i++;
-                        while (counter != 1 && line[i] == '\\') {
-                            counter++;
+                        while (j_k_c_ko[2] != 1 && line[i] == '\\') {
+                            j_k_c_ko[2]++;
                             i++;
                         }
-                        counter = 0;
+                        j_k_c_ko[2] = 0;
                     }
                 } /////
                 if (line[i] == '\\' && (line[i + 1] == '\"' || line[i + 1] == '`')) //here
                     i++;
                 if (line[i] == '\'') {
-                    mass[j][k] = line[i];
-                    k++;
+                    mass[j_k_c_ko[0]][j_k_c_ko[1]] = line[i];
+                    j_k_c_ko[1]++;
                     i++;
                     break;
                 }
-                mass[j][k] = line[i];
-                k++;
+                mass[j_k_c_ko[0]][j_k_c_ko[1]] = line[i];
+                j_k_c_ko[1]++;
                 i++;
                 if (line[i + 1] == '\0') {
-                    mass[j][k] = '\0';
+                    mass[j_k_c_ko[0]][j_k_c_ko[1]] = '\0';
                     break;
                 }
             }
         }
         if (line[i] == '`') {
-            mass[j][k] = line[i];//del
-            k++;//del
+            mass[j_k_c_ko[0]][j_k_c_ko[1]] = line[i];//del
+            j_k_c_ko[1]++;//del
             i++;
             while (line[i] != '`') {
                 if (line[i] == '\\' && line[i + 1] == '\\' && mx_check_for_echoE(line) != true) { /////
                     while (line[i] == '\\') {
-                        mass[j][k] = line[i];
-                        k++;
+                        mass[j_k_c_ko[0]][j_k_c_ko[1]] = line[i];
+                        j_k_c_ko[1]++;
                         i++;
-                        while (counter != 1 && line[i] == '\\') {
-                            counter++;
+                        while (j_k_c_ko[2] != 1 && line[i] == '\\') {
+                            j_k_c_ko[2]++;
                             i++;
                         }
-                        counter = 0;
+                        j_k_c_ko[2] = 0;
                     }
-                } /////
-                // if (line[i] == '\\' && (line[i + 1] == '\"' || line[i + 1] == '`')) //here
-                //     i++;
+                } 
                 if (line[i] == '`') {
-                    mass[j][k] = line[i];
-                    k++;
+                    mass[j_k_c_ko[0]][j_k_c_ko[1]] = line[i];
+                    j_k_c_ko[1]++;
                     i++;
                     break;
                 }
-                mass[j][k] = line[i];
-                k++;
+                mass[j_k_c_ko[0]][j_k_c_ko[1]] = line[i];
+                j_k_c_ko[1]++;
                 i++;
                 if (line[i + 1] == '\0') {
-                    mass[j][k] = '\0';
+                    mass[j_k_c_ko[0]][j_k_c_ko[1]] = '\0';
                     break;
                 }
             }
         }
         if (line[i] == '$' && line[i + 1] == '(') {
-            mass[j][k] = line[i];//del
-            k++;//del
+            mass[j_k_c_ko[0]][j_k_c_ko[1]] = line[i];//del
+            j_k_c_ko[1]++;//del
             i++;
-            kol++;
-            while(kol != 0) {//line[i] != ')'
+            j_k_c_ko[3]++;
+            while(j_k_c_ko[3] != 0) {//line[i] != ')'
                 if (line[i] == '\\' && line[i + 1] == '\\' && mx_check_for_echoE(line) != true) { /////
                     while (line[i] == '\\') {
-                        mass[j][k] = line[i];
-                        k++;
+                        mass[j_k_c_ko[0]][j_k_c_ko[1]] = line[i];
+                        j_k_c_ko[1]++;
                         i++;
-                        while (counter != 3 && line[i] == '\\') {
-                            counter++;
+                        while (j_k_c_ko[2] != 3 && line[i] == '\\') {
+                            j_k_c_ko[2]++;
                             i++;
                         }
-                        counter = 0;
+                        j_k_c_ko[2] = 0;
                     }
                 } /////
                 else {
                     if (line[i] == '$' && line[i + 1] == '(')
-                        kol++;
+                        j_k_c_ko[3]++;
                     if (line[i] == ')')
-                        kol--;
-                    if (kol == 0 && line[i] == ')') {
-                        mass[j][k] = line[i];
+                        j_k_c_ko[3]--;
+                    if (j_k_c_ko[3] == 0 && line[i] == ')') {
+                        mass[j_k_c_ko[0]][j_k_c_ko[1]] = line[i];
                     }
                     else {
-                        mass[j][k] = line[i];
-                        k++;
+                        mass[j_k_c_ko[0]][j_k_c_ko[1]] = line[i];
+                        j_k_c_ko[1]++;
                         i++;
                     }
                 }
@@ -130,45 +125,45 @@ char **mx_delim_space(char *line) {
             }
         }
         if (line[i] == '\"') {
-            mass[j][k] = line[i];//del
-            k++;//del
+            mass[j_k_c_ko[0]][j_k_c_ko[1]] = line[i];//del
+            j_k_c_ko[1]++;//del
             i++;
             while (line[i] != '\"') { 
                 if (line[i] == '\\' && line[i + 1] == '\\' && mx_check_for_echoE(line) != true) { /////
                     while (line[i] == '\\') {
-                        mass[j][k] = line[i];
-                        k++;
+                        mass[j_k_c_ko[0]][j_k_c_ko[1]] = line[i];
+                        j_k_c_ko[1]++;
                         i++;
-                        while (counter != 3 && line[i] == '\\') {
-                            counter++;
+                        while (j_k_c_ko[2] != 3 && line[i] == '\\') {
+                            j_k_c_ko[2]++;
                             i++;
                         }
-                        counter = 0;
+                        j_k_c_ko[2] = 0;
                     }
                 } /////
                 if (line[i] == '$' && line[i + 1] == '(') {
                     while (line[i] != ')') {
-                        mass[j][k] = line[i];
-                        k++;
+                        mass[j_k_c_ko[0]][j_k_c_ko[1]] = line[i];
+                        j_k_c_ko[1]++;
                         i++;
                     }
                 }
                 if (line[i] == '\"') {
                     break;
                 }
-                if (line[i] == '\\' && (line[i + 1] == '\"' || line[i + 1] == '`')) //here
+                if (line[i] == '\\' && (line[i + 1] == '\"' || line[i + 1] == '`')) 
                     i++;
                 if (!line[i])
                     break;
-                mass[j][k] = line[i];
-                k++;
+                mass[j_k_c_ko[0]][j_k_c_ko[1]] = line[i];
+                j_k_c_ko[1]++;
                 i++;
             }
-            mass[j][k] = line[i];//del
-            k++;//del
-            i++;
+            // mass[j_k_c_ko[0]][j_k_c_ko[1]] = line[i];//del
+            // j_k_c_ko[1]++;//del
+            // i++;
             if (line[i] == '\0') {
-                j++;
+                j_k_c_ko[0]++;
                 break;
             }
         }
@@ -182,17 +177,17 @@ char **mx_delim_space(char *line) {
                 if (line[i + 1] == '\0' && line[i] != ' ' && line[i] != '\t' 
                     && line[i] != '\r' && line[i] != '\n' 
                     && line[i] != '\a') {
-                    mass[j][k] = line[i];
+                    mass[j_k_c_ko[0]][j_k_c_ko[1]] = line[i];
                 }
-                j++;
-                k = 0;
+                j_k_c_ko[0]++;
+                j_k_c_ko[1] = 0;
         }
         else {
-            mass[j][k] = line[i];
-            k++;
+            mass[j_k_c_ko[0]][j_k_c_ko[1]] = line[i];
+            j_k_c_ko[1]++;
         }
     }
-    mass[j] = NULL;
+    mass[j_k_c_ko[0]] = NULL;
     return mass;
 }
 

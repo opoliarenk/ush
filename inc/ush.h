@@ -135,6 +135,10 @@ int mx_var_rep_count(char **temp);
 void mx_var_rep_crt(char **temp, char **buff_n);
 void mx_an_var(char **mass, int chang, t_var **list);
 int mx_hspl_count(char *line);
+void mx_hspl_cr(char *line, char **new, int *q, int *k);
+void mx_hspl_cr1(char *line, char **new, int *k, int *q);
+char *mx_hash(char *line);
+void mx_pre_substr(char **newl);
 
 int mx_strlen_for_2star(char **env);
 void mx_builtins(char **arr, t_trig *trig, t_var **list);

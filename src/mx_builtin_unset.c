@@ -50,17 +50,6 @@ void mx_builtin_unset(char **name, t_var **list) {
 	t_var *p = *list;
 	int size = variable_list_len(list);
 
-	t_var *buf1 = *list;
-	mx_printstr("\nXXXXXXXXXXXDOXXXXXXXXXXXX\n");
-	while (buf1) {
-		mx_printstr(buf1->name_of_data);
-		mx_printstr("=");
-		mx_printstr(buf1->data);
-		mx_printstr("\t");
-		buf1 = buf1->next;
-	}
-	mx_printstr("\nXXXXXXXXXXXXXXXXXXXXXXXXX\n");
-
 	while (name[i]) {
 		unsetenv(name[i]);
 		while (p) {
@@ -73,15 +62,4 @@ void mx_builtin_unset(char **name, t_var **list) {
 		p = *list;
 		i++;
 	}
-
-	t_var *buf2 = *list;
-	mx_printstr("\nXXXXXXXXXXXPOSLEXXXXXXXXX\n");
-	while (buf2) {
-		mx_printstr(buf2->name_of_data);
-		mx_printstr("=");
-		mx_printstr(buf2->data);
-		mx_printstr("\t");
-		buf2 = buf2->next;
-	}
-	mx_printstr("\nXXXXXXXXXXXXXXXXXXXXXXXXX\n");
 }

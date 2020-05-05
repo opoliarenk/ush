@@ -6,7 +6,7 @@ int main() {
     int i = 0;
     t_trig *trig = (t_trig *)malloc(sizeof(t_trig));
     //lena
-    t_input *input = malloc(sizeof(t_input)); //struct for input
+    t_input *input = (t_input *)malloc(sizeof(t_input)); //struct for input
     input->history_head = (t_history_list *)malloc(sizeof(t_history_list));
     struct termios tty;
     tcgetattr(0, &tty);
@@ -47,5 +47,7 @@ int main() {
             }
         }
     }
+    free(input);
+    system("leaks -q ush");
     return trig->err;
 }

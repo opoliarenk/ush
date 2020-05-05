@@ -2,7 +2,7 @@
 
 static void first_step(t_input *input) {
     input->history_tmp = (t_history_list *)malloc(sizeof(t_history_list));
-    input->history_back = (t_history_list *)malloc(sizeof(t_history_list));
+    // input->history_back = (t_history_list *)malloc(sizeof(t_history_list));
 
     input->history_back = input->history_head;
     input->cursor = 0;
@@ -21,5 +21,7 @@ char *mx_input(t_input *input) {
     if (!strlen(input->history_tmp->data))
         return NULL;
     mx_push_history(input);
+    memset(input->history_tmp->data, '\0', sizeof(input->history_tmp->data));
+    free(input->history_tmp);
     return input->history_head->data;
 }

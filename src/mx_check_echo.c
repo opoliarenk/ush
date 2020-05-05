@@ -27,10 +27,11 @@ static int second(char *line, int i) {
 }
 
 int mx_check_echo(char *line) {
-    int i;
+    int i = 0;
 
-    for (i = 0; line[i]; i++) {
-        if (line[i] == '\x22') {
+    while (line[i] && line[i] != '\x22' && line[i] != '\x27')
+        i++;
+    if (line[i] == '\x22') {
             if (!first(line, i))
                 return 0;
         }
@@ -38,6 +39,5 @@ int mx_check_echo(char *line) {
             if (!second(line, i))
                 return 0;
         }
-    }
     return 1;
 }

@@ -23,5 +23,8 @@ void mx_cmdor(char *line) {
         mx_cmdor(line);
     }
     mx_strcat(line, inp->history_tmp->data);
+    memset(inp->history_tmp->data, '\0', sizeof(inp->history_tmp->data));
+    free(inp->history_tmp);
+    free(inp);
     mx_printchar(10);
 }

@@ -12,6 +12,7 @@ void mx_builtin_cd(char **arr, t_trig *trig) {
     char *path;
 
     memset(cd, 0, sizeof(t_cd));
+    trig->is_cdP = 0;
     i = mx_parser_4_cd(arr, trig, cd);
     path = mx_part1_4_cd(arr, trig, cd, i);
     if (!cd->stop) {
@@ -24,4 +25,6 @@ void mx_builtin_cd(char **arr, t_trig *trig) {
         else
             without_flags(path, trig);
     }
+    free(cd);
+    cd = NULL;
 }

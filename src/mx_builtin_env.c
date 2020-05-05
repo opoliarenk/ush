@@ -60,4 +60,6 @@ void mx_builtin_env(char **environ, char **arr, t_trig *trig) {
 	}
 	else
 		print_env(environ);
+	free(env);
+    env = NULL;
 }

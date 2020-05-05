@@ -19,6 +19,7 @@ void print_for_export(char **env) {
 	mx_bubble_sort(dup, len_of_env);
 	for (int i = 0; dup[i]; i++)
 		printf("%s\n", dup[i]);
+	mx_del_strarr(&dup);
 }
 
 void mx_builtin_export(char **arr, char **env, t_var **list) {

@@ -58,18 +58,10 @@ static void part2(char **arr, t_trig *trig, t_pid *ppids, t_fg *fg) {
     }
 }
 
-void test1(t_trig *trig);
-void test2(t_trig *trig);
-
 void mx_builtin_fg(char **arr, t_trig *trig) {
     int i = 1;
     t_pid *ppids = trig->pids;
     t_fg *fg = (t_fg *)malloc(sizeof(t_fg));
-
-    if (arr[1]) {
-        if (strcmp(arr[1], "show") == 0)
-        test1(trig);
-    }
 
     if (arr[i]) {
         memset(fg, 0, sizeof(t_fg));
@@ -80,47 +72,6 @@ void mx_builtin_fg(char **arr, t_trig *trig) {
     }
     else
         bez_umovy(ppids, &trig);
-
-    if (arr[1]) {
-        if (strcmp(arr[1], "show") == 0)
-            test2(trig);
-    }
-}
-
-void test1(t_trig *trig) {
-    int i = 1;
-
-    if (trig->pids != NULL) {
-        t_pid *p1 = trig->pids;
-        mx_printstr("\n----------BULO----------\n");
-        while (p1) {
-            mx_printint(i++);
-            mx_printchar('\t');
-            mx_printstr(p1->name_of_pid[0]);
-            mx_printchar('\t');
-            mx_printint(p1->npid);
-            mx_printchar(10);
-            p1 = p1->next;
-        }
-        mx_printstr("\n------------------------\n");
-    }
-}
-
-void test2(t_trig *trig) {
-    int i = 1;
-
-    if (trig->pids != NULL) {
-        t_pid *p1 = trig->pids;
-        mx_printstr("\n----------STALO----------\n");
-        while (p1) {
-            mx_printint(i++);
-            mx_printchar('\t');
-            mx_printstr(p1->name_of_pid[0]);
-            mx_printchar('\t');
-            mx_printint(p1->npid);
-            mx_printchar(10);
-            p1 = p1->next;
-        }
-        mx_printstr("\n------------------------\n");
-    }
+    free(fg);
+    fg = NULL;
 }

@@ -8,6 +8,7 @@ static void part_for_link(char *path, t_trig *trig)  {
     trig->OLDPWD = trig->PWD;
     trig->PWD = link;
     mx_strdel(&link);
+    trig->is_cdP = 1;
 }
 
 void mx_cd_P(char *path, t_trig *trig) {

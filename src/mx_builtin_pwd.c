@@ -10,7 +10,7 @@ static void part_for_link(char *path)  {
     mx_strdel(&link);
 }
 
-static void print_pwd(char *cwd) {
+static void print_pwd(char *cwd, t_trig *trig) {
     char dir[1024];
 
     if (strcmp(cwd, "..") == 0
@@ -18,8 +18,11 @@ static void print_pwd(char *cwd) {
         getcwd(dir, 1024);
         mx_printstr(dir);
     }
-    else
+    else {
+        if (trig->is_cdP)
+            mx_printstr("/");
         mx_printstr(cwd);
+    }
     mx_printstr("\n");
 }
 
@@ -37,6 +40,8 @@ void mx_builtin_pwd(char **arr, t_trig *trig) {
         if ((lt.st_mode & MX_IFMT) == MX_IFLNK)
             part_for_link(trig->PWD);
         else
-            print_pwd(trig->PWD);
+            print_pwd(trig->PWD, trig);
     }
+    free(pwd);
+    pwd = NULL;
 }

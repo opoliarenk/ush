@@ -21,6 +21,7 @@ FILES = main \
 	mx_parser_4_echo \
 	mx_check_for_echoE \
 	mx_echo_func_for_slesh \
+	mx_del_4_echo \
 	mx_builtin_exit \
 	mx_builtin_unset \
 	mx_builtin_which \

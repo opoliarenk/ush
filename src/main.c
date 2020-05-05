@@ -46,8 +46,9 @@ int main() {
                 }
             }
         }
+        //system("leaks -q ush");
     }
     free(input);
-    system("leaks -q ush");
+    //system("leaks -q ush");
     return trig->err;
 }

@@ -60,7 +60,7 @@ void mx_builtin_echo(char **arr, char *origin) {
         i++;
         point++;
     }
-    mx_del_strarr(&split);
     if (!echo->n)
         mx_printchar(10);
+    mx_del_4_echo(split, &echo);
 }

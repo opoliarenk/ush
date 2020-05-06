@@ -4,7 +4,6 @@ static void first(char *line, int *i) {
     (*i)++;
     for (; line[(*i)] != '\x22'; (*i)++) {
         if (line[(*i)] == '\x5c') {}
-            // (*i)++;
         else {
             dprintf(2, "%c", line[(*i)]);
         }
@@ -15,7 +14,6 @@ static void second(char *line, int *i) {
     (*i)++;
     for (; line[(*i)] != '\x27'; (*i)++) {
         if (line[(*i)] == '\x5c') {}
-            // (*i)++;
         else {
             dprintf(2, "%c", line[(*i)]);
         }

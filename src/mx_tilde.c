@@ -1,18 +1,22 @@
 #include "../inc/ush.h"
 
+static void cycle_cop(int *i, char **buff, char *temp) {
+   while (temp[(*i)] != ' ' && temp[(*i)] != '\t' 
+        && temp[(*i)] != '\r' && temp[(*i)] != '\n' 
+        && temp[(*i)] != '\a') {
+            (*buff)[(*i)] = temp[(*i)];
+            (*i)++;
+            if (temp[(*i)] == '\0')
+                break;
+    } 
+}
+
 static int input(char *buff, char *temp) {
     int i = 0;
     char *is_okey = NULL;
     DIR * dir;
 
-    while (temp[i] != ' ' && temp[i] != '\t' 
-        && temp[i] != '\r' && temp[i] != '\n' 
-        && temp[i] != '\a') {
-            buff[i] = temp[i];
-            i++;
-            if (temp[i] == '\0')
-                break;
-    } 
+    cycle_cop(&i, &buff, temp);
     buff[i] = '\0';
     is_okey = mx_replace_substr(buff, "~", getenv("HOME"));
     dir = opendir(is_okey);
@@ -27,6 +31,17 @@ static int input(char *buff, char *temp) {
     return 0;
 }
 
+static void helper1(int *i, int *size, char *temp) {
+    if (temp[(*i)] != '\0') {
+        while (temp[(*i)] != ' ' && temp[(*i)] != '\t' 
+            && temp[(*i)] != '\r' && temp[(*i)] != '\n' 
+            && temp[(*i)] != '\a' && temp[(*i) + 1] != '\0') {
+                (*size)++;
+                (*i)++;
+        } 
+    }
+}
+
 static int new_line(char *temp) {
     char *buff = NULL;
     int size = 0;
@@ -35,14 +50,7 @@ static int new_line(char *temp) {
         if (temp[i] == '~') {
             size++;
             i++;
-            if (temp[i] != '\0') {
-                while (temp[i] != ' ' && temp[i] != '\t' 
-                && temp[i] != '\r' && temp[i] != '\n' 
-                && temp[i] != '\a' && temp[i + 1] != '\0') {
-                    size++;
-                    i++;
-                } 
-            }
+            helper1(&i, &size, temp);
             buff = mx_strnew(size);
             if (input(buff, temp) == -1)
                 return -1;

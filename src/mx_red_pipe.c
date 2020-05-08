@@ -22,7 +22,7 @@ static int redirectout(char **mass, t_trig *trig, t_var **list) {
     return posi;
 }
 
-static int both(char **mass, t_trig *trig, t_var **list) { // доделать еще 
+static int both(char **mass, t_trig *trig, t_var **list) { 
     int posi = 2;
     int in = 0;
     int out = 0;
@@ -38,7 +38,7 @@ static int both(char **mass, t_trig *trig, t_var **list) { // доделать �
     return posi;
  }
 
-static int err_stream(char **mass, t_trig *trig, t_var **list) { //на поток ошибок 
+static int err_stream(char **mass, t_trig *trig, t_var **list) { 
     int posi = 2;
 
     for (int i = 0; mass[i] != NULL; i++)

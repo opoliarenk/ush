@@ -97,6 +97,20 @@ FILES = main \
 	mx_hspl_cr1 \
 	mx_hash \
 	mx_pre_substr \
+	mx_sky_doubt \
+	mx_sub_pars \
+	mx_sub_doll_p \
+	mx_doubl_d \
+	mx_countingwh \
+	mx_countingwh1 \
+	mx_new_m_help \
+	mx_new_m_sd \
+	mx_new_s_d \
+	mx_new_str_d \
+	mx_sub_counts \
+	mx_workb1 \
+	mx_red_bh \
+	mx_pipe_help \
 
 SRC_PREFFIX = $(addprefix src/, $(FILES))
 

@@ -7,7 +7,7 @@ int mx_var_rep_count(char **temp) {
     for (int i = 0; i < len; i++) {
         if ((*temp)[i] == '$') {
             i++;
-            if ((*temp)[i] == '{') //ubrat esli chto
+            if ((*temp)[i] == '{') 
                 i++;
             while ((*temp)[i] && ((*temp)[i] != ' ' 
                 && (*temp)[i] != '$' && (*temp)[i] != '`' 

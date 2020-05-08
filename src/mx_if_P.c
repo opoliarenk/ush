@@ -13,6 +13,7 @@ static char *binary_which(char *arr) {
             if ((fd = open(buff, O_RDONLY)) != -1) {
                 close(fd);
                 free(pre);
+                mx_del_strarr(&bins);
                 return buff;
             }
             free(buff);

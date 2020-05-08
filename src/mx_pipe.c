@@ -49,29 +49,23 @@ static void parser(char **mass, t_trig *trig, t_var **list, int count) {
     char **buff = NULL;
     int i = 0;
     int dissp = count;
-    int fd_end;
-    int save_one = dup(1);
-    int save_zero = dup(0);
+    int one_zero_fd[3]; //fd_end
 
+    one_zero_fd[0] = dup(1);
+    one_zero_fd[1] = dup(0);
     while (count > 0) {
         buff = creator(&mass[i]);
-        if (dissp == count) {
-            fd_end = pipes_f(buff, trig, list);
-        }
-        else if (count - 1 == 0) {
-            dup2(save_one, 1);
-            dup2(fd_end, 0);
-            mx_builtins(buff, trig, list);
-            close(fd_end);
-            dup2(save_zero, 0);
-        }
-        else {
-            fd_end = pipe_gap(buff, trig, list, fd_end);
-        }
+        if (dissp == count)
+            one_zero_fd[2] = pipes_f(buff, trig, list);
+        else if (count - 1 == 0)
+            mx_pipe_help(one_zero_fd, buff, trig, list);
+        else 
+            one_zero_fd[2] = pipe_gap(buff, trig, list, one_zero_fd[2]);
         while (mass[i] && strcmp(mass[i], "|") != 0)
             i++;
         i++;
         count--;
+        //mx_del_strarr(&buff);
     }
 }
 

@@ -47,20 +47,24 @@ static char *new(char *newl) {
     return nn;
 }
 
+static void count_of(char **newl, int *count, int *i) {
+    (*i) = (*i) + 2;
+    while ((*newl)[(*i)] != '`') {
+        if ((*newl)[(*i)] == '\\' && (*newl)[(*i) + 1] == '`') {
+            (*count)++;
+            (*i)++;
+        }
+        (*i)++;
+    }
+}
+
 void mx_pre_substr(char **newl) {
     int count = 0;
     char *temp = NULL;
 
     for (int i = 0; (*newl)[i]; i++) {
         if ((*newl)[i] != '\\' && (*newl)[i + 1] == '`') {
-            i = i + 2;
-            while ((*newl)[i] != '`') {
-                if ((*newl)[i] == '\\' && (*newl)[i + 1] == '`') {
-                    count++;
-                    i++;
-                }
-                i++;
-            }
+            count_of(newl, &count, &i);
             if (count % 2 == 0 && count != 0) {
                 repl_sub_fir((*newl));
                 temp = new((*newl));

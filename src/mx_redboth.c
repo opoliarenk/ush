@@ -43,26 +43,18 @@ static int open_f(char *line, char **mass, t_trig *trig, t_var **list) {
 static int changred(char **mass, t_trig *trig, char *str, t_var **list) {
     int fd;
     int save_fd;
-    int status_of_work = 1;
+    int s_f_w = 1;
     char **newmass = newfor_bults(mass);
 
     for (int i = 0; mass[i] != NULL; i++) {
         if (strcmp(mass[i], ">") == 0) {
-            save_fd = dup(1);
-            close(1);
-            if (strcmp(mass[i + 1], ">") == 0)
-                fd = open(str, O_CREAT | O_APPEND | O_WRONLY);
-            else 
-                fd = open(str, O_WRONLY | O_TRUNC);
-            if (fd == -1)
-                 fd = open(str, O_CREAT | O_WRONLY);
-            dup2(fd, 1);
+            save_fd = mx_red_bh(mass, i, str, &fd);
             for (int j = 0; mass[j] != NULL; j++) {
                 if (strcmp(mass[j], "<") == 0) {
                     if (strcmp(mass[j + 1], "<") == 0)
-                        status_of_work = mx_doubl_red(mass[j + 2], newmass, trig, list);
+                        s_f_w = mx_doubl_red(mass[j + 2], newmass, trig, list);
                     else 
-                        status_of_work = open_f(mass[j + 1], newmass, trig, list);
+                        s_f_w = open_f(mass[j + 1], newmass, trig, list);
                     break;
                 }
             }
@@ -70,7 +62,8 @@ static int changred(char **mass, t_trig *trig, char *str, t_var **list) {
             break;
         }
     }
-    return status_of_work;
+    mx_del_strarr(&newmass);
+    return s_f_w;
 }
 
 int mx_redboth(char **mass, t_trig *trig, t_var **list) {
@@ -88,5 +81,6 @@ int mx_redboth(char **mass, t_trig *trig, t_var **list) {
         }
     }
     status_of_work = changred(mass, trig, str, list);
+    free(str);
     return status_of_work;
 }

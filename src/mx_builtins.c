@@ -2,15 +2,17 @@
 
 static void making_err(t_trig *trig, t_var **list) { //$?
     t_var *newl = *list;
+    char *it = mx_itoa(trig->err);
 
     while (newl) {
         if (strcmp(newl->name_of_data, "?") == 0) {
             free(newl->data);
-            newl->data = strdup(mx_itoa(trig->err));
+            newl->data = strdup(it);
             break;
         }
         newl = newl->next;
     }
+    free(it);
 }
 
 static bool part1(char **arr, t_trig *trig, t_var **list, char **environ) {

@@ -2,7 +2,6 @@
 
 int mx_mt(char ***mass) {
     char *str = NULL;
-    char *temp = NULL;
 
     for (int i = 0; (*mass)[i]; i++) {
         if ((*mass)[i][0] == '\'' || (*mass)[i][0] == '\"')
@@ -12,11 +11,9 @@ int mx_mt(char ***mass) {
             return 1;
         }
         else {
-            temp = strdup(str);
             free((*mass)[i]);
-            (*mass)[i] = strdup(temp);
+            (*mass)[i] = strdup(str);
             free(str);
-            free(temp);
         }
     }
     return 0;

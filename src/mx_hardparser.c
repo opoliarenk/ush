@@ -27,7 +27,7 @@ int mx_hardparser(char *line, t_trig *trig, t_var **list) {
     char *newl = mx_hardsplit(cuts);
     char **mass = NULL;
     int status_of_work = 1;
-
+    
     mx_pre_substr(&newl);
     mass = mx_delim_space(newl);
     if (mx_mt(&mass) == 1)
@@ -41,5 +41,6 @@ int mx_hardparser(char *line, t_trig *trig, t_var **list) {
     if (malloc_size(&mass))
         mx_del_strarr(&mass); 
     free(cuts);
+    //free(trig->linput);
     return status_of_work; 
 }

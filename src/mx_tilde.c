@@ -52,8 +52,11 @@ static int new_line(char *temp) {
             i++;
             helper1(&i, &size, temp);
             buff = mx_strnew(size);
-            if (input(buff, temp) == -1)
+            if (input(buff, temp) == -1) {
+                free(buff);
                 return -1;
+            }
+            free(buff);
             return 0;
         }
     }

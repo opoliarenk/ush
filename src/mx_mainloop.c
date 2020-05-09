@@ -27,6 +27,7 @@ void mx_mainloop(t_trig *trig, t_var *list, t_input *input) {
             if (mx_check_echo(line)) {
                 mass = mx_connectors(line);
                 auditor(mass, trig, list);
+                mx_del_strarr(&mass);
             }
         }
         memset(line, '\0', strlen(line));

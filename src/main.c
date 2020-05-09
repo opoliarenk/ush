@@ -15,10 +15,8 @@ int main() {
     while(list) {
         tmp = list;
         list = list->next;
-        if (malloc_size(&tmp->name_of_data)) {
-            free(tmp->data);
-            free(tmp->name_of_data);
-        }
+        free(tmp->data);
+        free(tmp->name_of_data);
         free(tmp);
     }
     system("leaks -q ush");

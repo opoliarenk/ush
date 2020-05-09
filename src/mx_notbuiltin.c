@@ -10,6 +10,9 @@ static t_pid *listcreat(pid_t chpid, char **temp) {
     newpid->name_of_pid = (char**)malloc(sizeof(char*) * i + 1);
     i = 0;
     split = mx_strsplit(temp[i], '/');
+    mx_printstr("ush: suspended ");
+    mx_printstr(split[mx_strlen_for_2star(split) - 1]);
+    mx_printstr("\n");
     newpid->name_of_pid[i] = mx_strdup(split[mx_strlen_for_2star(split) - 1]);
     mx_del_strarr(&split);
     for (i = 1; temp[i]; i++)

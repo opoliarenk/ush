@@ -1,9 +1,8 @@
 #include "../inc/ush.h"
 
 static void sigcatch(int sig) {
-    mx_printstr("\nsig catch ");
-    mx_printint(sig);
-    mx_printchar(10);
+	sig = 1;
+    mx_printstr("\n");
 }
 
 
@@ -12,5 +11,4 @@ void mx_signals() {
     signal(SIGINT, sigcatch);
     signal(SIGTTOU, SIG_IGN);
     signal(SIGTTIN, SIG_IGN);
-    //signal(SIGSEGV, sigcatch);
 }

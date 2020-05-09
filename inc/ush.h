@@ -215,6 +215,9 @@ void mx_clear_view(t_input *input, int count); //auditor_leaks
 bool mx_not_a_char(t_input *input); //auditor_leaks
 bool mx_del(t_input *input); //auditor_leaks
 bool mx_if_notch(t_input *input); //auditor_leaks
+void mx_fill_list(t_var *list);
+void mx_fill_trig(t_trig *trig);
+void mx_mainloop(t_trig *trig, t_var *list, t_input *input);
 
 void mx_pop_specific_4_pids(t_pid **list, int index);
 void mx_signals();

@@ -13,4 +13,5 @@ void mx_push_history(t_input *input) {
     if (input->history_prev != NULL)
         input->history_prev->prev = input->history_next;
     input->history_head = input->history_next;
+    // free(input->history_next);
 }

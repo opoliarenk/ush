@@ -112,6 +112,9 @@ FILES = main \
 	mx_workb1 \
 	mx_red_bh \
 	mx_pipe_help \
+	mx_fill_list \
+	mx_fill_trig \
+	mx_mainloop \
 
 SRC_PREFFIX = $(addprefix src/, $(FILES))
 

@@ -11,6 +11,16 @@ int main() {
     mx_check_input(trig, list);
     mx_mainloop(trig, list, input);
 
+    t_var *tmp;
+    while(list) {
+        tmp = list;
+        list = list->next;
+        if (malloc_size(&tmp->name_of_data)) {
+            free(tmp->data);
+            free(tmp->name_of_data);
+        }
+        free(tmp);
+    }
     system("leaks -q ush");
     return trig->err;
 }

@@ -19,7 +19,7 @@ static void auditor_1 (char *line, char **arr) {
 
     for (int i = 0; i < len; i++) {
         if ((line[i] == ';' && j != 0) || line[i + 1] == '\0') {
-            arr[k] = malloc (sizeof (char) * (j + 1));
+            arr[k] = malloc (sizeof (char) * j + 1);
             j = 0;
             k++;
         }

@@ -49,7 +49,7 @@ static void parser(char **mass, t_trig *trig, t_var **list, int count) {
     char **buff = NULL;
     int i = 0;
     int dissp = count;
-    int one_zero_fd[3]; //fd_end
+    int one_zero_fd[3];
 
     one_zero_fd[0] = dup(1);
     one_zero_fd[1] = dup(0);
@@ -65,7 +65,8 @@ static void parser(char **mass, t_trig *trig, t_var **list, int count) {
             i++;
         i++;
         count--;
-        //mx_del_strarr(&buff);
+        if (malloc_size(&buff))
+            mx_del_strarr(&buff);
     }
 }
 

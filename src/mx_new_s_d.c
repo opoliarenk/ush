@@ -33,7 +33,8 @@ void mx_new_s_d(char *line, char ***mass, int *j_e_k, int *i) {
         j_e_k[0]++;
         j_e_k[2]++;
         while(j_e_k[2] != 0) {
-            if (line[(*i)] == '\\' && line[(*i) + 1] == '\\' && mx_check_for_echoE(line) != true) { 
+            if (line[(*i)] == '\\' && line[(*i) + 1] == '\\' 
+                && mx_check_for_echoE(line) != true) { 
                 helper1(line, i, j_e_k);
             } 
             else {

@@ -63,6 +63,7 @@ static int var_replac(t_var **list, char **temp) {
     buff_n = mx_strnew(j);
     mx_var_rep_crt(temp, &buff_n);
     search_list(buff_n, list, temp);
+    free(buff_n); // 
     return 0;
 }
 

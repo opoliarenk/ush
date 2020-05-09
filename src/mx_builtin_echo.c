@@ -1,18 +1,7 @@
 #include "../inc/ush.h"
 
-static void print_1_type(char *arr, int j, int i, int trig) {
-    while (arr[j + i]) {
-        if (arr[j] == '\\' && trig == 1)
-            j++;
-        mx_printchar(arr[j]);
-        j++;
-    }
-}
-
-static void print_2_type(char *arr) {
-    int j = 1;
-
-    while (arr[j + 1]) {
+static int print_2_type(char *arr, int j, char c) {
+    while (arr[j] != c) {
         if ((arr[j] == '\\' && arr[j + 1] != '\'')
             || (arr[j] == '\\' && arr[j + 1] != '"')) {
             mx_echo_func_for_slesh(arr, j + 1);
@@ -22,24 +11,52 @@ static void print_2_type(char *arr) {
             mx_printchar(arr[j]);
         j++;
     }
+    return j;
+}
+
+static int print_1_type(char *arr, int j) {
+    while (arr[j] != '"') {
+        mx_printchar(arr[j]);
+        j++;
+    }
+    return j;
 }
 
 static void part1_of_cycle(char *arr, char *split) {
-    if (arr[0] == '\'')
-        print_1_type(split, 1, 1, 0);
-    else if (arr[0] == '"')
-        print_1_type(arr, 1, 1, 0);
-    else
-        print_1_type(arr, 0, 0, 1);
+    int j = 0;
+
+    while (arr[j]) {
+        if (arr[j] == '\'' && mx_check_double(&arr[j + 1], '\'')) {
+            j++;
+            while (arr[j] != '\'') {
+                mx_printchar(split[j]);
+                j++;
+            }
+        }
+        else if (arr[j] == '"' && mx_check_double(&arr[j + 1], '"'))
+            j = print_1_type(arr, j + 1);
+        else {
+            if (arr[j] == '\\')
+                j++;
+            mx_printchar(arr[j]);
+        }
+        j++;
+    }
 }
 
 static void part2_of_cycle(char *arr) {
-    if (arr[0] == '\'')
-        print_2_type(arr);
-    else if (arr[0] == '"') 
-        print_2_type(arr);
-    else
-        print_1_type(arr, 0, 0, 0);
+    int j = 0;
+
+    while (arr[j]) {
+        if (arr[j] == '\'' && mx_check_double(&arr[j + 1], '\'')) {
+            j = print_2_type(arr, j + 1, '\'');
+        }
+        else if (arr[j] == '"' && mx_check_double(&arr[j + 1], '"')) 
+            j = print_2_type(arr, j + 1, '"');
+        else
+            mx_printchar(arr[j]);
+        j++;
+    }
 }
 
 void mx_builtin_echo(char **arr, char *origin) {

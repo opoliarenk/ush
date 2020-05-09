@@ -178,6 +178,7 @@ int mx_parser_4_echo(char **arr, t_echo *echo);
 bool mx_check_for_echoE(char *arr);
 void mx_echo_func_for_slesh(char *str, int j);
 void mx_del_4_echo(char **split, t_echo **echo);
+bool mx_check_double(char *arr, char c);
 
 void mx_builtin_fg(char **arr, t_trig *trig);
 void mx_pid_pop_front(t_pid **head);

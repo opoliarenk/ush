@@ -70,13 +70,13 @@ void mx_logic(char *mass, t_trig *trig, t_var **list) {
         arr_ampers = malloc (sizeof (char *) * (2));
         arr_ampers[0] = strdup(mass);
         arr_ampers[1] = NULL;
-    } 
+    }
     for (int i = 0; arr_ampers[i] != NULL; i++) {
         if (if_there_or(arr_ampers[i]) == 1) {
-            if (mx_logical_or(arr_ampers[i], trig, list) == 1) 
+            if (mx_logical_or(arr_ampers[i], trig, list) == 1)
                 break;
         } else {
-            if (mx_hardparser(arr_ampers[i], trig, list) != 0) 
+            if (mx_hardparser(arr_ampers[i], trig, list) != 0)
                 break;
         }
     }

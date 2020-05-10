@@ -38,8 +38,8 @@ int mx_hardparser(char *line, t_trig *trig, t_var **list) {
     subst(&mass, trig, list, newl);
     status_of_work = built_done(mass, trig, list);
     free(newl);
-    mx_del_strarr(&mass); 
+    mx_del_strarr(&mass);
     free(cuts);
-    free(trig->linput); //strange 
-    return status_of_work; 
+    free(trig->linput); //strange
+    return status_of_work;
 }

@@ -16,8 +16,8 @@ void mx_mainloop(t_trig *trig, t_var *list, t_input *input) {
     char *line;
     char **mass;
     struct termios tty;
-    tcgetattr(0, &tty);
 
+    tcgetattr(0, &tty);
     while (trig->exit) {
         mx_canon_off();
         line = mx_input(input);
@@ -29,9 +29,8 @@ void mx_mainloop(t_trig *trig, t_var *list, t_input *input) {
                 auditor(mass, trig, list);
                 mx_del_strarr(&mass);
             }
+            memset(line, '\0', strlen(line));
         }
-        memset(line, '\0', strlen(line));
     }
     mx_strdel(&line);
-
 }

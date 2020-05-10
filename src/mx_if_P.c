@@ -27,8 +27,6 @@ static char *binary_which(char *arr) {
 char *mx_if_P(t_trig *trig, char **arr) {
     char *buff = NULL;
 
-    if (strstr(arr[0], "=") != NULL) //I DON'T KNOW
-        return NULL;
     if (getenv("PATH") != NULL) {
         buff = binary_which(arr[0]);
         return buff;

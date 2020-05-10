@@ -73,6 +73,7 @@ void mx_notbuiltin(char **arr, t_trig *trig, char **environ) {
         temp[i] = strdup(arr[i]);
     temp[i] = NULL;
     trig->err = exework(temp, environ, trig);
-    free(buff);
     mx_del_strarr(&temp);
+    if (strcmp(buff, arr[0]) != 0)
+        free(buff);
 }

@@ -5,6 +5,8 @@ static void pop_front_var(t_var **head) {
 
     if (head != NULL) {
         buf = (*head)->next;
+        free(buf->data);
+        free(buf->name_of_data);
         free(*head);
         *head = buf;
     }

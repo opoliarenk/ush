@@ -5,6 +5,7 @@ static void pop_front_var(t_pid **head) {
 
     if (head != NULL) {
         buf = (*head)->next;
+        mx_del_strarr(&(*head)->name_of_pid);
         free(*head);
         *head = buf;
     }
@@ -36,7 +37,7 @@ void mx_pop_specific_4_pids(t_pid **list, int index) {
                     index--;
                 }
                 temp = buf->next->next;
-                free(buf->next->name_of_pid);
+                mx_del_strarr(&buf->next->name_of_pid);
                 free(buf->next);
                 buf->next = temp;
             }

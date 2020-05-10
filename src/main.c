@@ -19,6 +19,5 @@ int main() {
         free(tmp->name_of_data);
         free(tmp);
     }
-    system("leaks -q ush");
     return trig->err;
 }

@@ -30,6 +30,13 @@ static void help_for_help2(char *line, int *i) {
 }
 
 static void help1(char *line, int *i, int *kol) {
+    if (line[(*i)] == '\\' && line[(*i) + 1] == ' ') {
+        (*i) = (*i) + 2;
+        if (line[(*i)] == '\0') {
+            (*i)--;
+            return ;
+        }
+    }
     if (line[(*i)] == '\"' && line[(*i) - 1] != '\\') {
         (*i)++;
         while (line[(*i)] != '\"') {

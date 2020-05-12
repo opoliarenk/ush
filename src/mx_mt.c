@@ -11,7 +11,7 @@ int mx_mt(char ***mass) {
             return 1;
         }
         else {
-            free((*mass)[i]);
+            free((*mass)[i]); 
             (*mass)[i] = strdup(str);
             free(str);
         }

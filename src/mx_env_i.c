@@ -34,7 +34,7 @@ void mx_env_i(char **mass, t_trig *trig) {
         env_n = creat_env(new);
         helper(new, &env_n, trig);
         mx_del_strarr(&new);
-        if (env_n[0] != NULL)
+        //if (env_n[0] != NULL)
             mx_del_strarr(&env_n);
     }
 }

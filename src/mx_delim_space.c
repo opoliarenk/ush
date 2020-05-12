@@ -1,5 +1,17 @@
 #include "../inc/ush.h"
 
+static void spec_symbol(char *line, int *i, int *j_k_c_ko, char ***mass);
+
+static void special_eq(char *line, int *i, int *j_k_c_ko, char ***mass) {
+    if (line[(*i)] == '\\' && line[(*i) + 1] == ' ') {
+        (*mass)[j_k_c_ko[0]][j_k_c_ko[1]] = line[(*i) + 1];
+        j_k_c_ko[1]++;
+        (*i) = (*i) + 2;
+        if (line[(*i)] == '\\')
+            spec_symbol(line, i, j_k_c_ko, mass);
+    }
+}
+
 static void spec_symbol(char *line, int *i, int *j_k_c_ko, char ***mass) {
     int is = 0;
 
@@ -16,11 +28,13 @@ static void spec_symbol(char *line, int *i, int *j_k_c_ko, char ***mass) {
             }
             j_k_c_ko[2] = 0;
             if (is == 1)
-                break; //nadeus norm
+                break; 
         }
     } 
+    special_eq(line, i, j_k_c_ko, mass);
     if (line[(*i)] == '\\')
         (*i)++;
+
 }
 
 static void main_delim(char *line, int *i, int *j_k_c_ko, char ***mass) {

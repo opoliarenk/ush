@@ -5,12 +5,6 @@ static void print_env(char **env) {
 		printf("%s\n",env[i]);
 }
 
-// static void printerr_usage() {
-// 	mx_printerr("usage: env [-i] [-P utilpath] [-u name]\n");
-// 	mx_printerr("           ");//11probelov
-// 	mx_printerr("[name=value ...] [utility [argument ...]]\n");
-// }
-
 static void is_flag(char **arr, int *j, int i, t_env *env) {
 	if (arr[i][0] == '-') {
 		(*j) = 1;
@@ -49,12 +43,13 @@ void mx_builtin_env(char **environ, char **arr, t_trig *trig) {
 	
 	trig->err = 0;
 	memset(env, 0, sizeof(t_env));
-	//printerr_usage();
 	if (arr[i]) {
 		while (arr[i]) {
 			is_flag(arr, &j, i, env);
-			if (is_done(env, arr, trig, environ) == 0)
-				return;
+			if (is_done(env, arr, trig, environ) == 0) {
+				free(env);
+				return ;
+			}
 			i++;
 		}
 	}

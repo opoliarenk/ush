@@ -1,5 +1,16 @@
 #include "../inc/ush.h"
 
+static void first_count(char *line, int *i, int *j_e_k);
+
+static void special_eq(char *line, int *i, int *j_e_k) {
+    if (line[(*i)] == '\\' && line[(*i) + 1] == ' ') {
+        j_e_k[0]++;
+        (*i) = (*i) + 2;
+        if (line[(*i)] == '\\')
+            first_count(line, i, j_e_k);
+    }
+}
+
 static void first_count(char *line, int *i, int *j_e_k) {
     int counter = 0;
 
@@ -15,6 +26,7 @@ static void first_count(char *line, int *i, int *j_e_k) {
             counter = 0;
         }
     } 
+    special_eq(line, i, j_e_k);
     if (line[(*i)] == '\\')
         (*i)++;
 }

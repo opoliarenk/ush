@@ -24,10 +24,13 @@ static int input(char *buff, char *temp) {
         write(2, "ush: no such user or named directory: ", 38);
         write(2, &buff[1], strlen(buff) - 1);
         write(2, "\n", 1);
+        free(is_okey);
         return -1;
     }
-    else 
+    else {
+        free(is_okey);
         closedir(dir);
+    }
     return 0;
 }
 

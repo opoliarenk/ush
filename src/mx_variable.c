@@ -50,8 +50,12 @@ static void varcheck(const char *str, t_var **list) {
 }
 
 void mx_variable(char **mass, t_var **list) {
+    int count = 0;
+
+    if (strcmp(mass[0], "export") == 0)
+        count++;
     for (int i = 0; mass[i] != NULL; i++) {
-        if (strstr(mass[i],"=") == NULL)
+        if (strstr(mass[i],"=") == NULL && count == 0)
             break;
         varcheck(mass[i], list);
     }

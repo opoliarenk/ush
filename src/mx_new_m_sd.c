@@ -19,7 +19,7 @@ static void helper2(char *line, int *i, int *j_e_k) {
 } 
 
 void mx_new_m_sd(char *line, char ***mass, int *j_e_k, int *i) {
-    if (line[(*i)] == '`') { 
+    if (line[(*i)] == '`' && line[(*i) - 1] != '\\') { 
         helper1(i, j_e_k);
         while (line[(*i)] != '`') {
             if (line[(*i)] == '\\' && line[(*i) + 1] == '\\' 

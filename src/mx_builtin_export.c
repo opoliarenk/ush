@@ -23,7 +23,6 @@ void print_for_export(char **env) {
 }
 
 void mx_builtin_export(char **arr, char **env, t_var **list) {
-	int index_potoka = 1;
 	t_var *p = *list;
 	int i = 1;
 	char **split = NULL;
@@ -34,9 +33,10 @@ void mx_builtin_export(char **arr, char **env, t_var **list) {
 			while(p) {
 				if (strcmp(p->name_of_data, arr[i]) == 0
 					|| strcmp(p->name_of_data, split[0]) == 0)
-					setenv(p->name_of_data, p->data, index_potoka);
+					setenv(p->name_of_data, p->data, 1);
 				p = p->next;
 			}
+			p = *list;
 			i++;
 			mx_del_strarr(&split);
 		}

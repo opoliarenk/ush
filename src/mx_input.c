@@ -18,8 +18,10 @@ char *mx_input(t_input *input) {
         mx_move_cursor(input);
         memset(input->ch, '\0', sizeof(input->ch));
     }
-    if (!strlen(input->history_tmp->data))
+    if (!strlen(input->history_tmp->data)) {
+        free(input->history_tmp);
         return NULL;
+    }
     mx_push_history(input);
     memset(input->history_tmp->data, '\0', sizeof(input->history_tmp->data));
     free(input->history_tmp);

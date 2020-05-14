@@ -29,13 +29,13 @@ static int second(char *line, int *i) {
 static int brackets(char *line, int *i) {
     (*i)++;
     for (; line[(*i)] != ')'; (*i)++) {
-        if (line[(*i)] == '$' && line[(*i + 1)] == '(') {
-            if (!brackets(line, i))
-                return 0;
-        }
         if (line[(*i)] == '\0') {
             dprintf(2, "Odd number of brackets.\n");
             return 0;
+        }
+        if (line[(*i)] == '$' && line[(*i) + 1] == '(') {
+            if (!brackets(line, i))
+                return 0;
         }
         if (line[(*i)] == '\x5c')
             (*i)++;

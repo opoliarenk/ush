@@ -2,8 +2,10 @@
 
 static void without_flags(char *path, t_trig *trig) {
     chdir(path);
-    trig->OLDPWD = trig->PWD;
-    trig->PWD = path;
+    free(trig->OLDPWD);
+    trig->OLDPWD = strdup(trig->PWD);
+    free(trig->PWD);
+    trig->PWD = strdup(path);
 }
 
 void mx_builtin_cd(char **arr, t_trig *trig) {

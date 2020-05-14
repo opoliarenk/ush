@@ -7,7 +7,9 @@ static void bez_umovy(t_pid *ppids, t_trig **trig) {
     if (ppids) {
         mx_printname_4_fg(ppids);
         kill(ppids->npid, SIGCONT);
+        tcsetpgrp(1, ppids->npid);
         waitpid(ppids->npid, &status, WUNTRACED);
+        tcsetpgrp(1, getpid());
         if (status != 4735) {
             mx_pid_pop_front(&p);
             (*trig)->pids = p;

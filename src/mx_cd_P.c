@@ -5,8 +5,10 @@ static void part_for_link(char *path, t_trig *trig)  {
 
     readlink(path, link, 1024);
     chdir(link);
-    trig->OLDPWD = trig->PWD;
-    trig->PWD = link;
+    free(trig->OLDPWD);
+    trig->OLDPWD = strdup(trig->PWD);
+    free(trig->PWD);
+    trig->PWD = strdup(link);
     mx_strdel(&link);
     trig->is_cdP = 1;
 }
@@ -19,7 +21,9 @@ void mx_cd_P(char *path, t_trig *trig) {
         part_for_link(path, trig);
     else {
         chdir(path);
-        trig->OLDPWD = trig->PWD;
-        trig->PWD = path;
+        free(trig->OLDPWD);
+        trig->OLDPWD = strdup(trig->PWD);
+        free(trig->PWD);
+        trig->PWD = strdup(path);
     }
 }

@@ -6,8 +6,10 @@ void mx_cd_s(char *path, t_trig *trig) {
     lstat(path, &lt);
     if ((lt.st_mode & MX_IFMT) == MX_IFDIR) {
         chdir(path);
-        trig->OLDPWD = trig->PWD;
-        trig->PWD = path;
+        free(trig->OLDPWD);
+        trig->OLDPWD = strdup(trig->PWD);
+        free(trig->PWD);
+        trig->PWD = strdup(path);
     }
     else {
         mx_printerr("cd: not a directory: ");

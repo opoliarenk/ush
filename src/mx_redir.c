@@ -41,12 +41,13 @@ int mx_redir(char **mass, t_trig *trig, t_var **list) {
             i = i + 1;
             newmass = mx_newfor_bults(mass);
             status_err = creat_file_add(mass[i + 1], newmass, trig, list);
-            //continue;
+            mx_del_strarr(&newmass);
             break;
         }
         if (strcmp(mass[i], ">") == 0) {
             newmass = mx_newfor_bults(mass);
             status_err = creat_file_one(mass[i + 1], newmass, trig, list);
+            mx_del_strarr(&newmass);
             break;
         }
     }

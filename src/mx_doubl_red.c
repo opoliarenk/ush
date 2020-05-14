@@ -16,6 +16,7 @@ int mx_doubl_red(char *line, char **mass, t_trig *trig, t_var **list) {
         write(pipefd[1], "\n", 1);
         free(temp);
     }
+    free(temp);
     close(pipefd[1]);
     close(0);
     dup2(pipefd[0], 0);

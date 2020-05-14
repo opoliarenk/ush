@@ -12,11 +12,11 @@ int main() {
     mx_mainloop(trig, list, input);
 
     t_var *tmp;
-    while(list) {
+    while(list) { 
         tmp = list;
         list = list->next;
         free(tmp->data);
-        free(tmp->name_of_data);
+        free(tmp->name_of_data); 
         free(tmp);
     }
     return trig->err;

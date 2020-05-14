@@ -1,7 +1,7 @@
 #include "../inc/ush.h"
 
 static void creat_pars(char **str, t_trig *trig, t_var **list) {
-    int count = mx_count_substr(*str, "$(") + mx_count_substr(*str, "`") / 2; //Tut toge dly `
+    int count = mx_count_substr(*str, "$(") + mx_count_substr(*str, "`") / 2;
     int j_i_f[3] = {0, 0, 0};
 
     for (; count > 0; count--) {
@@ -24,7 +24,7 @@ char **mx_sub(char **mass, t_trig *trig, t_var **list) {
             && mass[i][0] != '\'') { 
             creat_pars(&mass[i], trig, list);
             news = mx_end_sub(mass, mass[i]); 
-             if ((buff_mass = mx_sub(news, trig, list)) == NULL) {
+            if ((buff_mass = mx_sub(news, trig, list)) == NULL) {
                 return news;
             } 
             else {

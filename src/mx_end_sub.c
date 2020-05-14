@@ -20,10 +20,10 @@ static void sub(char ***news, char **mass, char *str, char **buff_mass) {
             i++;
         }
     }
-    news[h] = NULL;
+    (*news)[h] = NULL;
 }
 
-char **mx_end_sub(char **mass, char *str) { //mass[i] == str
+char **mx_end_sub(char **mass, char *str) { 
     char **buff_mass = NULL;
     char **news = NULL;
     int i = 0;

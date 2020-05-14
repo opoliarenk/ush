@@ -38,6 +38,7 @@ int mx_hardparser(char *line, t_trig *trig, t_var **list) {
     trig->linput = mx_strdup(cuts);
     mx_variable(mass, list);
     mx_v_out(mass, list);
+    mx_printstr("WOW HEY");
     subst(&mass, trig, list, newl);
     status_of_work = built_done(mass, trig, list);
     free(newl);

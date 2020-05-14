@@ -65,8 +65,7 @@ static void parser(char **mass, t_trig *trig, t_var **list, int count) {
             i++;
         i++;
         count--;
-        if (malloc_size(&buff))
-            mx_del_strarr(&buff);
+        mx_del_strarr(&buff);
     }
 }
 

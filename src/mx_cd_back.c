@@ -1,7 +1,7 @@
 #include "../inc/ush.h"
 
 void mx_cd_back(t_trig *trig) {
-    char *buf;
+    char *buf = NULL;
     char dir[1024];
 
     chdir(trig->OLDPWD);

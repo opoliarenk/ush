@@ -6,7 +6,8 @@ void mx_cd_back(t_trig *trig) {
 
     chdir(trig->OLDPWD);
     if (strcmp(trig->OLDPWD, "..") == 0
-    	|| strcmp(trig->OLDPWD, ".") == 0) {
+    	|| strcmp(trig->OLDPWD, ".") == 0
+        || trig->OLDPWD[0] != '/') {
     	getcwd(dir, 1024);
     	mx_printstr(dir);
     }

@@ -14,7 +14,8 @@ static void print_pwd(char *cwd, t_trig *trig) {
     char dir[1024];
 
     if (strcmp(cwd, "..") == 0
-        || strcmp(cwd, ".") == 0) {
+        || strcmp(cwd, ".") == 0
+        || cwd[0] != '/') {
         getcwd(dir, 1024);
         mx_printstr(dir);
     }

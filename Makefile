@@ -115,6 +115,7 @@ FILES = main \
 	mx_fill_list \
 	mx_fill_trig \
 	mx_mainloop \
+	mx_last_coms \
 
 SRC_PREFFIX = $(addprefix src/, $(FILES))
 

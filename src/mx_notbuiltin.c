@@ -58,6 +58,13 @@ static int exework(char **temp, char **environ, t_trig *trig) {
     return status_err;
 }
 
+static void if_coms(char ***temp) {
+    for(int i = 0; (*temp)[i]; i++) {
+        if ((*temp)[i][0] == '\"' || (*temp)[i][0] == '\'')
+            mx_last_coms(&(*temp)[i]);
+    }
+}
+
 void mx_notbuiltin(char **arr, t_trig *trig, char **environ) {
     char *buff = mx_if_P(trig, arr);
     char **temp = NULL;
@@ -71,6 +78,7 @@ void mx_notbuiltin(char **arr, t_trig *trig, char **environ) {
     for (i = 1; arr[i] != NULL; i++)
         temp[i] = strdup(arr[i]);
     temp[i] = NULL;
+    if_coms(&temp);
     trig->err = exework(temp, environ, trig);
     mx_del_strarr(&temp);
     if (strcmp(buff, arr[0]) != 0)

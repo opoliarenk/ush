@@ -152,6 +152,7 @@ void mx_sub_counts(char **str, int *j_i_f);
 void mx_workb1(char **str, t_trig *trig, t_var **list, int *j_i_f);
 int mx_red_bh(char **mass, int i, char *str, int *fd);
 void mx_pipe_help(int *one_zero_fd, char **buff, t_trig *trig, t_var **list);
+void mx_last_coms(char **temp);
 
 int mx_strlen_for_2star(char **env);
 void mx_builtins(char **arr, t_trig *trig, t_var **list);

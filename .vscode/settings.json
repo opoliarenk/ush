@@ -1,8 +1,0 @@
-{
-    "files.associations": {
-        "ush.h": "c",
-        "string.h": "c",
-        "__config": "c"
-    },
-    "C_Cpp.errorSquiggles": "Disabled"
-}

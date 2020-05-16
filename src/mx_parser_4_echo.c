@@ -21,7 +21,7 @@ int mx_parser_4_echo(char **arr, t_echo *echo) {
 
     while (arr[i]) {
         if (arr[i][0] == '-') {
-            j = 1;
+            j = 1; 
             if (!part(arr, echo, i, j))
                 break;
         }

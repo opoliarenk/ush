@@ -33,7 +33,7 @@ static void helper4(int *j_e_k, char ***mass) {
 }
 
 void mx_new_m_help(char *line, char ***mass, int *j_e_k, int *i) {
-    if (line[(*i)] == '\'') {
+    if (line[(*i)] == '\'' && line[(*i) - 1] != '\\') {
         helper2(i, j_e_k);
         while (line[(*i)] != '\'') {
             helper1(line, i, j_e_k);

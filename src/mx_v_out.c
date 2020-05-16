@@ -43,6 +43,7 @@ static void search_list(char *buff_n, t_var **list, char **temp) {
         bt = mx_replace_substr(*temp, bn, envv);
         free(*temp);
         *temp = bt;
+        free(bn);
         return ;
     }
     while (buffl != NULL ) { // check leaks

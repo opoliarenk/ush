@@ -8,7 +8,8 @@ static bool not_a_char(t_input *input) {
         || strcmp(input->ch, "\x1b\x5b\x48") == 0
         || strcmp(input->ch, "\x1b\x5b\x46") == 0
         || input->ch[0] == '\x16' || input->ch[0] == '\x03'
-        || input->ch[0] == '\x1a' || input->ch[0] == '\t') {
+        || input->ch[0] == '\x1a' || input->ch[0] == '\t'
+        || input->ch[0] == '\x15') {
         return true;
     }
     return false;

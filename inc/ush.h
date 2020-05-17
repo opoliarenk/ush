@@ -53,6 +53,8 @@ typedef struct s_input {
     t_history_list *history_next;
     t_history_list *history_prev;
     t_history_list *history_tmp;
+    int user;
+    char prompt[ARG_MAX + 1];
     unsigned int index;
     unsigned int cursor;
 } 			   t_input;
@@ -107,7 +109,6 @@ char *mx_canon(void);
 int mx_red_pipe(char **mass, t_trig *trig, t_var **list);
 int mx_redir(char **mass, t_trig *trig, t_var **list);
 char **mx_newfor_bults(char **mass);
-char **mx_sh_splite(char *line);
 char *mx_hardsplit(char *line);
 int mx_redirout(char **mass, t_trig *trig, t_var **list);
 char **mx_delim_space(char *line);

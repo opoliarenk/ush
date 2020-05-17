@@ -39,7 +39,6 @@ FILES = main \
 	mx_hardsplit \
 	mx_hardparser \
 	mx_red_pipe \
-	mx_sh_splite \
 	mx_redirout \
 	mx_redir \
 	mx_newfor_bults \

@@ -22,6 +22,26 @@ static bool notch_2(t_input *input) {
     return false;
 }
 
+static bool user_prompt(t_input *input) {
+    if (input->index == 0) {
+        if (input->user == 0) {
+            input->user = 1;
+            mx_clear_view(input, strlen(input->prompt) + 3);
+            memset(input->prompt, '\0', sizeof(input->prompt));
+            strcpy(input->prompt, getenv("USER"));
+            return true;
+        }
+        else if (input->user == 1) {
+            input->user = 0;
+            mx_clear_view(input, strlen(input->prompt) + 3);
+            memset(input->prompt, '\0', sizeof(input->prompt));
+            strcpy(input->prompt, "u$h");
+            return true;
+        }
+    }
+    return true;
+}
+
 bool mx_if_notch(t_input *input) {
     if (input->ch[0] == '\n')
         return false;
@@ -37,5 +57,7 @@ bool mx_if_notch(t_input *input) {
         input->cursor = 0;
         return true;
     }
+    else if (input->ch[0] == '\x15')
+        return user_prompt(input);
     return notch_2(input);
 }

@@ -35,6 +35,16 @@ static void if_quote(char *line) {
     dprintf(2, "\n");
 }
 
+static void slash(char *line) {
+    for (int i = 0; line[i]; i++) {
+        if (line[i] == '/') {
+            dprintf(2, "ush: no such file or directory: ");
+            return;
+        }
+    }
+    dprintf(2, "ush: command not found: ");
+}
+
 void mx_unknown(char **temp) {
     if (temp[0][0] == '$' && temp[0][1] != '$') {
         exit(0);
@@ -43,7 +53,7 @@ void mx_unknown(char **temp) {
         if (temp[0][i] == '=')
             return;
     }
-    dprintf(2, "ush: command not found: ");
+    slash(temp[0]);
     if_quote(temp[0]);
     exit(127);
 }

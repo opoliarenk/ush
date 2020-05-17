@@ -7,17 +7,24 @@ static void first_step(t_input *input) {
     input->history_back = input->history_head;
     input->cursor = 0;
     input->index = 0;
-    dprintf(1, "%s", "u$h> ");
+    memset(input->prompt, '\0', sizeof(input->prompt));
+    if (input->user == 0)
+        strcpy(input->prompt, "u$h");
+    else if (input->user == 1) {
+        strcpy(input->prompt, getenv("USER"));
+    }
+    dprintf(1, "%s> ", input->prompt);
 }
 
 char *mx_input(t_input *input) {
     first_step(input);
     while (read(STDIN_FILENO, input->ch, 5) && mx_checkout_char(input)) {
-        mx_clear_view(input, 6);
-        dprintf(1, "%s%s", "u$h> ", input->history_tmp->data);
+        mx_clear_view(input, strlen(input->prompt) + 3);
+        dprintf(1, "%s> %s", input->prompt, input->history_tmp->data);
         mx_move_cursor(input);
         memset(input->ch, '\0', sizeof(input->ch));
     }
+    memset(input->prompt, '\0', sizeof(input->prompt));
     if (!strlen(input->history_tmp->data)) {
         free(input->history_tmp);
         return NULL;

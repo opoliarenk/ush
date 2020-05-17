@@ -36,23 +36,34 @@ static int is_done(t_env *env, char **arr, t_trig *trig, char **environ) {
 	return 1;
 }
 
-void mx_builtin_env(char **environ, char **arr, t_trig *trig) {
+static void helper(char **environ, char **arr, t_trig *trig, t_env *env) {
+	char **copy = mx_env_var(&environ, arr);
 	int i = 1;
 	int j = 1;
+
+	while (arr[i]) {
+		is_flag(arr, &j, i, env);
+		if (is_done(env, arr, trig, copy) == 0) {
+			mx_del_strarr(&copy);
+			//free(env);
+			return ;
+		}
+		i++;
+	}
+	if (mx_env_exe(arr, copy, trig) == 1)
+		print_env(copy);
+	mx_env_back(environ, copy);
+	mx_del_strarr(&copy);
+}
+
+void mx_builtin_env(char **environ, char **arr, t_trig *trig) {
+	int i = 1;
 	t_env *env = (t_env *)malloc(sizeof(t_env));
 	
 	trig->err = 0;
 	memset(env, 0, sizeof(t_env));
-	if (arr[i]) {
-		while (arr[i]) {
-			is_flag(arr, &j, i, env);
-			if (is_done(env, arr, trig, environ) == 0) {
-				free(env);
-				return ;
-			}
-			i++;
-		}
-	}
+	if (arr[i]) 
+		helper(environ, arr, trig, env);
 	else
 		print_env(environ);
 	free(env);

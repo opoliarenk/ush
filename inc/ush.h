@@ -153,6 +153,12 @@ void mx_workb1(char **str, t_trig *trig, t_var **list, int *j_i_f);
 int mx_red_bh(char **mass, int i, char *str, int *fd);
 void mx_pipe_help(int *one_zero_fd, char **buff, t_trig *trig, t_var **list);
 void mx_last_coms(char **temp);
+void mx_no_var_is(char *bn, char **temp);
+char **mx_env_var(char ***environ, char **arr);
+int mx_find_env(char *environ, char *buff);
+int mx_env_exe(char **arr, char **envi, t_trig *trig);
+void mx_env_back(char **environ, char **copy);
+void mx_env_unk(char **arr, char **environ, t_trig *trig);
 
 int mx_strlen_for_2star(char **env);
 void mx_builtins(char **arr, t_trig *trig, t_var **list);

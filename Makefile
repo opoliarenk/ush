@@ -116,6 +116,12 @@ FILES = main \
 	mx_fill_trig \
 	mx_mainloop \
 	mx_last_coms \
+	mx_no_var_is \
+	mx_env_var \
+	mx_find_env \
+	mx_env_exe \
+	mx_env_back \
+	mx_env_unk \
 
 SRC_PREFFIX = $(addprefix src/, $(FILES))
 

@@ -38,22 +38,26 @@ static void search_list(char *buff_n, t_var **list, char **temp) {
     char *bn = join_search(buff_n, temp);
     char *bt = NULL;
     char *envv = getenv(buff_n);
+    int is_var = 0;
 
-    if (envv != NULL) { //
+    if (envv != NULL) { 
         bt = mx_replace_substr(*temp, bn, envv);
         free(*temp);
         *temp = bt;
         free(bn);
         return ;
     }
-    while (buffl != NULL ) { // check leaks
+    while (buffl != NULL ) { 
         if (strcmp(buffl->name_of_data, buff_n) == 0) {
            bt = mx_replace_substr(*temp, bn, buffl->data);
            free(*temp);
            *temp = bt;
+           is_var = 1;
         }
         buffl = buffl->next;
     }
+    if (is_var == 0)
+        mx_no_var_is(bn, temp);
     free(bn);
 }
 
@@ -64,7 +68,7 @@ static int var_replac(t_var **list, char **temp) {
     buff_n = mx_strnew(j);
     mx_var_rep_crt(temp, &buff_n);
     search_list(buff_n, list, temp);
-    free(buff_n); // 
+    free(buff_n); 
     return 0;
 }
 
@@ -79,7 +83,7 @@ void mx_v_out(char **mass, t_var **list) {
                     j++;
                 }
             }
-            if (mass[i][j] == '$') {
+            if (mass[i][j] == '$' && mass[i][j + 1] != '(') {
                 chang = var_replac(list, &mass[i]);
             }
         }

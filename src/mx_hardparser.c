@@ -43,6 +43,6 @@ int mx_hardparser(char *line, t_trig *trig, t_var **list) {
     free(newl);
     mx_del_strarr(&mass);
     free(cuts);
-    free(trig->linput); //strange
+    free(trig->linput); 
     return status_of_work;
 }

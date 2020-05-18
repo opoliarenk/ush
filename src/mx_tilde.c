@@ -66,18 +66,20 @@ static int new_line(char *temp) {
     return 0;
 }
 
-char *mx_tilde(char *line) {
+char *mx_tilde(char **line) {
     char *buf = NULL;
 
-    if (line[0] == '\'' || line[0] == '\"')
-        return line;
-    for (int i = 0; line[i]; i++) {
-        if (line[i] == '~') {
-            if (new_line(&line[i]) == -1) {
+    if ((*line)[0] == '\'' || (*line)[0] == '\"')
+        return (*line);
+    for (int i = 0; (*line)[i]; i++) {
+        if ((*line)[i] == '~') {
+            mx_usr_tilde(&(*line)[i + 1], line);
+            if (new_line(&(*line)[i]) == -1) {
                 return NULL;
             }
+            break;//I DONT KNOW
         }
     }
-    buf = mx_replace_substr(line, "~", getenv("HOME"));
+    buf = mx_replace_substr((*line), "~", getenv("HOME"));
     return buf;
 }

@@ -39,7 +39,6 @@ FILES = main \
 	mx_hardsplit \
 	mx_hardparser \
 	mx_red_pipe \
-	mx_sh_splite \
 	mx_redirout \
 	mx_redir \
 	mx_newfor_bults \
@@ -122,6 +121,8 @@ FILES = main \
 	mx_env_exe \
 	mx_env_back \
 	mx_env_unk \
+	mx_usr_tilde \
+	mx_gcopy_env \
 
 SRC_PREFFIX = $(addprefix src/, $(FILES))
 

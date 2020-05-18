@@ -51,7 +51,6 @@ static char **extra_env(char **environ, char **copy) {
     for (i = 0; copy[i]; i++);
     extra_c = i;
     if (extra_c > count) {
-
         new = (char **) malloc (sizeof(char *) * (extra_c - count) + 1);
         for (i = 0; count <= extra_c; i++, count++)
             new[i] = strdup(copy[count]);

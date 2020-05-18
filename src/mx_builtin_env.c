@@ -40,19 +40,27 @@ static void helper(char **environ, char **arr, t_trig *trig, t_env *env) {
 	char **copy = mx_env_var(&environ, arr);
 	int i = 1;
 	int j = 1;
+	pid_t pid;
+	int status = 1;
 
 	while (arr[i]) {
 		is_flag(arr, &j, i, env);
 		if (is_done(env, arr, trig, copy) == 0) {
 			mx_del_strarr(&copy);
-			//free(env);
 			return ;
 		}
 		i++;
 	}
-	if (mx_env_exe(arr, copy, trig) == 1)
-		print_env(copy);
-	mx_env_back(environ, copy);
+	pid = fork();
+	if (pid == 0) {
+		if (mx_env_exe(arr, copy, trig) == 1)
+			print_env(copy);
+		exit(0);
+	} 
+	else {
+		waitpid(pid, &status, WUNTRACED);
+		trig->err = status;
+	}
 	mx_del_strarr(&copy);
 }
 

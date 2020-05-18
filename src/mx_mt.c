@@ -6,7 +6,7 @@ int mx_mt(char ***mass) {
     for (int i = 0; (*mass)[i]; i++) {
         if ((*mass)[i][0] == '\'' || (*mass)[i][0] == '\"')
             continue;
-        if ((str = mx_tilde((*mass)[i])) == NULL) {
+        if ((str = mx_tilde(&(*mass)[i])) == NULL) {
             mx_del_strarr(mass);
             return 1;
         }

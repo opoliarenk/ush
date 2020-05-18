@@ -119,10 +119,8 @@ FILES = main \
 	mx_env_var \
 	mx_find_env \
 	mx_env_exe \
-	mx_env_back \
 	mx_env_unk \
 	mx_usr_tilde \
-	mx_gcopy_env \
 
 SRC_PREFFIX = $(addprefix src/, $(FILES))
 

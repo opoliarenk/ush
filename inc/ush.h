@@ -157,10 +157,8 @@ void mx_no_var_is(char *bn, char **temp);
 char **mx_env_var(char ***environ, char **arr);
 int mx_find_env(char *environ, char *buff);
 int mx_env_exe(char **arr, char **envi, t_trig *trig);
-void mx_env_back(char **environ, char **copy);
 void mx_env_unk(char **arr, char **environ, t_trig *trig);
 void mx_usr_tilde(char *temp, char **temp1);
-char **mx_gcopy_env(char **environ);
 
 int mx_strlen_for_2star(char **env);
 void mx_builtins(char **arr, t_trig *trig, t_var **list);

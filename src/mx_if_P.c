@@ -21,7 +21,8 @@ static char *binary_which(char *arr) {
         }
     }
     mx_del_strarr(&bins);
-    return arr;
+    buff = strdup(arr);
+    return buff;
 }
 
 char *mx_if_P(t_trig *trig, char **arr) {

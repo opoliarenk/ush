@@ -30,14 +30,14 @@ int mx_hardparser(char *line, t_trig *trig, t_var **list) {
     
     mx_pre_substr(&newl);
     mass = mx_delim_space(newl);
+    trig->linput = mx_strdup(cuts);
+    mx_variable(mass, list);
+    mx_v_out(mass, list);
     if (mx_mt(&mass) == 1) {
         free(cuts);
         free(newl);
         return status_of_work;
     }
-    trig->linput = mx_strdup(cuts);
-    mx_variable(mass, list);
-    mx_v_out(mass, list);
     subst(&mass, trig, list, newl);
     status_of_work = built_done(mass, trig, list);
     free(newl);

@@ -80,6 +80,9 @@ char *mx_tilde(char **line) {
             break;//I DONT KNOW
         }
     }
-    buf = mx_replace_substr((*line), "~", getenv("HOME"));
+    if (getenv("HOME") != NULL)
+        buf = mx_replace_substr((*line), "~", getenv("HOME"));
+    else 
+        buf = strdup((*line));
     return buf;
 }

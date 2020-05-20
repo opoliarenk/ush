@@ -1,6 +1,7 @@
 #include "../inc/ush.h"
 
 static void first_step(t_input *input) {
+    char *line;
     input->history_tmp = (t_history_list *)malloc(sizeof(t_history_list));
     // input->history_back = (t_history_list *)malloc(sizeof(t_history_list));
 
@@ -11,7 +12,12 @@ static void first_step(t_input *input) {
     if (input->user == 0)
         strcpy(input->prompt, "u$h");
     else if (input->user == 1) {
-        strcpy(input->prompt, getenv("USER"));
+        if ((line = getenv("USER"))) {
+            strcpy(input->prompt, line);
+            // mx_strdel(&line);
+        }
+        else
+            strcpy(input->prompt, "ghost_u$er");
     }
     dprintf(1, "%s> ", input->prompt);
 }

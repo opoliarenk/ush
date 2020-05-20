@@ -227,6 +227,7 @@ bool mx_if_notch(t_input *input); //auditor_leaks
 void mx_fill_list(t_var *list);
 void mx_fill_trig(t_trig *trig);
 void mx_mainloop(t_trig *trig, t_var *list, t_input *input);
+bool mx_user_prompt(t_input *input);
 
 void mx_pop_specific_4_pids(t_pid **list, int index);
 void mx_signals();

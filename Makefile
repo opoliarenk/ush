@@ -121,6 +121,7 @@ FILES = main \
 	mx_env_exe \
 	mx_env_unk \
 	mx_usr_tilde \
+	mx_user_prompt \
 
 SRC_PREFFIX = $(addprefix src/, $(FILES))
 

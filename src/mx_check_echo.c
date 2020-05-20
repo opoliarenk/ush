@@ -75,5 +75,5 @@ int mx_check_echo(char *line) {
         else if (line[i] == '\x5c')
             i++;
     }
-    return 1;
+    return mx_odd_slash(line, strlen(line) - 1);
 }

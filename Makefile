@@ -122,6 +122,7 @@ FILES = main \
 	mx_env_unk \
 	mx_usr_tilde \
 	mx_user_prompt \
+	mx_odd_slash \
 
 SRC_PREFFIX = $(addprefix src/, $(FILES))
 

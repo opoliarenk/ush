@@ -81,6 +81,5 @@ void mx_notbuiltin(char **arr, t_trig *trig, char **environ) {
     if_coms(&temp);
     trig->err = exework(temp, environ, trig);
     mx_del_strarr(&temp);
-    if (strcmp(buff, arr[0]) != 0)
-        free(buff);
+    free(buff);
 }

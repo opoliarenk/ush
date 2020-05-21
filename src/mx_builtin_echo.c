@@ -7,8 +7,10 @@ static int print_2_type(char *arr, int j, char c) {
             mx_echo_func_for_slesh(arr, j + 1);
             j++;
         }
-        else
-            mx_printchar(arr[j]);
+        else {
+            if (arr[j] != 127)
+                mx_printchar(arr[j]);
+        }
         j++;
     }
     return j;
@@ -16,7 +18,8 @@ static int print_2_type(char *arr, int j, char c) {
 
 static int print_1_type(char *arr, int j) {
     while (arr[j] != '"') {
-        mx_printchar(arr[j]);
+        if (arr[j] != 127)
+            mx_printchar(arr[j]);
         j++;
     }
     return j;
@@ -29,14 +32,15 @@ static void part1_of_cycle(char *arr, char *split) {
         if (arr[j] == '\'' && mx_check_double(&arr[j + 1], '\'')) {
             j++;
             while (arr[j] != '\'') {
-                mx_printchar(split[j]);
+                if (arr[j] != 127)
+                    mx_printchar(split[j]);
                 j++;
             }
         }
         else if (arr[j] == '"' && mx_check_double(&arr[j + 1], '"'))
             j = print_1_type(arr, j + 1);
         else {
-            if (arr[j] == '\\')
+            if (arr[j] == '\\' || arr[j] == 127)
                 j++;
             mx_printchar(arr[j]);
         }
@@ -53,8 +57,10 @@ static void part2_of_cycle(char *arr) {
         }
         else if (arr[j] == '"' && mx_check_double(&arr[j + 1], '"')) 
             j = print_2_type(arr, j + 1, '"');
-        else
-            mx_printchar(arr[j]);
+        else {
+            if (arr[j] != 127)
+                mx_printchar(arr[j]);
+        }
         j++;
     }
 }

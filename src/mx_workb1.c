@@ -5,7 +5,7 @@ static void helper1(int fd, int fd1, int *i) {
 
     while (read(fd, &a, 1) > 0) {
         write(fd1, &a, 1);
-        i++;
+        (*i)++;
     }
     close(fd1);
     close(fd);
@@ -34,6 +34,7 @@ static char *help_res(int fd[2]) {
 static char *result(char **buff, t_trig *trig, t_var **list) {
     int fd[2];
     int save_fd = dup(1);
+    char *newl = NULL;
 
     pipe(fd);
     close(1);
@@ -41,7 +42,8 @@ static char *result(char **buff, t_trig *trig, t_var **list) {
     mx_builtins(buff, trig, list);
     close(fd[1]);
     dup2(save_fd, 1);
-    return help_res(fd);
+    newl = help_res(fd);
+    return newl;
 }
 
 static char *workb(char *str, t_trig *trig, t_var **list) {
@@ -59,10 +61,10 @@ static char *workb(char *str, t_trig *trig, t_var **list) {
     temp[i] = '\0';
     newl = mx_cut_spaces(temp);
     mass_temp = mx_delim_space(newl);
-    free(newl);
-    free(temp);
     res = result(mass_temp, trig, list);
     mx_del_strarr(&mass_temp);
+    free(newl);
+    free(temp);
     return res;
 }
 

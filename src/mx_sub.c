@@ -5,7 +5,7 @@ static void creat_pars(char **str, t_trig *trig, t_var **list) {
     int j_i_f[3] = {0, 0, 0};
 
     for (; count > 0; count--) {
-        for (j_i_f[1] = 0; (*str)[j_i_f[1]]; j_i_f[1]++) {
+        for (j_i_f[1] = 0; (*str)[j_i_f[1]]; j_i_f[1]++) { 
             mx_sub_counts(str, j_i_f);
             if (j_i_f[0] == count) { 
                 mx_workb1(str, trig, list, j_i_f);
@@ -23,7 +23,7 @@ char **mx_sub(char **mass, t_trig *trig, t_var **list) {
         if ((strstr(mass[i], "$(") != NULL || strstr(mass[i], "`") != NULL) 
             && mass[i][0] != '\'') { 
             creat_pars(&mass[i], trig, list);
-            news = mx_end_sub(mass, mass[i]); 
+            news = mx_end_sub(mass, mass[i]);
             if ((buff_mass = mx_sub(news, trig, list)) == NULL) {
                 return news;
             } 

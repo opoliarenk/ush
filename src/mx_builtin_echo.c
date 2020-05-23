@@ -73,7 +73,7 @@ void mx_builtin_echo(char **arr, char *origin) {
     memset(echo, 0, sizeof(t_echo));
     i = mx_parser_4_echo(arr, echo);
     while (arr[i]) {
-        if (arr[i][0] != 127) {
+        if (arr[i][0] != 127 && arr[i][1] == '\0') {
             if (echo->E)
                 part1_of_cycle(arr[i], split[point]);
             else

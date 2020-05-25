@@ -73,14 +73,14 @@ void mx_builtin_echo(char **arr, char *origin) {
     memset(echo, 0, sizeof(t_echo));
     i = mx_parser_4_echo(arr, echo);
     while (arr[i]) {
-        if (arr[i][0] != 127 && arr[i][1] == '\0') {
-            if (echo->E)
-                part1_of_cycle(arr[i], split[point]);
-            else
-                part2_of_cycle(arr[i]);
-            if (mx_strlen_for_2star(arr) - i != 1)
-                mx_printchar(32);
-        }
+        if (arr[i][0] != 127 && arr[i][1] == '\0')
+            i++;
+        if (echo->E)
+            part1_of_cycle(arr[i], split[point]);
+        else
+            part2_of_cycle(arr[i]);
+        if (mx_strlen_for_2star(arr) - i != 1)
+            mx_printchar(32);
         i++;
         point++;
     }

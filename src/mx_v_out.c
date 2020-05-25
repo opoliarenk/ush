@@ -41,7 +41,7 @@ static void search_list(char *buff_n, t_var **list, char **temp) {
     int is_var = 0;
 
     if (envv != NULL) { 
-        bt = mx_replace_substr(*temp, bn, envv);
+        bt = mx_good_repl_var((*temp), bn, envv);
         free(*temp);
         *temp = bt;
         free(bn);
@@ -49,7 +49,7 @@ static void search_list(char *buff_n, t_var **list, char **temp) {
     }
     while (buffl != NULL ) { 
         if (strcmp(buffl->name_of_data, buff_n) == 0) {
-           bt = mx_replace_substr(*temp, bn, buffl->data);
+           bt = mx_good_repl_var((*temp), bn, buffl->data);
            free(*temp);
            *temp = bt;
            is_var = 1;

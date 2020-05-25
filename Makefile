@@ -123,6 +123,7 @@ FILES = main \
 	mx_usr_tilde \
 	mx_user_prompt \
 	mx_odd_slash \
+	mx_good_repl_var \
 
 SRC_PREFFIX = $(addprefix src/, $(FILES))
 

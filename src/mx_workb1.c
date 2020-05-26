@@ -55,6 +55,8 @@ static char *workb(char *str, t_trig *trig, t_var **list) {
         
     while (str[i] != ')' && str[i] != '`')
         i++;
+    if (i == 0)
+        return NULL;
     temp = (char *)malloc(sizeof(char) * i + 1);
     for (i = 0; str[i] != ')' && str[i] != '`'; i++)
         temp[i] = str[i];
@@ -78,9 +80,10 @@ void mx_workb1(char **str, t_trig *trig, t_var **list, int *j_i_f) {
     } 
     else { 
         temp = workb(&(*str)[j_i_f[1] + 1], trig, list);
-        repl = mx_replace(&(*str)[j_i_f[1] + 1], str, temp);
+        repl = mx_replace(&(*str)[j_i_f[1] + 1], str, temp); 
     }
-    free(temp);
+    if (temp)
+        free(temp);
     free(*str);
     *str = mx_strdup(repl);
     free(repl);

@@ -37,11 +37,32 @@ static char *wich_h(char *start, char **str, char *temp, char *buff) {
     return wich_creat(meetupf, str, temp, buff);
 }
 
+static char *if_empty(char *start, char **str) {
+    char *new = NULL;
+    char *final = NULL;
+
+    for (int i = 0; start[i]; i++) {
+        if (start[i] == ')') {
+            new = strdup("$()");
+            break;
+        }
+        if (start[i] == '`') {
+            new = strdup("``");
+            break;
+        }
+    }
+    final = mx_replace_substr((*str), new, "");
+    free(new);
+    return final;
+}
+
 char *mx_replace(char *start, char **str, char *temp) {
     int i = 0;
     char *buff = NULL;
     char *final = NULL;
 
+    if (temp == NULL)
+        return final = if_empty(start, str);
     while (start[i] != ')' && start[i] != '`')
         i++;
     buff = (char *)malloc(sizeof(char) * i + 1);

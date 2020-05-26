@@ -49,7 +49,7 @@ static char *new(char *newl) {
 
 static void count_of(char **newl, int *count, int *i) {
     (*i) = (*i) + 2;
-    while ((*newl)[(*i)] != '`') {
+    while ((*newl)[(*i)] != '`' && (*newl)[*i] != '\0') {
         if ((*newl)[(*i)] == '\\' && (*newl)[(*i) + 1] == '`') {
             (*count)++;
             (*i)++;
@@ -57,13 +57,13 @@ static void count_of(char **newl, int *count, int *i) {
         (*i)++;
     }
 }
-
+ 
 void mx_pre_substr(char **newl) {
     int count = 0;
     char *temp = NULL;
 
     for (int i = 0; (*newl)[i]; i++) {
-        if ((*newl)[i] != '\\' && (*newl)[i + 1] == '`') {
+        if ((*newl)[i] != '\\' && (*newl)[i + 1] == '`' && (*newl)[i + 2] != '\0') {
             count_of(newl, &count, &i);
             if (count % 2 == 0 && count != 0) {
                 repl_sub_fir((*newl));

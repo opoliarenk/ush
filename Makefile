@@ -23,9 +23,11 @@ FILES = main \
 	mx_echo_func_for_slesh \
 	mx_del_4_echo \
 	mx_check_double \
+	mx_echo_part \
 	mx_builtin_exit \
 	mx_builtin_unset \
 	mx_builtin_which \
+	mx_look_in_path \
 	mx_builtin_fg \
 	mx_pid_pop_front \
 	mx_parsing_4_fg \

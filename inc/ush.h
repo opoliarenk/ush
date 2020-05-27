@@ -188,6 +188,7 @@ bool mx_check_for_echoE(char *arr);
 void mx_echo_func_for_slesh(char *str, int j);
 void mx_del_4_echo(char **split, t_echo **echo);
 bool mx_check_double(char *arr, char c);
+void mx_echo_part(char **arr, int i, char *split, t_echo *echo);
 
 void mx_builtin_fg(char **arr, t_trig *trig);
 void mx_pid_pop_front(t_pid **head);
@@ -207,6 +208,7 @@ bool mx_is_built_in(char *str);
 bool mx_is_slash(char *path);
 bool mx_is_command(char *path, bool *flag, int index);
 char *mx_strjoin_free(char *s1, const char *s2);
+bool mx_look_in_path(t_trig *trig, char **ways, char *arr, bool *flag);
 
 char *mx_input(t_input *input); //auditor
 void mx_move_cursor(t_input *input); //auditor_leaks

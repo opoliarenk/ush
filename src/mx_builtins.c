@@ -58,3 +58,4 @@ void mx_builtins(char **arr, t_trig *trig, t_var **list) {
         mx_notbuiltin(arr, trig, environ);
     making_err(trig, list);
 }
+

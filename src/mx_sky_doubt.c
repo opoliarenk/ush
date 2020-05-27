@@ -11,7 +11,7 @@ static void helper(char *line, int *i, int *j_k_c_ko, char ***mass) {
                 j_k_c_ko[2]++;
                 (*i)++;
             }
-            j_k_c_ko[2] = 0;
+            j_k_c_ko[2] = 0; 
         }
     } 
 }
@@ -27,7 +27,7 @@ void mx_sky_doubt(char *line, int *i, int *j_k_c_ko, char ***mass) {
         helper2(line, i, j_k_c_ko, mass);
         while (line[(*i)] != '\'') {
             helper(line, i, j_k_c_ko, mass);
-            if (line[(*i)] == '\\' && 
+            if (line[(*i)] == '\\' &&
                 (line[(*i) + 1] == '\"' || line[(*i) + 1] == '`')) 
                 (*i)++;
             if (line[(*i)] == '\'') {

@@ -56,7 +56,9 @@ static void main_delim(char *line, int *i, int *j_k_c_ko, char ***mass) {
     else {
         (*mass)[j_k_c_ko[0]][j_k_c_ko[1]] = line[(*i)];
         j_k_c_ko[1]++;
-    }
+        if (line[(*i)] == '\0') 
+            j_k_c_ko[0]++;
+    } 
 }
 
 static void funcs(char *line, int *i, int *j_k_c_ko, char ***mass) {
@@ -66,7 +68,7 @@ static void funcs(char *line, int *i, int *j_k_c_ko, char ***mass) {
     mx_sub_doll_p(line, i, j_k_c_ko, mass);
 }
 
-char **mx_delim_space(char *line) {
+char **mx_delim_space(char *line) { 
     char **mass = malloc(sizeof(char*) * mx_countingw(line) + 1);
     int j_k_c_ko[4] = {0, 0, 0, 0};
     int len = strlen(line);

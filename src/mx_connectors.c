@@ -56,14 +56,37 @@ static char **split(char *line, int count) {
     return arr;
 }
 
+static void dd_string(char *line, int *i) {
+    if ((*i) != 0) {
+        if (line[(*i)] == '\"' && line[(*i) - 1] != '\\') {
+            (*i)++;
+            while (line[(*i)] != '\"') {
+                (*i)++;
+                if (line[(*i)] == '\\')
+                    (*i) = (*i) + 2;
+            }
+        }
+        if (line[(*i)] == '\'' && line[(*i) - 1] != '\\') {
+            (*i)++;
+            while (line[(*i)] != '\'') {
+                (*i)++;
+                if (line[(*i)] == '\\')
+                    (*i) = (*i) + 2;
+            }
+        }
+    }
+}
+
 char **mx_connectors(char *line) {
     char **mass = NULL;
     int sep = 0;
 
     if (mx_semicolon_check(line)) {
-        for (int i = 0; line[i]; i++) 
+        for (int i = 0; line[i]; i++) {
+            dd_string(line, &i);
             if (line[i] == ';' && i != 0)
                 sep++;
+        }
         if (sep > 0)
             mass = split(line, sep);
         else {

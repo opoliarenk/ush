@@ -1,6 +1,6 @@
 #include "../inc/ush.h"
 
-static void first_count(char *line, int *i, int *j_e_k);
+static int first_count(char *line, int *i, int *j_e_k);
 
 static void special_eq(char *line, int *i, int *j_e_k) {
     if (line[(*i)] == '\\' && line[(*i) + 1] == ' ') {
@@ -11,7 +11,7 @@ static void special_eq(char *line, int *i, int *j_e_k) {
     }
 }
 
-static void first_count(char *line, int *i, int *j_e_k) {
+static int first_count(char *line, int *i, int *j_e_k) {
     int counter = 0;
 
     if (line[(*i)] == '\\' && line[(*i) + 1] == '\\' 
@@ -27,8 +27,11 @@ static void first_count(char *line, int *i, int *j_e_k) {
         }
     } 
     special_eq(line, i, j_e_k);
-    if (line[(*i)] == '\\')
+    if (line[(*i)] == '\\') {
         (*i)++;
+        return 1;
+    }
+    return 0;
 }
 
 static void mall_delim(char *line, char ***mass, int *j_e_k, int *i) {
@@ -55,11 +58,12 @@ void mx_new_malloc(char **mass, char *line) {
     int len = strlen(line);
 
     for (int i = 0; i < len; i++) {
-        first_count(line, &i, j_e_k);
-        mx_new_m_help(line, &mass, j_e_k, &i);
-        mx_new_m_sd(line, &mass, j_e_k, &i);
-        mx_new_s_d(line, &mass, j_e_k, &i);
-        mx_new_str_d(line, &mass, j_e_k, &i);
+        if (first_count(line, &i, j_e_k) == 0) {
+            mx_new_m_help(line, &mass, j_e_k, &i);
+            mx_new_m_sd(line, &mass, j_e_k, &i);
+            mx_new_s_d(line, &mass, j_e_k, &i);
+            mx_new_str_d(line, &mass, j_e_k, &i);
+        }
         mall_delim(line, &mass, j_e_k, &i);
     }
 }

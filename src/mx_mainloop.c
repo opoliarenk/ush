@@ -31,7 +31,6 @@ void mx_mainloop(t_trig *trig, t_var *list, t_input *input) {
             }
             memset(line, '\0', strlen(line));
         }
-        //system("leaks -q ush");
     }
     mx_strdel(&line);
 }

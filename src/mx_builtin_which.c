@@ -31,8 +31,8 @@ static int flag_parser(char **arr, t_trig *trig, bool *flag) {
 static void main_part(t_trig *trig, char **ways, char *arr, bool *flag) {
     if (mx_is_built_in(arr) && !flag[1])
         printf("%s: shell built-in command\n", arr);
-    if (!mx_is_built_in(arr) || (mx_is_built_in(arr)
-        && flag[0]))
+    if ((!mx_is_built_in(arr) || (mx_is_built_in(arr)
+        && flag[0])) && getenv("PATH") != NULL)
         mx_look_in_path(trig, ways, arr, flag);
 }
 

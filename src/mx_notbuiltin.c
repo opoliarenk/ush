@@ -59,7 +59,14 @@ static int exework(char **temp, char **environ, t_trig *trig) {
 }
 
 static void if_coms(char ***temp) {
+    int len = 0;
+
     for(int i = 0; (*temp)[i]; i++) {
+        if ((*temp)[i][0] == '\'' || (*temp)[i][0] == '\"') {
+            len = strlen((*temp)[i]);
+            if ((*temp)[i][len - 1] != '\'' || (*temp)[i][len - 1] != '\"')
+                continue;
+        }
         if ((*temp)[i][0] == '\"' || (*temp)[i][0] == '\'')
             mx_last_coms(&(*temp)[i]);
     }
@@ -75,7 +82,7 @@ void mx_notbuiltin(char **arr, t_trig *trig, char **environ) {
     for (i = 0; arr[i] != NULL; i++);
     temp = (char **)malloc(sizeof(char*) * i + 1);
     temp[0] = strdup(buff);
-    for (i = 1; arr[i] != NULL; i++)
+    for (i = 1; arr[i] != NULL; i++) 
         temp[i] = strdup(arr[i]);
     temp[i] = NULL;
     if_coms(&temp);
